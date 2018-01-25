@@ -1,6 +1,6 @@
 #define _XOPEN_SOURCE 700
-#ifndef _TOOLS_ /* L'écriture ici présente n'est pas universelle */
-#define _TOOLS_ /* Edit suite aux corrections des posts suivants -> */
+#ifndef _TOOLS_H_ /* L'écriture ici présente n'est pas universelle */
+#define _TOOLS_H_ /* Edit suite aux corrections des posts suivants -> */
 
 /**
  * Procedure which displays binary usage

@@ -1,4 +1,9 @@
 #include"tools.h"
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <errno.h>
+#include<getopt.h>
+#include<string.h>
 
 #define STDOUT 1
 #define STDERR 2
@@ -14,6 +19,22 @@
   -v, --verbose : enable *verbose* mode\n\
   -h, --help    : display this help\n\
 "
+
+/**
+ * Binary options declaration
+ * (must end with {0,0,0,0})
+ *
+ * \see man 3 getopt_long or getopt
+ * \see struct option definition
+ 
+static struct option binary_opts[] = 
+{
+  { "help",    no_argument,       0, 'h' },
+  { "verbose", no_argument,       0, 'v' },
+  { "input",   required_argument, 0, 'i' },
+  { "output",  required_argument, 0, 'o' },
+  { 0,         0,                 0,  0  } 
+};*/
 
 /**
  * Procedure which displays binary usage
