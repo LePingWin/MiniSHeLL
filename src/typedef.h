@@ -6,7 +6,10 @@
 #include<getopt.h>
 #include<fcntl.h>
 
-typedef enum { false, true } bool;
+typedef enum { true,false } bool;
+
+#define STDOUT 1
+#define STDERR 2
 
 /**
  * Structure for Trees

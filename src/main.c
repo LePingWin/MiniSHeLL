@@ -1,13 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "typedef.h"
-#include "tools.h"
+#include "builtin.h"
 
 int main(int argc, char* argv[])
 {
-    node test;
-    test.value = "2";
-
-    printf("%s\n",test.value);
+    cdCmd(argv[1]);
     return EXIT_SUCCESS;
 }

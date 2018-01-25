@@ -4,9 +4,7 @@
 #include <errno.h>
 #include<getopt.h>
 #include<string.h>
-
-#define STDOUT 1
-#define STDERR 2
+#include "typedef.h"
 
 #define MAX_PATH_LENGTH 4096
 
