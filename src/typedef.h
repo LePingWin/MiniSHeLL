@@ -7,6 +7,8 @@
 #include<getopt.h>
 #include<fcntl.h>
 
+typedef enum { false, true } bool;
+
 /**
  * Binary options declaration
  * (must end with {0,0,0,0})
@@ -31,12 +33,14 @@ static struct option binary_opts[] =
  */ 
 const char* binary_optstr = "hvi:o:";
 
-
+/**
+ * Structure for Trees
+ */
 typedef struct node
 {
     char* value;
-    struct node* pere;
-    struct node** fils;
+    struct node* root;
+    struct node** childs;
 }node;
 
 
