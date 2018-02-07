@@ -1,7 +1,7 @@
-#include "builtin.h"
+#include "../headers/builtin.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "typedef.h"
+#include "../headers/typedef.h"
 #include <unistd.h>
 
 void cdCmd(char* arg)
