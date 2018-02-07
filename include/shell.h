@@ -16,12 +16,18 @@ void shellReader();
  * \return void
  */
 int readerL(char *chaine, int longueur);
+/**
+ * Permet de savoir si la chaine contient le caractere de fin de chaine
+ * 
+ *
+ * \return int 1 si caract de fin, 0 sinon
+ */
+int endOfCommand(char *chaine, int longueur);
 
 /**
- * Permet de lire plus de caracteres sur
- * l'entree standard
+ * Vide le buffer
  *
  * \return void
  */
-void clean(const char *buffer, FILE *fp);
+void cleanBuffer();
 #endif
