@@ -1,8 +1,9 @@
 CC=gcc
-CFLAGS=-Wall -c  -std=c11
+CFLAGS=-Wall -c  -std=gnu11
 LDFLAGS=-pthread  -I ./include/
 
 SRC_DIR=./src
+OBJ_DIR=./obj
 INC_DIR=./include
 BIN_DIR=./bin
 DOC_DIR=./doc
@@ -13,7 +14,7 @@ GCOVFLAGS=-O0 --coverage -lgcov -Wall -g
 LCOV_REPORT=report.info
 
 SRC=$(wildcard $(SRC_DIR)/*.c)
-OBJ=$(SRC:.c=.o)
+OBJ=$(SRC:%.c=%.o)
 EXEC=miniSHell
 
 GEXEC=$(EXEC).cov
@@ -23,7 +24,7 @@ AR_NAME=archive_$(EXEC).tar.gz
 
 all: $(SRC) $(EXEC)
     
-%.o:%.c
+$(OBJ_DIR)%.o:%.c
 	$(CC) $(CFLAGS) $< $(LDFLAGS) -o $@
 
 $(EXEC): $(OBJ) 
@@ -34,6 +35,8 @@ $(GEXEC):
 
 doc:
 	doxygen $(DOC_DIR)/doxygen.conf
+
+print-%  : ; @echo $* = $($*)
 
 gcov: $(GEXEC)
 	# generate some data for gcov by calling the generated binary with various options
