@@ -1,4 +1,4 @@
-#include "../headers/parser.h"
+#include "../include/parser.h"
 #include <stdlib.h>
 
 node* parseString(int argc,char* argv[]){

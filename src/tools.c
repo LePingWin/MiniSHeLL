@@ -1,10 +1,10 @@
-#include"../headers/tools.h"
+#include"../include/tools.h"
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <errno.h>
 #include  <getopt.h>
 #include  <string.h>
-#include "../headers/typedef.h"
+#include "../include/typedef.h"
 
 #define MAX_PATH_LENGTH 4096
 

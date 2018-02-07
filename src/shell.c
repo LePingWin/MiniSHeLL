@@ -1,8 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include"shell.h"
-
+#include"../include/shell.h"
 
 void shellReader()
 {

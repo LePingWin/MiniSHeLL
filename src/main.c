@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../headers/builtin.h"
+#include "../include/builtin.h"
+#include "../include/shell.h"
 
 
 int main(int argc, char* argv[])
