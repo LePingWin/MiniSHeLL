@@ -15,20 +15,21 @@ LCOV_REPORT=report.info
 
 SRC=$(wildcard $(SRC_DIR)/*.c)
 OBJ=$(SRC:%.c=%.o)
+OBJ2= $(patsubst %.c, $(OBJ_DIR)/%.o, $(notdir $(SRC)))
 EXEC=miniSHell
 
-GEXEC=$(EXEC).cov
+GEXEC=$(EXEC).cov$(BIN_DIR)/$@ 
 
 AR_NAME=archive_$(EXEC).tar.gz
 
 
 all: $(SRC) $(EXEC)
     
-$(OBJ_DIR)%.o:%.c
-	$(CC) $(CFLAGS) $< $(LDFLAGS) -o $@
+%.o:%.c
+	$(CC) $(CFLAGS) $< $(LDFLAGS) -o $(OBJ_DIR)/$(notdir $@)
 
-$(EXEC): $(OBJ) 
-	$(CC) -o $(BIN_DIR)/$@ -Wall $(LDFLAGS) $(OBJ)
+$(EXEC): $(OBJ)
+	$(CC) -o $(BIN_DIR)/$@ -Wall $(LDFLAGS) $(OBJ2)
 
 $(GEXEC):
 	$(CC) $(GCOVFLAGS) -o $(GCOV_DIR)/$@ -Wall $(LDFLAGS) $(SRC)
@@ -54,7 +55,7 @@ package: gcov doc all
 	rm -rf $(AR_NAME)
 	tar cvfz $(AR_NAME) ./*
 clean:	
-	rm -rf $(OBJ)
+	rm -rf $(OBJ2)
 
 mrproper: clean
 	rm -rf $(BIN_DIR)/*
