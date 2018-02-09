@@ -41,4 +41,11 @@ int endOfCommand(char *chaine, int longueur);
  *
  */
 void cleanBuffer();
+/**
+ * \fn void callCommands(char * arg)
+ * \brief Selectionne la bonne commande à appeler
+ *
+ * \param Chaîne d'entrée
+ */
+char* callCommands(char * arg);
 #endif

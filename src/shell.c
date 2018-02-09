@@ -4,22 +4,54 @@
 #include "../include/shell.h"
 #include "../include/builtin.h"
 
+char* callCommands(char * arg)
+{
+    char* returnString;
+    char* token;
+    token = strtok(arg," ");
+    if(token == NULL){
+        return "Aucune commande entrée";
+    }
+    //Récupère les arguments
+    char* cmd = token;
+    token = strtok(NULL," ");
+    char* cmdArg;
+    if(token != NULL)
+    {
+        cmdArg = token;
+    }
+    //Appel les bonnes fonctions
+    if(strcmp(cmd,"cd") == true)
+    {
+       returnString = cdCmd(cmdArg);
+    }
+    else if(strcmp(cmd,"pwd") == true)
+    {
+       returnString = pwdCmd();
+    }
+    else if(strcmp(cmd,"echo") == true)
+    {
+        returnString = echoCmd(cmdArg);
+    }
+    else
+    {
+        returnString = strerror(execOutsideFunction(arg));
+    }
+    return returnString;
+}
 
 void shellReader()
 {
     int size = 100;
     char command[size];
     char* stopShell = "exit";
-    printf("%s $ ",pwdCmd());
-    readerL(command, size);
-
-    printf(" %s !\n\n", command);
-
-    while(strcmp(command,stopShell) != 0)
+    while(strcmp(command,stopShell) != false)
     {
         printf("%s $ ",pwdCmd());
         readerL(command, size); 
-        printf(" %s !\n\n", command);
+        printf("%s\n",callCommands(command));
+
+        //int res = execOutsideFunction(command);
        // while(endOfCommand(command,size) != 1)
        // {
         //    readerL(command, size); 

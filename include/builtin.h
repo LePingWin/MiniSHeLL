@@ -9,6 +9,8 @@
 #ifndef _BUILTIN_H_
 #define _BUILTIN_H_
 
+#include "typedef.h"
+
 /**
  * \fn char* cdCmd(char* arg)
  * \brief Reproduit la commande "cd" 
@@ -42,7 +44,7 @@ char* echoCmd(char* arg);
  * \brief Tente un exec de la chaîne en entrée 
  *
  * \param Chaîne à executer
- * \return Resultat
+ * \return Code Erreur
  */
-char* execOutsideFunction(char* arg);
+int execOutsideFunction(char* arg);
 #endif

@@ -3,8 +3,10 @@
 #include <stdio.h>
 #include "../include/typedef.h"
 #include <unistd.h>
+#include <sys/wait.h>
 
 char cwd[1024];
+const int NBFunc = 3;
 
 char* cdCmd(char* arg)
 {
@@ -19,7 +21,7 @@ char* pwdCmd()
    if (getcwd(cwd, sizeof(cwd)) != NULL)
        return cwd;
    else
-       return "Can't print working directory ";
+       return "Can't print working directory";
 }
 
 void exitCmd()
@@ -31,3 +33,9 @@ char* echoCmd(char* arg)
 {
     return arg;
 }
+
+int execOutsideFunction(char* arg)
+{
+    return WEXITSTATUS(system(arg));
+}
+

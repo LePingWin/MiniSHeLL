@@ -32,5 +32,4 @@ typedef struct node
     struct node* fg;
 }node;
 
-
 #endif

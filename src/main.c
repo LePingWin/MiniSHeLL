@@ -6,8 +6,6 @@
 
 int main(int argc, char* argv[])
 {
-    
- 
     shellReader();
 
     return EXIT_SUCCESS;
