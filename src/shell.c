@@ -10,16 +10,15 @@ void shellReader()
     int size = 100;
     char command[size];
     char* stopShell = "exit";
-    printf("Quelle est votre commande ? ");
+    printf("%s $ ",pwdCmd());
     readerL(command, size);
-    pwdCmd();
+
     printf(" %s !\n\n", command);
 
     while(strcmp(command,stopShell) != 0)
     {
-        printf("Quelle est votre commande ? ");
+        printf("%s $ ",pwdCmd());
         readerL(command, size); 
-        pwdCmd();
         printf(" %s !\n\n", command);
        // while(endOfCommand(command,size) != 1)
        // {
@@ -35,7 +34,7 @@ int endOfCommand(char *chaine, int longueur)
     int isEnd = 0;
     while(i <10 && isEnd == 0)
     {
-        if(*chaine == "\n" )
+        if(*chaine == '\n' )
             isEnd = 1;
 
         chaine = chaine+1;
@@ -71,7 +70,7 @@ int readerL(char *chaine, int longueur)
 
 void cleanBuffer()
 {
-    char *c = 0;
+    char c = 0;
     while (c != '\n' && c != EOF)
     {
         c = getchar();

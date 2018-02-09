@@ -4,6 +4,8 @@
 #include "../include/typedef.h"
 #include <unistd.h>
 
+char cwd[1024];
+
 char* cdCmd(char* arg)
 {
     if(chdir(arg) == true)
@@ -14,7 +16,6 @@ char* cdCmd(char* arg)
 
 char* pwdCmd()
 {
-   char cwd[1024];
    if (getcwd(cwd, sizeof(cwd)) != NULL)
        return cwd;
    else

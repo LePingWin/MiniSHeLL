@@ -1,9 +1,9 @@
 #ifndef _BUILTIN_H_
 #define _BUILTIN_H_
 
-void cdCmd(char* arg);
-void pwdCmd();
+char* cdCmd(char* arg);
+char* pwdCmd();
 void exitCmd();
-void echoCmd(char* arg);
+char* echoCmd(char* arg);
 
 #endif
