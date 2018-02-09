@@ -3,6 +3,10 @@
 #include <string.h>
 #include "../include/shell.h"
 #include "../include/builtin.h"
+#include <unistd.h>
+#include <fcntl.h>
+
+const char* SAVEPATH = "/home/lepingwin/Documents/MiniSHeLL/bin/hist.txt";
 
 char* callCommands(char * arg)
 {
@@ -53,6 +57,7 @@ void shellReader()
     {
         printf("%s $ ",pwdCmd());
         readerL(command, size); 
+        historize(command);
         printf("%s\n",callCommands(command));
        // while(endOfCommand(command,size) != 1)
        // {
@@ -109,4 +114,11 @@ void cleanBuffer()
     {
         c = getchar();
     }
+}
+
+void historize(char* arg){
+    int filedesc = open(SAVEPATH, O_WRONLY | O_APPEND | O_CREAT);
+    if(filedesc < 0)
+        return;
+    write(filedesc,arg, sizeof(arg));
 }

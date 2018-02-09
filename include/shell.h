@@ -48,4 +48,11 @@ void cleanBuffer();
  * \param Chaîne d'entrée
  */
 char* callCommands(char * arg);
+/**
+ * \fn void historize(char* arg)
+ * \brief Historise les commandes dans un fichier
+ *
+ * \param Chaîne d'entrée
+ */
+void historize(char* arg);
 #endif
