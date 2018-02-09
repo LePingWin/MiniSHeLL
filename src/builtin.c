@@ -4,21 +4,21 @@
 #include "../include/typedef.h"
 #include <unistd.h>
 
-void cdCmd(char* arg)
+char* cdCmd(char* arg)
 {
     if(chdir(arg) == true)
-        pwdCmd();
+        return pwdCmd();
     else
-        perror("This directory doesn't exists");
+        return "This directory doesn't exists";
 }
 
-void pwdCmd()
+char* pwdCmd()
 {
    char cwd[1024];
    if (getcwd(cwd, sizeof(cwd)) != NULL)
-       dprintf(STDOUT,"%s\n", cwd);
+       return cwd;
    else
-       perror("Can't print working directory ");
+       return "Can't print working directory ";
 }
 
 void exitCmd()
@@ -26,7 +26,7 @@ void exitCmd()
     exit(EXIT_SUCCESS);
 }
 
-void echoCmd(char* arg)
+char* echoCmd(char* arg)
 {
-    dprintf(STDOUT,"%s\n",arg);
+    return arg;
 }
