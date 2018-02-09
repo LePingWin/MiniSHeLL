@@ -29,6 +29,10 @@ char* callCommands(char * arg)
     {
        returnString = pwdCmd();
     }
+    else if(strcmp(cmd,"exit") == true)
+    {
+        exitCmd();
+    }
     else if(strcmp(cmd,"echo") == true)
     {
         returnString = echoCmd(cmdArg);
@@ -45,19 +49,17 @@ void shellReader()
     int size = 100;
     char command[size];
     char* stopShell = "exit";
-    while(strcmp(command,stopShell) != false)
+    do
     {
         printf("%s $ ",pwdCmd());
         readerL(command, size); 
         printf("%s\n",callCommands(command));
-
-        //int res = execOutsideFunction(command);
        // while(endOfCommand(command,size) != 1)
        // {
         //    readerL(command, size); 
           //  printf("%s", command);
         //}
-    }
+    }while(strcmp(command,stopShell) != false);
 }
 
 int endOfCommand(char *chaine, int longueur)
