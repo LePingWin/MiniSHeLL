@@ -8,34 +8,34 @@
 char cwd[1024];
 const int NBFunc = 3;
 
-char* cdCmd(char* arg)
+void cdCmd(char* arg)
 {
     if(chdir(arg) == true)
-        return pwdCmd();
+        pwdCmd(arg);
     else
-        return "This directory doesn't exists";
+        printf("This directory doesn't exists\n");
 }
 
-char* pwdCmd()
+void pwdCmd(char* arg)
 {
    if (getcwd(cwd, sizeof(cwd)) != NULL)
-       return cwd;
+       printf("%s",cwd);
    else
-       return "Can't print working directory";
+       printf("Can't print working directory\n");
 }
 
-void exitCmd()
+void exitCmd(char* arg)
 {
     exit(EXIT_SUCCESS);
 }
 
-char* echoCmd(char* arg)
+void echoCmd(char* arg)
 {
-    return arg;
+    printf("%s\n",arg);
 }
 
-int execOutsideFunction(char* arg)
+void execOutsideFunction(char* arg)
 {
-    return WEXITSTATUS(system(arg));
+    system(arg);
 }
 

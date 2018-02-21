@@ -18,19 +18,19 @@
  * \param Chemin du répertoire cible
  * \return Chemin du répertoire cible
  */
-char* cdCmd(char* arg);
+void cdCmd(char* arg);
 /**
  * \fn char* pwdCmd()
  * \brief Reproduit la commande "pwd" 
  *
  * \return Chemin du répertoire courant
  */
-char* pwdCmd();
+void pwdCmd(char* arg);
 /**
  * \fn void exitCmd()
  * \brief Quitte le processus courant
  */
-void exitCmd();
+void exitCmd(char* arg);
 /**
  * \fn char* echoCmd(char* arg)
  * \brief Reproduit la commande "echo" 
@@ -38,7 +38,7 @@ void exitCmd();
  * \param Chaîne à afficher
  * \return Chaîne à afficher
  */
-char* echoCmd(char* arg);
+void echoCmd(char* arg);
 /**
  * \fn char* execOutsideFunction(char* arg)
  * \brief Tente un exec de la chaîne en entrée 
@@ -46,5 +46,5 @@ char* echoCmd(char* arg);
  * \param Chaîne à executer
  * \return Code Erreur
  */
-int execOutsideFunction(char* arg);
+void execOutsideFunction(char* arg);
 #endif

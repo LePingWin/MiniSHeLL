@@ -8,13 +8,12 @@
 
 const char* SAVEPATH = "/home/lepingwin/Documents/MiniSHeLL/bin/hist.txt";
 
-char* callCommands(char * arg)
+void callCommands(char * arg)
 {
-    char* returnString;
     char* token;
     token = strtok(arg," ");
     if(token == NULL){
-        return "Aucune commande entrée";
+        printf("Aucune commande entrée");
     }
     //Récupère les arguments
     char* cmd = token;
@@ -27,25 +26,24 @@ char* callCommands(char * arg)
     //Appel les bonnes fonctions
     if(strcmp(cmd,"cd") == true)
     {
-       returnString = cdCmd(cmdArg);
+       cdCmd(cmdArg);
     }
     else if(strcmp(cmd,"pwd") == true)
     {
-       returnString = pwdCmd();
+       pwdCmd("");
     }
     else if(strcmp(cmd,"exit") == true)
     {
-        exitCmd();
+        exitCmd("");
     }
     else if(strcmp(cmd,"echo") == true)
     {
-        returnString = echoCmd(cmdArg);
+       echoCmd(cmdArg);
     }
     else
     {
-        returnString = strerror(execOutsideFunction(arg));
+        execOutsideFunction(arg);
     }
-    return returnString;
 }
 
 void shellReader()
@@ -55,10 +53,11 @@ void shellReader()
     char* stopShell = "exit";
     do
     {
-        printf("%s $ ",pwdCmd());
+        pwdCmd("");
+        printf(" ");
         readerL(command, size); 
         historize(command);
-        printf("%s\n",callCommands(command));
+        callCommands(command);
        // while(endOfCommand(command,size) != 1)
        // {
         //    readerL(command, size); 
@@ -118,13 +117,11 @@ void cleanBuffer()
 
 
 void historize(char* arg){
-  FILE * pFile = fopen("./hist.txt", "a");
+  FILE * pFile = fopen("/tmp/hist.txt", "a");
   if(pFile == NULL)
   {
-    return false;
+    return;
   }
-  fprintf(pFile, arg);
-  fprintf(pFile, "\n");
+  fprintf(pFile,"%s\n", arg);
   fclose(pFile);
-  return true;
 }

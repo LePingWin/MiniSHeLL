@@ -47,7 +47,7 @@ void cleanBuffer();
  *
  * \param Chaîne d'entrée
  */
-char* callCommands(char * arg);
+void callCommands(char * arg);
 /**
  * \fn void historize(char* arg)
  * \brief Historise les commandes dans un fichier
