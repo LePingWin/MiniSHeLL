@@ -16,6 +16,15 @@
  */
 void shellReader();
 
+
+/**
+ * \fn ReadInput(char command, int size)
+ * \brief Wrapper 
+ * \param Chaîne d'entrée
+ * \param Longueur de la chaîne d'entrée
+ */
+void ReadInput(char* command, int size);
+
 /**
  * \fn int readerL(char *chaine, int longueur)
  * \brief Lecture des elements renseignes par l'utilisateur afin d'executer les commandes avec ses parametres
@@ -47,7 +56,7 @@ void cleanBuffer();
  *
  * \param Chaîne d'entrée
  */
-void callCommands(char * arg);
+void CallCommands(char * arg);
 /**
  * \fn void historize(char* arg)
  * \brief Historise les commandes dans un fichier
@@ -55,4 +64,11 @@ void callCommands(char * arg);
  * \param Chaîne d'entrée
  */
 void historize(char* arg);
+
+/**
+ * \fn void PrintWorkingDirColored()
+ * \brief Affiche le chemin du répertoire courant
+ *
+ */
+void PrintWorkingDirColored();
 #endif

@@ -1,4 +1,0 @@
-hey
-salute
-echo banane
-echo ridor

@@ -5,10 +5,11 @@
 #include "../include/builtin.h"
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 
 const char* SAVEPATH = "/home/lepingwin/Documents/MiniSHeLL/bin/hist.txt";
 
-void callCommands(char * arg)
+void CallCommands(char * arg)
 {
     char* token;
     token = strtok(arg," ");
@@ -46,6 +47,56 @@ void callCommands(char * arg)
     }
 }
 
+void ExecuteCommand(char* arg)
+{
+    int status;
+
+   int pfd[2];
+   if (pipe(pfd) == -1)
+     {
+       printf("pipe failed\n");
+       return;
+     }
+ 
+   /* create the child */
+   int pid;
+   if ((pid = fork()) < 0)
+     {
+       printf("fork failed\n");
+       return;
+     }
+ 
+   if (pid == 0)
+     {
+       /* child */
+       close(pfd[0]); /* close the unused read side */
+       dup2(pfd[1],1); /* connect the write side with stdout */
+       CallCommands(arg);
+     }
+   else
+     {
+        int size = 1;
+       /* parent */
+       close(pfd[1]); /* close the unused write side */
+        int returnStatus;    
+        //waitpid(pid, &returnStatus, 0);
+        char reading_buf[size];
+        while(read(pfd[0], reading_buf,size) > 0)
+        {
+            write(1, reading_buf, size);
+        }
+  }
+
+}
+
+
+void PrintWorkingDirColored()
+{
+        printf("%s",KYEL);
+        pwdCmd("");
+        printf("$ %s",KNRM);
+}
+
 void shellReader()
 {
     int size = 100;
@@ -53,18 +104,20 @@ void shellReader()
     char* stopShell = "exit";
     do
     {
-        printf("%s",KYEL);
-        pwdCmd("");
-        printf("$ ");
-        readerL(command, size); 
-        historize(command);
-        callCommands(command);
+        ReadInput(command,size);
+        ExecuteCommand(command);
        // while(endOfCommand(command,size) != 1)
        // {
         //    readerL(command, size); 
           //  printf("%s", command);
         //}
     }while(strcmp(command,stopShell) != false);
+}
+
+void ReadInput(char* command, int size){
+        PrintWorkingDirColored();
+        readerL(command, size); 
+        historize(command);
 }
 
 int endOfCommand(char *chaine, int longueur)
