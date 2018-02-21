@@ -116,9 +116,15 @@ void cleanBuffer()
     }
 }
 
+
 void historize(char* arg){
-    int filedesc = open(SAVEPATH, O_WRONLY | O_APPEND | O_CREAT);
-    if(filedesc < 0)
-        return;
-    write(filedesc,arg, sizeof(arg));
+  FILE * pFile = fopen("./hist.txt", "a");
+  if(pFile == NULL)
+  {
+    return false;
+  }
+  fprintf(pFile, arg);
+  fprintf(pFile, "\n");
+  fclose(pFile);
+  return true;
 }
