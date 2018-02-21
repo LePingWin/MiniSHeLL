@@ -53,8 +53,9 @@ void shellReader()
     char* stopShell = "exit";
     do
     {
+        printf("%s",KYEL);
         pwdCmd("");
-        printf(" ");
+        printf("$ ");
         readerL(command, size); 
         historize(command);
         callCommands(command);
