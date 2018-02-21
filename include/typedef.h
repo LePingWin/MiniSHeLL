@@ -34,12 +34,25 @@ typedef enum { true,false } bool;
  * \brief Objet Arbre binaire
  *
  */
-typedef struct node
+/*typedef struct node
 {
     char* value;
     struct node* root;
     struct node* fd;
     struct node* fg;
-}node;
+}node;*/
+
+/**
+ * \struct tree
+ * \brief Structure d'arbre binaire 
+ *
+ */
+typedef struct tree Tree;
+struct tree
+{
+    char value;
+    Tree *brother;
+    Tree *child;
+};
 
 #endif
