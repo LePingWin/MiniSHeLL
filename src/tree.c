@@ -3,21 +3,23 @@
 #include <string.h>
 #include "../include/tree.h"
 
-
-
-
-void testTree(void)
+Tree createTree(char* val, Tree ls, Tree rs)
 {
-    Tree I = {'I', NULL, NULL};
-    Tree H = {'H', &I, NULL};
-    Tree G = {'G', &H, NULL};
-    Tree F = {'F', NULL, &G};
-    Tree E = {'E', NULL, NULL};
-    Tree D = {'D', &E, NULL};
-    Tree C = {'C', NULL, &F};
-    Tree B = {'B', &C, &D};
-    Tree A = {'A', NULL, &B};
-    //return 0;
+    Tree res;
+    printf("%s\n",val);
+    res = malloc(sizeof(*res));
+
+    if(res == NULL)
+    {
+        printf(stderr, "Impossible d'allouer le noeud");
+        return NULL;
+    }
+
+    res->value = val;
+    res->left = ls;
+    res->right = rs;
+    printf("%s\n",res->value);
+    return res;
 }
 
 void displayTree(Tree t)
@@ -34,4 +36,39 @@ int sizeTree(Tree t)
 
 
 
+}
+
+bool isEmpty(Tree t)
+{
+    if (t == NULL)
+        return true;
+    else
+        return false;
+
+}
+
+Tree Left(Tree t)
+{
+    if(isEmpty(t))
+        return NULL;
+    else
+        return t->left;
+}
+
+Tree Right(Tree t)
+{
+    if(isEmpty(t))
+        return NULL;
+    else
+        return t->right;
+}
+
+bool isLeaf(Tree t)
+{
+    if(isEmpty(t))
+        return false;
+    else if (isEmpty(Left(t)) && isEmpty(Right(t)))
+        return true;
+    else
+        return false;
 }

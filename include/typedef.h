@@ -47,12 +47,12 @@ typedef enum { true,false } bool;
  * \brief Structure d'arbre binaire 
  *
  */
-typedef struct tree Tree;
-struct tree
+typedef struct node *Tree;
+struct node
 {
-    char value;
-    Tree *brother;
-    Tree *child;
+    char* value;
+    Tree left;
+    Tree right;
 };
 
 #endif
