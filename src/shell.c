@@ -7,6 +7,7 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 #include "../include/typedef.h"
+#include "../include/parser.h"
 
 
 
@@ -94,7 +95,7 @@ void shellReader()
     do{
 
         ReadInput(command, MAX_COMMAND_LENGTH);
-        DecryptArgs(command,argv);
+        parseStringBySpaces(command,argv);
         if(CallCommands(argv) == false)
         {
             ExecuteCommand(argv);
@@ -105,14 +106,6 @@ void shellReader()
         //  printf("%s", command);
         //}
     } while (strcmp(command, stopShell) != true);
-}
-
-void DecryptArgs(char* cmd, char** params)
-{       
-    for(int i = 0; i < MAX_NUMBER_OF_PARAMS; i++) {
-        params[i] = strsep(&cmd, " ");
-        if(params[i] == NULL) break;
-    }
 }
 
 void ReadInput(char *command, int size)
