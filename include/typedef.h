@@ -33,16 +33,16 @@ typedef enum { true,false } bool;
 #define BOLD  "\x1B[1m"
 
 /**
- * \struct node
- * \brief Objet Arbre binaire
+ * \struct tree
+ * \brief Structure d'arbre binaire 
  *
  */
-typedef struct node
+typedef struct node *Tree;
+struct node
 {
     char* value;
-    struct node* root;
-    struct node* fd;
-    struct node* fg;
-}node;
+    Tree left;
+    Tree right;
+};
 
 #endif

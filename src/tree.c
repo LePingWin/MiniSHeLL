@@ -11,7 +11,7 @@ Tree createTree(char* val, Tree ls, Tree rs)
 
     if(res == NULL)
     {
-        printf(stderr, "Impossible d'allouer le noeud");
+        perror("Impossible d'allouer le noeud");
         return NULL;
     }
 

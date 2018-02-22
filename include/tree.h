@@ -9,7 +9,7 @@
 #ifndef _TREE_H_ /* L'ecriture ici presente n'est pas universelle */
 #define _TREE_H_ /* Edit suite aux corrections des posts suivants -> */
 
-#include "../include/typedef.h"
+#include "typedef.h"
 
 /**
  * \fn Tree createTree(char* val, Tree ls, Tree rs)
