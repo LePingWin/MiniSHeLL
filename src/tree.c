@@ -22,6 +22,23 @@ Tree createTree(char* val, Tree ls, Tree rs)
     return res;
 }
 
+void addNode(Tree t, char* val)
+{
+    if(isEmpty(t))
+        t = createTree(val,NULL,NULL);
+    else if(isEmpty(left(t)))
+        t->left = createTree(val,NULL,NULL);
+    else if(isEmpty(right(t)))
+        t->right = createTree(val,NULL,NULL);
+    else
+        addNode(left(t),val);
+}
+
+void constructTree()
+{
+
+}
+
 void displayTree(Tree t)
 {
 
@@ -47,7 +64,7 @@ bool isEmpty(Tree t)
 
 }
 
-Tree Left(Tree t)
+Tree left(Tree t)
 {
     if(isEmpty(t))
         return NULL;
@@ -55,7 +72,7 @@ Tree Left(Tree t)
         return t->left;
 }
 
-Tree Right(Tree t)
+Tree right(Tree t)
 {
     if(isEmpty(t))
         return NULL;
@@ -67,7 +84,7 @@ bool isLeaf(Tree t)
 {
     if(isEmpty(t))
         return false;
-    else if (isEmpty(Left(t)) && isEmpty(Right(t)))
+    else if (isEmpty(left(t)) && isEmpty(right(t)))
         return true;
     else
         return false;

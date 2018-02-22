@@ -9,7 +9,7 @@
 #ifndef _TREE_H_ /* L'ecriture ici presente n'est pas universelle */
 #define _TREE_H_ /* Edit suite aux corrections des posts suivants -> */
 
-#include "../include/typedef.h"
+#include "typedef.h"
 
 /**
  * \fn Tree createTree(char* val, Tree ls, Tree rs)
@@ -19,6 +19,15 @@
  * \return Tree : retourne l'arbre cree
  */
 Tree createTree(char* val, Tree ls, Tree rs);
+
+/**
+ * \fn void addNode(Tree t, char* val)
+ * \brief Ajout d'un noeud a un arbre
+ *
+ * \param Tree t arbre source, char* val valeur du noeud
+ */
+void addNode(Tree t, char* val);
+
 
 /**
  * \fn void displayTree(Tree t)
@@ -44,7 +53,7 @@ bool isEmpty(Tree t);
  * \param Tree arbre en entrée
  * \return Tree : resultat Tree si frere gauche non vide, NULL sinon
  */
-Tree Left(Tree t);
+Tree left(Tree t);
 
 /**
  * \fn Tree Right(Tree t)
@@ -53,7 +62,7 @@ Tree Left(Tree t);
  * \param Tree arbre en entrée
  * \return Tree : resultat Tree si frere de droite non vide, NULL sinon
  */
-Tree Right(Tree t);
+Tree right(Tree t);
 
 /**
  * \fn Tree Right(Tree t)
