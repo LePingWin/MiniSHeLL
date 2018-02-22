@@ -6,130 +6,132 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/wait.h>
+#include "../include/typedef.h"
 
-const char* SAVEPATH = "/home/lepingwin/Documents/MiniSHeLL/bin/hist.txt";
 
-void CallCommands(char * arg)
+
+
+bool CallCommands(char **argv)
 {
-    char* token;
-    token = strtok(arg," ");
-    if(token == NULL){
-        printf("Aucune commande entrée");
-    }
-    //Récupère les arguments
-    char* cmd = token;
-    token = strtok(NULL," ");
-    char* cmdArg;
-    if(token != NULL)
-    {
-        cmdArg = token;
-    }
     //Appel les bonnes fonctions
-    if(strcmp(cmd,"cd") == true)
+    if (strcmp(argv[0], "cd") == true)
     {
-       cdCmd(cmdArg);
+        cdCmd(argv);
     }
-    else if(strcmp(cmd,"pwd") == true)
+    else if (strcmp(argv[0], "pwd") == true)
     {
-       pwdCmd("");
+        pwdCmd("");
     }
-    else if(strcmp(cmd,"exit") == true)
+    else if (strcmp(argv[0], "exit") == true)
     {
         exitCmd("");
     }
-    else if(strcmp(cmd,"echo") == true)
+    else if (strcmp(argv[0], "echo") == true)
     {
-       echoCmd(cmdArg);
+        echoCmd(argv);
     }
     else
     {
-        execOutsideFunction(arg);
+        return false;
+    }
+    printf("\n");
+    return true;
+}
+
+void ExecuteCommand(char **argv)
+{
+    int pfd[2];
+    if (pipe(pfd) == -1)
+    {
+        perror("pipe failed\n");
+        return;
+    }
+
+    /* create the child */
+    int pid;
+    if ((pid = fork()) < 0)
+    {
+        perror("fork failed\n");
+        return;
+    }
+
+    if (pid == 0)
+    {
+        /* child */
+        close(pfd[0]);   /* close the unused read side */
+        dup2(1, 2);      /* redirect stderr to stdout */
+        dup2(pfd[1], 1); /* connect the write side with stdout */
+        execvp(argv[0],argv);
+        exit(0);
+    }
+    else
+    {
+        wait(NULL);
+        int size = 1;
+        /* parent */
+        close(pfd[1]); /* close the unused write side */
+        char reading_buf[size];
+        while (read(pfd[0], reading_buf, size) > 0)
+        {
+          write(1, reading_buf, size);
+        }
+        
     }
 }
 
-void ExecuteCommand(char* arg)
-{
-    int status;
-
-   int pfd[2];
-   if (pipe(pfd) == -1)
-     {
-       printf("pipe failed\n");
-       return;
-     }
- 
-   /* create the child */
-   int pid;
-   if ((pid = fork()) < 0)
-     {
-       printf("fork failed\n");
-       return;
-     }
- 
-   if (pid == 0)
-     {
-       /* child */
-       close(pfd[0]); /* close the unused read side */
-       dup2(pfd[1],1); /* connect the write side with stdout */
-       CallCommands(arg);
-     }
-   else
-     {
-        int size = 1;
-       /* parent */
-       close(pfd[1]); /* close the unused write side */
-        int returnStatus;    
-        //waitpid(pid, &returnStatus, 0);
-        char reading_buf[size];
-        while(read(pfd[0], reading_buf,size) > 0)
-        {
-            write(1, reading_buf, size);
-        }
-  }
-
-}
-
-
 void PrintWorkingDirColored()
 {
-        printf("%s",KYEL);
-        pwdCmd("");
-        printf("$ %s",KNRM);
+    printf("%s", KYEL);
+    pwdCmd("");
+    printf("$ %s", KNRM);
 }
 
 void shellReader()
 {
-    int size = 100;
-    char command[size];
-    char* stopShell = "exit";
-    do
-    {
-        ReadInput(command,size);
-        ExecuteCommand(command);
-       // while(endOfCommand(command,size) != 1)
-       // {
-        //    readerL(command, size); 
-          //  printf("%s", command);
+    char command[MAX_COMMAND_LENGTH];
+    char *stopShell = "exit";
+    char *argv[MAX_COMMAND_LENGTH];
+    do{
+
+        ReadInput(command, MAX_COMMAND_LENGTH);
+        DecryptArgs(command,argv);
+        if(CallCommands(argv) == false)
+        {
+            ExecuteCommand(argv);
+        }
+        // while(endOfCommand(command,size) != 1)
+        // {
+        //    readerL(command, size);
+        //  printf("%s", command);
         //}
-    }while(strcmp(command,stopShell) != false);
+    } while (strcmp(command, stopShell) != true);
 }
 
-void ReadInput(char* command, int size){
-        PrintWorkingDirColored();
-        readerL(command, size); 
-        historize(command);
+void DecryptArgs(char* cmd, char** params)
+{       
+    for(int i = 0; i < MAX_NUMBER_OF_PARAMS; i++) {
+        params[i] = strsep(&cmd, " ");
+        if(params[i] == NULL) break;
+    }
+}
+
+void ReadInput(char *command, int size)
+{
+    PrintWorkingDirColored();
+    readerL(command, size);
+    historize(command);
 }
 
 int endOfCommand(char *chaine, int longueur)
 {
     int i = 0;
     int isEnd = 0;
-    while(i <10 && isEnd == 0)
+    while (i < 10 && isEnd == 0)
     {
-        if(*chaine == '\n' )
+        if (*chaine == '\n')
             isEnd = 1;
 
-        chaine = chaine+1;
+        chaine = chaine + 1;
     }
 
     return isEnd;
@@ -138,12 +140,12 @@ int endOfCommand(char *chaine, int longueur)
 int readerL(char *chaine, int longueur)
 {
     char *positionEntree = NULL;
- 
+
     // On lit le texte saisi au clavier
-    if (fgets(chaine, longueur, stdin) != NULL)  // Pas d'erreur de saisie ?
+    if (fgets(chaine, longueur, stdin) != NULL) // Pas d'erreur de saisie ?
     {
         positionEntree = strchr(chaine, '\n'); // On recherche l'"Entrée"
-        if (positionEntree != NULL) // Si on a trouvé le retour à la ligne
+        if (positionEntree != NULL)            // Si on a trouvé le retour à la ligne
         {
             *positionEntree = '\0'; // On remplace ce caractère par \0
         }
@@ -169,13 +171,13 @@ void cleanBuffer()
     }
 }
 
-
-void historize(char* arg){
-  FILE * pFile = fopen("/tmp/hist.txt", "a");
-  if(pFile == NULL)
-  {
-    return;
-  }
-  fprintf(pFile,"%s\n", arg);
-  fclose(pFile);
+void historize(char *arg)
+{
+    FILE *pFile = fopen("/tmp/hist.txt", "a");
+    if (pFile == NULL)
+    {
+        return;
+    }
+    fprintf(pFile, "%s\n", arg);
+    fclose(pFile);
 }

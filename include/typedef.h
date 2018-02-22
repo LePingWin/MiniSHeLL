@@ -9,6 +9,9 @@
 #ifndef TYPEDEF_H
 #define TYPEDEF_H
 
+
+#define MAX_COMMAND_LENGTH 100
+#define MAX_NUMBER_OF_PARAMS 10
 /**
  * \enum bool
  * \brief Booléen
@@ -34,25 +37,12 @@ typedef enum { true,false } bool;
  * \brief Objet Arbre binaire
  *
  */
-/*typedef struct node
+typedef struct node
 {
     char* value;
     struct node* root;
     struct node* fd;
     struct node* fg;
-}node;*/
-
-/**
- * \struct tree
- * \brief Structure d'arbre binaire 
- *
- */
-typedef struct node *Tree;
-struct node
-{
-    char* value;
-    Tree left;
-    Tree right;
-};
+}node;
 
 #endif

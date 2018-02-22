@@ -3,6 +3,6 @@
 
 #include "typedef.h"
 
-/*node* parseString(int argc,char* argv[]);*/
+node* parseString(int argc,char* argv[]);
 
 #endif

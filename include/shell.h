@@ -9,6 +9,8 @@
 #ifndef _SHELL_H_ /* L'écriture ici présente n'est pas universelle */
 #define _SHELL_H_ /* Edit suite aux corrections des posts suivants -> */
 
+#include "typedef.h"
+
 /**
  * \fn void shellReader()
  * \brief Fonction de lecture des commande en boucle sur la console
@@ -51,14 +53,23 @@ int endOfCommand(char *chaine, int longueur);
  */
 void cleanBuffer();
 /**
- * \fn void callCommands(char * arg)
+ * \fn bool CallCommands(char *cmd,char* cmdArg)
  * \brief Selectionne la bonne commande à appeler
  *
  * \param Chaîne d'entrée
+ * \return Vrai si executé, faux si doit déléguer
  */
-void CallCommands(char * arg);
+bool CallCommands(char **argv);
+
 /**
- * \fn void historize(char* arg)
+ * \fn ExecuteCommand(char** argv)
+ * \brief Délègue l'appel via fork/execvp à un processus fils
+ *
+ * \param Chaîne d'entrée
+ */
+void ExecuteCommand(char **argv);
+/**
+ * \fn void ExecuteCommand(char *cmd,char* cmdArg)
  * \brief Historise les commandes dans un fichier
  *
  * \param Chaîne d'entrée
@@ -71,4 +82,9 @@ void historize(char* arg);
  *
  */
 void PrintWorkingDirColored();
+/**
+ * \fn void DecryptArgs(char* arg,char** params)
+ * \brief Sépare la chaine de commande en deux chaînes de caractères
+ */
+void DecryptArgs(char* cmd,char** params);
 #endif
