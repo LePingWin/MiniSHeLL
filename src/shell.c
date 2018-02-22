@@ -79,6 +79,63 @@ void ExecuteCommand(char **argv)
     }
 }
 
+int spawn_proc (int in, int out, struct command *cmd)
+{
+  pid_t pid;
+
+  if ((pid = fork ()) == 0)
+    {
+      if (in != 0)
+        {
+          dup2 (in, 0);
+          close (in);
+        }
+
+      if (out != 1)
+        {
+          dup2 (out, 1);
+          close (out);
+        }
+
+      return execvp (cmd->argv [0], (char * const *)cmd->argv);
+    }
+
+  return pid;
+}
+
+int fork_pipes (int n, struct command *cmd)
+{
+  int i;
+  pid_t pid;
+  int in, fd [2];
+
+  // Le premier processus devrait obtenir son entree du descripteur de fichier original 0
+  in = 0;
+
+  // Execution de toutes les commande sauf de la derniere
+  for (i = 0; i < n - 1; ++i)
+    {
+      pipe (fd);
+
+      // f [1] est la fin d'ecriture du pipe, 'in' = de la precedente iteration
+      spawn_proc (in, fd [1], cmd + i);
+
+      // Pas besoin d'ecrire a la fin du pipe, le fils ecrira dedans
+      close (fd [1]);
+
+      // Garde la fin de lecture du pipe, le prochain fils lira depuis celui-ci
+      in = fd [0];
+    }
+
+    // Derniere etape du pipe, setter stdin en lecture de fin du precedent pipe 
+    // et en sortie du descripteur 1 original  
+    if (in != 0)
+        dup2 (in, 0);
+
+    // Execute la derniere etape avec le processus courant
+    return execvp (cmd [i].argv [0], (char * const *)cmd [i].argv);
+}
+
 void PrintWorkingDirColored()
 {
     printf("%s", KYEL);

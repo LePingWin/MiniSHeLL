@@ -36,7 +36,7 @@ void addNode(Tree t, char* val)
 
 void constructTree()
 {
-
+    
 }
 
 void displayTree(Tree t)

@@ -68,6 +68,26 @@ bool CallCommands(char **argv);
  * \param Chaîne d'entrée
  */
 void ExecuteCommand(char **argv);
+
+/**
+ * \fn int spawn_proc(int in, int out, struct command *cmd)
+ * \brief Creer un processus pour ecrire le resultat dans le pipe de sortie, redirection d'entree standard
+ *
+ * \param int in entree du pipe, int out sortie du pipe, struct command *cmd commande a executer
+ * \return pid du processus
+ */
+int spawn_proc(int in, int out, struct command *cmd);
+
+/**
+ * \fn int fork_pipes(int n, struct command *cmd)
+ * \brief Execute les commandes precedente au dernier pipe puis execute la derniere commande depuis les resultats des precedentes
+ *
+ * \param int n nombre de commandes, struct command *cmd commande a executer
+ * \return statut de la fonction
+ */
+int fork_pipes(int n, struct command *cmd);
+
+
 /**
  * \fn void ExecuteCommand(char *cmd,char* cmdArg)
  * \brief Historise les commandes dans un fichier
