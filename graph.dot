@@ -1,0 +1,6 @@
+digraph G
+{
+grep c -> cd ../..
+grep c -> | ls -a
+| ls -a -> | cd ..
+}

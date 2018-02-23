@@ -6,15 +6,33 @@
 
 int main(int argc, char* argv[])
 {
-    shellReader();
+    //shellReader();
+    char* test1 = "cd ";
+    char* test2 = "| grep test ";
+    char* test3 = "| ls -a";
+    char* test4 = "grep c";
 
-    /*char* test = "ls -a | grep git && echo hallo || echo test";
+    Tree a = createTree(test1,NULL,NULL);
+
+    Tree b = createTree(test2, NULL,NULL);
+    Tree d = createTree(test3,b,NULL);
+    Tree c = createTree(test4,a,d);
+    printf("%s\n",c->left->value);
+    printf("%d\n",isEmpty(c));
+    //parcoursPrefixe(a);
+    save_dot(c,"graph.dot");
+
+
+
+    /*
+    char* test = "ls -a | grep git && echo hallo || echo test";
     printf("Before build tree I\n");
 
 
     Tree I = createTree(test, NULL, NULL);
     printf("Before call\n");
-    printf("%d",isEmpty(I));*/
+    printf("%d",isEmpty(I));
+    */
 
     /*const char *ls[] = { "ls", "-l", 0 };
     const char *awk[] = { "awk", "{print $1}", 0 };
