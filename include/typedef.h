@@ -45,4 +45,13 @@ struct node
     Tree right;
 };
 
+/**
+ * \struct commande
+ * \brief Structure des commandes, tableau de la commande et de ses arguments
+ *
+ */
+struct command
+{
+  const char **argv;
+};
 #endif
