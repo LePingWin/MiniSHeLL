@@ -4,7 +4,7 @@
 #include <string.h>
 #include <regex.h>    
 
-const char* special_chars = "^[&|><]+";
+const char* SPECIAL_CHARS = "(^[&|><]+)";
 
 int parseStringBySpaces(char* arg,char** parsed)
 {
@@ -19,27 +19,30 @@ int parseStringBySpaces(char* arg,char** parsed)
 int parseStringBySpecialChars(char** parsed,char** result,int size){
     int c = 0;
     regex_t regex;
-    int reti;
     char msgbuf[100]; 
-
     /* Compile regular expression */
-    reti = regcomp(&regex, special_chars, 0);
+    int reti = regcomp(&regex, SPECIAL_CHARS, REG_EXTENDED);
     if (reti) {
         perror("Could not compile regex\n");
     }
-
     for(int i = 0; i < size; i++) {
-        
         /* Execute regular expression */
         reti = regexec(&regex,parsed[i], 0, NULL, 0);
         if (!reti) 
         {
             result[++c] = parsed[i];
             c++;
+
         }
         else if (reti == REG_NOMATCH) 
         {
-            strcat(result[c], parsed[i]);
+            if(result[c] == NULL)
+            {
+                strcpy(result[c],parsed[i]);
+            }
+            else{
+                strcat(result[c], parsed[i]);
+            }
         }
         else 
         {

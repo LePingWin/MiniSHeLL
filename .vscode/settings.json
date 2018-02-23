@@ -4,6 +4,7 @@
         "unistd.h": "c",
         "builtin.h": "c",
         "shell.h": "c",
-        "typedef.h": "c"
+        "typedef.h": "c",
+        "regex.h": "c"
     }
 }

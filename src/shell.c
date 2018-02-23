@@ -87,25 +87,35 @@ void PrintWorkingDirColored()
     printf("$ %s", KNRM);
 }
 
+
 void shellReader()
 {
     char command[MAX_COMMAND_LENGTH];
     char *stopShell = "exit";
     char *argv[MAX_COMMAND_LENGTH];
+    char *parsed[MAX_COMMAND_LENGTH];
+    for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+        parsed[i] = malloc(sizeof(command));
+    }
     do{
 
         ReadInput(command, MAX_COMMAND_LENGTH);
-        parseStringBySpaces(command,argv);
-        if(CallCommands(argv) == false)
+        int size = parseStringBySpaces(command,argv);
+        int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
+
+        /*if(CallCommands(argv) == false)
         {
             ExecuteCommand(argv);
-        }
+        }*/
         // while(endOfCommand(command,size) != 1)
         // {
         //    readerL(command, size);
         //  printf("%s", command);
         //}
     } while (strcmp(command, stopShell) != true);
+        for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+            free(parsed[i]);
+        }
 }
 
 void ReadInput(char *command, int size)
