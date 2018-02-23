@@ -170,9 +170,9 @@ void shellReader()
         //  printf("%s", command);
         //}
     } while (strcmp(command, stopShell) != true);
-        for(int i=0;i < MAX_COMMAND_LENGTH;i++){
-            free(parsed[i]);
-        }
+    for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+        free(parsed[i]);
+    }
 }
 
 void ReadInput(char *command, int size)

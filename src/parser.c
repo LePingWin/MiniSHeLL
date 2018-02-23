@@ -32,7 +32,6 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
         {
             result[++c] = parsed[i];
             c++;
-
         }
         else if (reti == REG_NOMATCH) 
         {
