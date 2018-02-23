@@ -6,7 +6,7 @@
 Tree createTree(char* val, Tree ls, Tree rs)
 {
     Tree res;
-    printf("%s\n",val);
+    //printf("%s\n",val);
     res = malloc(sizeof(*res));
 
     if(res == NULL)
@@ -18,7 +18,7 @@ Tree createTree(char* val, Tree ls, Tree rs)
     res->value = val;
     res->left = ls;
     res->right = rs;
-    printf("%s\n",res->value);
+    //printf("%s\n",res->value);
     return res;
 }
 
@@ -39,20 +39,41 @@ void constructTree()
     
 }
 
-void displayTree(Tree t)
+char* root(Tree t)
 {
+	return t->value;
+}
 
+void writeTree(Tree t, FILE* fp)
+{
+    if(isEmpty(left(t)) == false){
+		fprintf(fp,"%s -> %s\n",root(t),root(left(t)));
+		writeTree(left(t),fp);
+	}
+	if(isEmpty(right(t)) == false){
+		fprintf(fp,"%s -> %s\n",root(t),root(right(t)));	
+		writeTree(right(t),fp);
+    }
+}
 
-
-
+void save_dot(Tree t,char* filename){
+	FILE* fp;
+	fp = fopen(filename,"w+");
+	fprintf(fp,"digraph G\n{\n");
+	if(isEmpty(t) == false){
+        
+		writeTree(t,fp);
+	}
+	fprintf(fp,"}");
+	fclose(fp);
 }
 
 int sizeTree(Tree t)
 {
-    
-
-
-
+    if(isEmpty(t) == true)
+        return 0;
+    else   
+        return sizeTree(left(t)) + sizeTree(right(t)) + 1;
 }
 
 bool isEmpty(Tree t)
@@ -66,7 +87,7 @@ bool isEmpty(Tree t)
 
 Tree left(Tree t)
 {
-    if(isEmpty(t))
+    if(isEmpty(t) == true)
         return NULL;
     else
         return t->left;
@@ -74,7 +95,7 @@ Tree left(Tree t)
 
 Tree right(Tree t)
 {
-    if(isEmpty(t))
+    if(isEmpty(t) == true )
         return NULL;
     else
         return t->right;

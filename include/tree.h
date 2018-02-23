@@ -28,14 +28,39 @@ Tree createTree(char* val, Tree ls, Tree rs);
  */
 void addNode(Tree t, char* val);
 
+/**
+ * \fn char* root(Tree t)
+ * \brief Retourne la valeur de l'arbre
+ *
+ * \param Tree t arbre source
+ * \return char* la valeur de la racine de l'arbre
+ */
+char* root(Tree t);
 
 /**
- * \fn void displayTree(Tree t)
- * \brief Affiche l'arbre sur la sortie standard
+ * \fn void writeTree(Tree t, File* fp)
+ * \brief Ecrit l'arbre dans un fichier. Il sera interprete pour generer une visualisation de l'arbre
  *
- * \param Tree arbre en entrée
+ * \param Tree arbre en entree, File* fichier dans lequel sera ecrit l'arbre
  */
-void displayTree(Tree t);
+void writeTree(Tree t, FILE* fp);
+
+/**
+ * \fn void save_dot(Tree t, char* filename)
+ * \brief dessine la representation de l'arbre.
+ *
+ * \param Tree arbre en entree, char* nom du fichier dans lequel sauvegarder la representation de l'arbre
+ */
+void save_dot(Tree t,char* filename);
+
+/**
+ * \fn int sizeTree(Tree t)
+ * \brief Calcul la taille de l'arbre
+ *
+ * \param Tree arbre en entree
+ * \return int : retourne la taille de l'arbre, nombre de noeud
+ */
+int sizeTree(Tree t);
 
 /**
  * \fn bool isEmpty(Tree t)
