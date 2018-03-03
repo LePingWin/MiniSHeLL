@@ -61,4 +61,11 @@ struct stackNode
     char* data;
     Stack next;
 };
+
+typedef struct stackTree *StackTree;
+struct stackTree
+{
+    Tree data;
+    Stack next;
+};
 #endif

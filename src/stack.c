@@ -21,7 +21,7 @@ void init(Stack head)
 */
 Stack push(Stack head,char* data)
 {
-    Stack tmp = (Stack)malloc(sizeof(struct stackNode));
+    Stack tmp = (Stack)malloc(sizeof(Stack));
     if(tmp == NULL)
     {
         exit(0);

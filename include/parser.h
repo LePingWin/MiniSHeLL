@@ -26,5 +26,18 @@ int parseStringBySpaces(char* arg,char** parsed);
  * \return argc
  */
 int parseStringBySpecialChars(char** parsed,char** result,int size);
+/**
+ * \fn void addNodeStackTree(StackTree stack, char* operator)
+ * \brief Ajoute des noeuds à l'arbre
+ *
+ */
+void addNodeStackTree(StackTree stack, char* operator);
+
+/**
+ * \fn Tree parseStringToStacks(char** parsed,int sizeParsed)
+ * \brief Construit l'arbre syntaxique
+ *
+ */
+Tree parseStringToStacks(char** parsed,int sizeParsed);
 
 #endif

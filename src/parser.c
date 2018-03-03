@@ -5,6 +5,8 @@
 #include <regex.h>    
 #include "../include/typedef.h"
 #include "../include/stack.h"
+#include "../include/stackTree.h"
+#include "../include/tree.h"
 
 const char* SPECIAL_CHARS = "(^[&|><]+)";
 
@@ -56,6 +58,66 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
 
     return c;
 }
+
+void addNodeStackTree(StackTree stack, char* operator) {
+    Tree tmpRight;
+    Tree tmpLeft;
+    popStackTree(stack,&tmpRight);
+    popStackTree(stack,&tmpLeft);
+    pushStackTree(stack,createTree(operator, tmpLeft, tmpRight));
+}
+
+Tree parseStringToStacks(char** parsed,int sizeParsed)
+{
+    Stack operators = NULL;
+    StackTree operands = NULL;
+    init(operators);
+    initStackTree(operands);
+    char* tmpStack = "";
+    int i;
+    for(i = 0; i < sizeParsed;i++)
+    {
+        char* tmp = parsed[i];
+        if(strcmp(tmp,"||") || strcmp(tmp,"&&"))
+        {
+            operators = push(operators,tmp);
+        }
+        else if(strcmp(tmp,"("))
+        {
+            operators = push(operators,tmp);
+        }
+        else if(strcmp(tmp,")"))
+        {
+
+            while(strcmp(tmpStack,"("))
+            {
+                operators = pop(operators,&tmpStack);
+                addNodeStackTree(operands,tmpStack);
+            }
+            
+        }
+        else
+        {
+            operands = pushStackTree(operands,createTree(tmp,NULL,NULL));
+        }
+
+    }
+
+
+    while(empty(operators) == false)
+    {
+       operators = pop(operators,&tmpStack);
+       addNodeStackTree(operands,tmpStack);
+    }
+
+    Tree result;
+    popStackTree(operands,&result);
+
+    free(operators);
+    free(operands);
+    return result; 
+}
+
 
     
 

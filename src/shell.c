@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include "../include/typedef.h"
 #include "../include/parser.h"
+#include "../include/tree.h"
 
 
 
@@ -159,6 +160,8 @@ void shellReader()
         ReadInput(command, MAX_COMMAND_LENGTH);
         int size = parseStringBySpaces(command,argv);
         int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
+        Tree test = parseStringToStacks(parsed,sizeParsed);
+        save_dot(test,"graph.dot");
 
         /*if(CallCommands(argv) == false)
         {
