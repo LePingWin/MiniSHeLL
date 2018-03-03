@@ -54,4 +54,11 @@ struct command
 {
   const char **argv;
 };
+
+typedef struct stackNode *Stack;
+struct stackNode
+{
+    int data;
+    Stack next;
+};
 #endif

@@ -7,10 +7,10 @@
 int main(int argc, char* argv[])
 {
     //shellReader();
-    char* test1 = "cd ";
-    char* test2 = "| grep test ";
-    char* test3 = "| ls -a";
-    char* test4 = "grep c";
+    char* test1 = "cd";
+    char* test2 = "grep";
+    char* test3 = "ls";
+    char* test4 = "grep";
 
     Tree a = createTree(test1,NULL,NULL);
 

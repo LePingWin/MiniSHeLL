@@ -1,8 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../include/typedef.h"
+
 #include <string.h>
 #include <regex.h>    
+#include "../include/typedef.h"
+#include "../include/stack.h"
 
 const char* SPECIAL_CHARS = "(^[&|><]+)";
 
