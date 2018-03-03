@@ -58,7 +58,7 @@ struct command
 typedef struct stackNode *Stack;
 struct stackNode
 {
-    int data;
+    char* data;
     Stack next;
 };
 #endif

@@ -6,8 +6,8 @@
 
 int main(int argc, char* argv[])
 {
-    //shellReader();
-    char* test1 = "cd";
+    shellReader();
+    /*char* test1 = "cd";
     char* test2 = "grep";
     char* test3 = "ls";
     char* test4 = "grep";
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     printf("%d\n",isEmpty(c));
     //parcoursPrefixe(a);
     save_dot(c,"graph.dot");
-
+*/
 
 
     /*

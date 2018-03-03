@@ -19,7 +19,7 @@ void init(Stack head)
 /*
     push an element into stack
 */
-Stack push(Stack head,int data)
+Stack push(Stack head,char* data)
 {
     Stack tmp = (Stack)malloc(sizeof(struct stackNode));
     if(tmp == NULL)
@@ -34,7 +34,7 @@ Stack push(Stack head,int data)
 /*
     pop an element from the stack
 */
-Stack pop(Stack head,int *element)
+Stack pop(Stack head,char* *element)
 {
     Stack tmp = head;
     *element = head->data;
@@ -45,9 +45,9 @@ Stack pop(Stack head,int *element)
 /*
     returns 1 if the stack is empty, otherwise returns 0
 */
-int empty(Stack head)
+bool empty(Stack head)
 {
-    return head == NULL ? 1 : 0;
+    return head == NULL ? true : false;
 }
 
 /*
@@ -62,7 +62,7 @@ void display(Stack head)
         printf("Stack: ");
         do
         {
-            printf("%d ",current->data);
+            printf("%s ",current->data);
             current = current->next;
         }
         while (current!= NULL);
