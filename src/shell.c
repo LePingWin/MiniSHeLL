@@ -161,8 +161,8 @@ void shellReader()
         int size = parseStringBySpaces(command,argv);
         int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
         Tree test = parseStringToStacks(parsed,sizeParsed);
-        save_dot(test,"graph.dot");
-
+       display(test);
+        free(test);
         /*if(CallCommands(argv) == false)
         {
             ExecuteCommand(argv);

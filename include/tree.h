@@ -54,6 +54,13 @@ void writeTree(Tree t, FILE* fp);
 void save_dot(Tree t,char* filename);
 
 /**
+ * \fn void display(Tree t);
+ * \brief affiche la representation de l'arbre.
+ *
+ */
+void display(Tree t);
+
+/**
  * \fn int sizeTree(Tree t)
  * \brief Calcul la taille de l'arbre
  *

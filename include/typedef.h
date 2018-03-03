@@ -66,6 +66,6 @@ typedef struct stackTree *StackTree;
 struct stackTree
 {
     Tree data;
-    Stack next;
+    StackTree next;
 };
 #endif

@@ -8,33 +8,14 @@
 
 #include "../include/typedef.h"
 
-bool emptyStackTree(StackTree s);
-/**
- * \fn StackTree pop(StackTree s,char* *data)
- * \brief Empile le premier élement
- *
- * \param StackTree Pile
- */
-StackTree pushStackTree(StackTree s,Tree data);
-/**
- * \fn StackTree pop(StackTree s,char* *data)
- * \brief dépile le première élément
- *
- * \param StackTree Pile
- */
-StackTree popStackTree(StackTree s,Tree *data);
-/**
- * \fn void init(StackTree s)
- * \brief Initialise la pile
- *
- * \param StackTree Pile
- */
-void initStackTree(StackTree s);
-/**
- * \fn void display(StackTree head)
- * \brief Affiche la pile
- *
- * \param StackTree Pile
- */
-void displayStackTree(StackTree head);
+
+StackTree newNodeStackTree(Tree data);
+
+bool isEmptyStackTree(StackTree root);
+ 
+void pushStackTree(StackTree* root, Tree data);
+
+Tree popStackTree(StackTree* root);
+
+Tree peekStackTree(StackTree root);
 #endif // LINKEDStackTree_H_INCLUDED

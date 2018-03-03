@@ -1,76 +1,47 @@
-/*
-�* File:��  stack.c
-�* Author:  zentut.com
-�* Purpose: linked stack implementation
-�*/
-
+// C program for linked list implementation of stack
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+
+#include "../include/typedef.h"
 #include "../include/stack.h"
-
-/*
-    init the stack
-*/
-void init(Stack head)
+ 
+Stack newNode(char* data)
 {
-    head = NULL;
+    Stack stackNode =
+              (Stack) malloc(sizeof(struct stackNode));
+    stackNode->data = data;
+    stackNode->next = NULL;
+    return stackNode;
 }
-
-/*
-    push an element into stack
-*/
-Stack push(Stack head,char* data)
+ 
+bool empty(Stack root)
 {
-    Stack tmp = (Stack)malloc(sizeof(Stack));
-    if(tmp == NULL)
-    {
-        exit(0);
-    }
-    tmp->data = data;
-    tmp->next = head;
-    head = tmp;
-    return head;
+    return root ? true : false;
 }
-/*
-    pop an element from the stack
-*/
-Stack pop(Stack head,char* *element)
+ 
+void push(Stack* root, char* data)
 {
-    Stack tmp = head;
-    *element = head->data;
-    head = head->next;
-    free(tmp);
-    return head;
+    Stack stackNode = newNode(data);
+    stackNode->next = *root;
+    *root = stackNode;
 }
-/*
-    returns 1 if the stack is empty, otherwise returns 0
-*/
-bool empty(Stack head)
+ 
+char* pop(Stack* root)
 {
-    return head == NULL ? true : false;
+    if (empty(*root))
+        return NULL;
+    Stack temp = *root;
+    *root = (*root)->next;
+    char* popped = temp->data;
+    free(temp);
+ 
+    return popped;
 }
-
-/*
-    display the stack content
-*/
-void display(Stack head)
+ 
+char* peek(Stack root)
 {
-    Stack current;
-    current = head;
-    if(current!= NULL)
-    {
-        printf("Stack: ");
-        do
-        {
-            printf("%s ",current->data);
-            current = current->next;
-        }
-        while (current!= NULL);
-        printf("\n");
-    }
-    else
-    {
-        printf("The Stack is empty\n");
-    }
-
+    if (empty(root))
+        return NULL;
+    return root->data;
 }

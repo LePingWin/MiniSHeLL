@@ -1,6 +1,3 @@
 digraph G
 {
-grep -> cd
-grep -> ls
-ls -> grep
 }

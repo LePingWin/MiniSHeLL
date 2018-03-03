@@ -18,7 +18,6 @@ Tree createTree(char* val, Tree ls, Tree rs)
     res->value = val;
     res->left = ls;
     res->right = rs;
-    //printf("%s\n",res->value);
     return res;
 }
 
@@ -67,6 +66,18 @@ void save_dot(Tree t,char* filename){
 	fprintf(fp,"}");
 	fclose(fp);
 }
+
+void display(Tree t){
+    if(isEmpty(left(t)) == false){
+		printf("%s -> %s\n",root(t),root(left(t)));
+		display(left(t));
+	}
+	if(isEmpty(right(t)) == false){
+		printf("%s -> %s\n",root(t),root(right(t)));	
+		display(right(t));
+    }
+}
+
 
 int sizeTree(Tree t)
 {

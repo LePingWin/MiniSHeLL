@@ -55,67 +55,59 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
     }
      /* Free memory allocated to the pattern buffer by regcomp() */
     regfree(&regex);
-
     return c;
 }
 
-void addNodeStackTree(StackTree stack, char* operator) {
-    Tree tmpRight;
-    Tree tmpLeft;
-    popStackTree(stack,&tmpRight);
-    popStackTree(stack,&tmpLeft);
-    pushStackTree(stack,createTree(operator, tmpLeft, tmpRight));
+void addNodeStackTree(StackTree *stack, char* operator) {
+    Tree tmpRight =popStackTree(stack);
+    Tree tmpLeft = popStackTree(stack);
+    Tree tmp = createTree(operator, tmpLeft, tmpRight);
+    pushStackTree(stack,tmp);
 }
 
 Tree parseStringToStacks(char** parsed,int sizeParsed)
 {
-    Stack operators = NULL;
-    StackTree operands = NULL;
-    init(operators);
-    initStackTree(operands);
-    char* tmpStack = "";
+    Stack operators = newNode(NULL);
+    StackTree operands = newNodeStackTree(NULL);
+    pop(&operators);
+    popStackTree(&operands);
     int i;
-    for(i = 0; i < sizeParsed;i++)
+    for(i = 0; i <= sizeParsed;i++)
     {
-        char* tmp = parsed[i];
-        if(strcmp(tmp,"||") || strcmp(tmp,"&&"))
+        char* tmp = malloc(sizeof(parsed[i]));
+        strcpy(tmp,parsed[i]);
+        if(strcmp(tmp,"||") == true || strcmp(tmp,"&&") == true)
         {
-            operators = push(operators,tmp);
+            push(&operators,tmp);
         }
-        else if(strcmp(tmp,"("))
+        else if(strcmp(tmp,"(")== true)
         {
-            operators = push(operators,tmp);
+            push(&operators,tmp);
         }
-        else if(strcmp(tmp,")"))
+        else if(strcmp(tmp,")")== true)
         {
-
-            while(strcmp(tmpStack,"("))
+            char * tmpStack;
+            while(strcmp((tmpStack = pop(&operators)),"(")== true)
             {
-                operators = pop(operators,&tmpStack);
-                addNodeStackTree(operands,tmpStack);
+                addNodeStackTree(&operands,tmpStack);
             }
             
         }
         else
         {
-            operands = pushStackTree(operands,createTree(tmp,NULL,NULL));
+            pushStackTree(&operands,createTree(tmp,NULL,NULL));
         }
+        
 
     }
 
-
-    while(empty(operators) == false)
+    while(empty(operators) == true)
     {
-       operators = pop(operators,&tmpStack);
-       addNodeStackTree(operands,tmpStack);
+       addNodeStackTree(&operands,pop(&operators));
+       
     }
-
-    Tree result;
-    popStackTree(operands,&result);
-
-    free(operators);
-    free(operands);
-    return result; 
+    return peekStackTree(operands);
+    
 }
 
 

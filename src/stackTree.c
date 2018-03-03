@@ -1,76 +1,47 @@
-/*
-�* File:��  StackTree.c
-�* Author:  zentut.com
-�* Purpose: linked StackTree implementation
-�*/
-
+// C program for linked list implementation of stack
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+ 
+#include "../include/typedef.h"
 #include "../include/stackTree.h"
 
-/*
-    initStackTree the StackTree
-*/
-void initStackTree(StackTree head)
+StackTree newNodeStackTree(Tree data)
 {
-    head = NULL;
+    StackTree stackNode =
+              (StackTree) malloc(sizeof(struct stackTree));
+    stackNode->data = data;
+    stackNode->next = NULL;
+    return stackNode;
 }
-
-/*
-    pushStackTree an element into StackTree
-*/
-StackTree pushStackTree(StackTree head,Tree data)
+ 
+bool isEmptyStackTree(StackTree root)
 {
-    StackTree tmp = (StackTree)malloc(sizeof(StackTree));
-    if(tmp == NULL)
-    {
-        exit(0);
-    }
-    tmp->data = data;
-    tmp->next = head;
-    head = tmp;
-    return head;
+    return root ? true : false;
 }
-/*
-    popStackTree an element from the StackTree
-*/
-StackTree popStackTree(StackTree head,Tree *element)
+ 
+void pushStackTree(StackTree* root, Tree data)
 {
-    StackTree tmp = head;
-    *element = head->data;
-    head = (StackTree)head->next;
-    free(tmp);
-    return head;
+    StackTree stackNode = newNodeStackTree(data);
+    stackNode->next = *root;
+    *root = stackNode;
 }
-/*
-    returns 1 if the StackTree is emptyStackTree, otherwise returns 0
-*/
-bool emptyStackTree(StackTree head)
+ 
+Tree popStackTree(StackTree* root)
 {
-    return head == NULL ? true : false;
+    if (isEmptyStackTree(*root))
+        return NULL;
+    StackTree temp = *root;
+    *root = (*root)->next;
+    Tree popped = temp->data;
+    free(temp);
+ 
+    return popped;
 }
-
-/*
-    displayStackTree the StackTree content
-*/
-void displayStackTree(StackTree head)
+ 
+Tree peekStackTree(StackTree root)
 {
-    StackTree current;
-    current = head;
-    if(current!= NULL)
-    {
-        printf("StackTree: ");
-        do
-        {
-            printf("%s ",current->data->value);
-            current = (StackTree)current->next;
-        }
-        while (current!= NULL);
-        printf("\n");
-    }
-    else
-    {
-        printf("The StackTree is emptyStackTree\n");
-    }
-
+    if (isEmptyStackTree(root))
+        return NULL;
+    return root->data;
 }
