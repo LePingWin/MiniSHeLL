@@ -121,3 +121,12 @@ bool isLeaf(Tree t)
     else
         return false;
 }
+
+void parcoursPrefixe(Tree a){
+	if(isEmpty(a) == false){
+        //do smth
+		printf("%s\n" ,root(a));
+		parcoursPrefixe(left(a));
+		parcoursPrefixe(right(a));
+	}
+}

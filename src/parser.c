@@ -90,7 +90,6 @@ Tree parseStringToStacks(char** parsed,int sizeParsed)
     for(i = 0; i <= sizeParsed;i++)
     {
         char* tmp = parsed[i];
-        //strcpy(tmp,parsed[i]);
         if(strcmp(tmp,"||") == true || strcmp(tmp,"&&") == true)
         {
             push(&operators,tmp);
@@ -112,7 +111,6 @@ Tree parseStringToStacks(char** parsed,int sizeParsed)
         {
             pushStackTree(&operands,createTree(tmp,NULL,NULL));
         }
-        //free(tmp);
     }
 
     while(empty(operators) == true)

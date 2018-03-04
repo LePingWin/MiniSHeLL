@@ -105,4 +105,6 @@ Tree right(Tree t);
  */
 bool isLeaf(Tree t);
 
+void parcoursPrefixe(Tree a);
+
 #endif

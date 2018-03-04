@@ -62,12 +62,12 @@ void cleanBuffer();
 bool CallCommands(char **argv);
 
 /**
- * \fn ExecuteCommand(char** argv)
+ * \fn bool ExecuteCommand(char** argv)
  * \brief Délègue l'appel via fork/execvp à un processus fils
  *
  * \param Chaîne d'entrée
  */
-void ExecuteCommand(char **argv);
+bool ExecuteCommand(char **argv);
 
 /**
  * \fn int spawn_proc(int in, int out, struct command *cmd)

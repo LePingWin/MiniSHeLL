@@ -9,6 +9,7 @@
 #include "../include/typedef.h"
 #include "../include/parser.h"
 #include "../include/tree.h"
+#include <errno.h>
 
 
 
@@ -40,9 +41,10 @@ bool CallCommands(char **argv)
     return true;
 }
 
-void ExecuteCommand(char **argv)
+bool ExecuteCommand(char **argv)
 {
     int pfd[2];
+    int status;
     if (pipe(pfd) == -1)
     {
         perror("pipe failed\n");
@@ -64,11 +66,12 @@ void ExecuteCommand(char **argv)
         dup2(1, 2);      /* redirect stderr to stdout */
         dup2(pfd[1], 1); /* connect the write side with stdout */
         execvp(argv[0],argv);
-        exit(0);
+        exit(errno);
     }
     else
     {
-        wait(NULL);
+        //wait(NULL);
+        waitpid(pid,&status,0);
         int size = 1;
         /* parent */
         close(pfd[1]); /* close the unused write side */
@@ -77,6 +80,11 @@ void ExecuteCommand(char **argv)
         {
           write(1, reading_buf, size);
         }
+        if(WEXITSTATUS(status) == 0)
+        {
+            return true;
+        }
+        return false;
         
     }
 }
@@ -163,11 +171,12 @@ void shellReader()
         int size = parseStringBySpaces(command,argv);
         int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
         test = parseStringToStacks(parsed,sizeParsed);
-        display(test);
-        /*if(CallCommands(argv) == false)
+        //display(test);
+        parcoursPrefixe(test);
+        if(CallCommands(argv) == false)
         {
             ExecuteCommand(argv);
-        }*/
+        }
         // while(endOfCommand(command,size) != 1)
         // {
         //    readerL(command, size);
@@ -177,6 +186,62 @@ void shellReader()
     } while (strcmp(command, stopShell) != true);
 
 }
+    //TODO treat pipes
+    char* evaluateTree(Tree t) {
+        if(strcmp(root(t),"&&") == true || strcmp(root(t),"||") == true)
+        {
+            char** tmp;
+            parseStringBySpaces(root(left(t)),tmp);
+            bool ok;
+            if((ok = CallCommands(tmp)) == false)
+            {
+                ok = ExecuteCommand(tmp);
+
+            }
+
+            if(strcmp(root(t),"&&") == true){
+                if(ok == true)
+                {            
+                    evaluateTree(right(t));
+                }
+                else
+                {
+                    return "";
+                }
+            }else{
+                if(ok == false)
+                {            
+                    evaluateTree(right(t));
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        } 
+        else if (strcmp(root(t),"<") == true)
+        {
+
+        }
+        else if (strcmp(root(t),">") == true)
+        {
+
+        }
+        else if (strcmp(root(t),">>") == true)
+        {
+
+        }
+        else if(strcmp(root(t),"<<") == true)
+        {
+        
+        }
+        else
+        {
+            return root(t);
+        }
+        return "";
+    }
+
 
 void ReadInput(char *command, int size)
 {
