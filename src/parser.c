@@ -8,7 +8,7 @@
 #include "../include/stackTree.h"
 #include "../include/tree.h"
 
-const char* SPECIAL_CHARS = "(^[&|><]+)";
+const char* SPECIAL_CHARS = "([&|><]+)";
 
 int parseStringBySpaces(char* arg,char** parsed)
 {

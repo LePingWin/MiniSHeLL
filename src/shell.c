@@ -171,11 +171,11 @@ void shellReader()
         int size = parseStringBySpaces(command,argv);
         int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
         test = parseStringToStacks(parsed,sizeParsed);
-        //display(test);
-        parcoursPrefixe(test);
+        display(test);
+        //parcoursPrefixe(test);
         if(CallCommands(argv) == false)
         {
-            ExecuteCommand(argv);
+         printf("%d\n",ExecuteCommand(argv));
         }
         // while(endOfCommand(command,size) != 1)
         // {
