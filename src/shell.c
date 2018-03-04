@@ -157,15 +157,13 @@ void shellReader()
     do{
         for(int i=0;i < MAX_COMMAND_LENGTH;i++){
             parsed[i] = malloc(sizeof(command));
+            parsed[i] = "";
         }
         ReadInput(command, MAX_COMMAND_LENGTH);
         int size = parseStringBySpaces(command,argv);
         int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
-
         test = parseStringToStacks(parsed,sizeParsed);
         display(test);
-        
-        
         /*if(CallCommands(argv) == false)
         {
             ExecuteCommand(argv);
@@ -175,7 +173,6 @@ void shellReader()
         //    readerL(command, size);
         //  printf("%s", command);
         //}    
-        memset(parsed, 0, sizeof(parsed));
         free(test);
     } while (strcmp(command, stopShell) != true);
 

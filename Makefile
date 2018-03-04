@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -c  -std=gnu11 -g
+CFLAGS=-Wall -c  -std=gnu11 
 LDFLAGS=-pthread  -I ./include/
 
 SRC_DIR=./src

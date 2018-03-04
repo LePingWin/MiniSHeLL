@@ -8,7 +8,7 @@
 #include "../include/stackTree.h"
 #include "../include/tree.h"
 
-const char* SPECIAL_CHARS = "(^[&|><()]+)";
+const char* SPECIAL_CHARS = "(^[&|><]+)";
 
 int parseStringBySpaces(char* arg,char** parsed)
 {
@@ -35,25 +35,30 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
         if (!reti) 
         {
             if(strcmp(parsed[i],"|") == true || strcmp(parsed[i],"&") == true){
-                if(result[c] == NULL)
+
+                if(result[c] == NULL || strcmp(result[c],"") == true)
                 {
-                    strcpy(result[c],parsed[i]);
+                    result[c] = parsed[i];
+                    //strcpy(result[c],parsed[i]);
                 }
                 else{
                     strcat(result[c], parsed[i]);
                 }
             }else{
+               // printf("%s\n",parsed[i]);
                 result[++c] = parsed[i];
                 c++;
             }
         }
         else if (reti == REG_NOMATCH) 
         {
-            if(result[c] == NULL)
+            if(result[c] == NULL || strcmp(result[c],"") == true)
             {
-                strcpy(result[c],parsed[i]);
+                result[c] = parsed[i];
+                //strcpy(result[c],parsed[i]);
             }
-            else{
+            else
+            {
                 strcat(result[c], parsed[i]);
             }
         }
@@ -84,8 +89,8 @@ Tree parseStringToStacks(char** parsed,int sizeParsed)
     int i;
     for(i = 0; i <= sizeParsed;i++)
     {
-        char* tmp = malloc(sizeof(parsed[i]));
-        strcpy(tmp,parsed[i]);
+        char* tmp = parsed[i];
+        //strcpy(tmp,parsed[i]);
         if(strcmp(tmp,"||") == true || strcmp(tmp,"&&") == true)
         {
             push(&operators,tmp);
@@ -107,8 +112,7 @@ Tree parseStringToStacks(char** parsed,int sizeParsed)
         {
             pushStackTree(&operands,createTree(tmp,NULL,NULL));
         }
-        
-
+        //free(tmp);
     }
 
     while(empty(operators) == true)
