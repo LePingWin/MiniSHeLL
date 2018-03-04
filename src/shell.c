@@ -151,18 +151,21 @@ void shellReader()
     char command[MAX_COMMAND_LENGTH];
     char *stopShell = "exit";
     char *argv[MAX_COMMAND_LENGTH];
+    Tree test;
     char *parsed[MAX_COMMAND_LENGTH];
-    for(int i=0;i < MAX_COMMAND_LENGTH;i++){
-        parsed[i] = malloc(sizeof(command));
-    }
-    do{
 
+    do{
+        for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+            parsed[i] = malloc(sizeof(command));
+        }
         ReadInput(command, MAX_COMMAND_LENGTH);
         int size = parseStringBySpaces(command,argv);
         int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
-        Tree test = parseStringToStacks(parsed,sizeParsed);
-       display(test);
-        free(test);
+
+        test = parseStringToStacks(parsed,sizeParsed);
+        display(test);
+        
+        
         /*if(CallCommands(argv) == false)
         {
             ExecuteCommand(argv);
@@ -171,11 +174,11 @@ void shellReader()
         // {
         //    readerL(command, size);
         //  printf("%s", command);
-        //}
+        //}    
+        memset(parsed, 0, sizeof(parsed));
+        free(test);
     } while (strcmp(command, stopShell) != true);
-    for(int i=0;i < MAX_COMMAND_LENGTH;i++){
-        free(parsed[i]);
-    }
+
 }
 
 void ReadInput(char *command, int size)
