@@ -30,23 +30,24 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
         perror("Could not compile regex\n");
     }
     for(int i = 0; i < size; i++) {
+        char* tmp = malloc(sizeof(parsed[i]));
+        strcpy(tmp,parsed[i]);
         /* Execute regular expression */
         reti = regexec(&regex,parsed[i], 0, NULL, 0);
         if (!reti) 
         {
-            if(strcmp(parsed[i],"|") == true || strcmp(parsed[i],"&") == true){
+            if(strcmp(tmp,"|") == true || strcmp(tmp,"&") == true){
 
                 if(result[c] == NULL || strcmp(result[c],"") == true)
                 {
-                    result[c] = parsed[i];
+                    result[c] = tmp;
                     //strcpy(result[c],parsed[i]);
                 }
                 else{
-                    strcat(result[c], parsed[i]);
+                    strcat(result[c], tmp);
                 }
             }else{
-               // printf("%s\n",parsed[i]);
-                result[++c] = parsed[i];
+                result[++c] = tmp;
                 c++;
             }
         }
@@ -54,12 +55,12 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
         {
             if(result[c] == NULL || strcmp(result[c],"") == true)
             {
-                result[c] = parsed[i];
+                result[c] = tmp;
                 //strcpy(result[c],parsed[i]);
             }
             else
             {
-                strcat(result[c], parsed[i]);
+                strcat(result[c], tmp);
             }
         }
         else 
@@ -90,7 +91,7 @@ Tree parseStringToStacks(char** parsed,int sizeParsed)
     for(i = 0; i <= sizeParsed;i++)
     {
         char* tmp = parsed[i];
-        if(strcmp(tmp,"||") == true || strcmp(tmp,"&&") == true)
+        if(strcmp(tmp,"||") == true || strcmp(tmp,"&&") == true || tmp[0] == '>' || tmp[0] == '<')
         {
             push(&operators,tmp);
         }
