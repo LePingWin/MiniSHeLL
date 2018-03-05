@@ -84,6 +84,7 @@ bool ExecuteCommand(char **argv)
         {
             return true;
         }
+
         return false;
         
     }
@@ -171,7 +172,7 @@ void shellReader()
         int size = parseStringBySpaces(command,argv);
         int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
         test = parseStringToStacks(parsed,sizeParsed);
-        //display(test);
+        display(test);
         //parcoursPrefixe(test);
 
         if(CallCommands(argv) == false)
@@ -203,7 +204,9 @@ void shellReader()
             if(strcmp(root(t),"&&") == true){
                 if(ok == true)
                 {            
+                    printf("test ok\n");          
                     evaluateTree(right(t));
+                    
                 }
                 else
                 {
