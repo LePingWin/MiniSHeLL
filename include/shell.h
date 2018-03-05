@@ -107,4 +107,8 @@ void PrintWorkingDirColored();
  * \brief Sépare la chaine de commande en deux chaînes de caractères
  */
 void DecryptArgs(char* cmd,char** params);
+
+
+char* evaluateTree(Tree t);
+
 #endif

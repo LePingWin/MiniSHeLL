@@ -173,11 +173,8 @@ void shellReader()
         test = parseStringToStacks(parsed,sizeParsed);
         //display(test);
         //parcoursPrefixe(test);
+        evaluateTree(test);
 
-        if(CallCommands(argv) == false)
-        {
-         printf("%d\n",ExecuteCommand(argv));
-        }
         // while(endOfCommand(command,size) != 1)
         // {
         //    readerL(command, size);
@@ -187,30 +184,49 @@ void shellReader()
     } while (strcmp(command, stopShell) != true);
 
 }
+
+    bool Execute(char** argv)
+    {
+            bool ok;
+            if((ok = CallCommands(argv)) == false)
+            {
+               return ExecuteCommand(argv);
+            }
+            return ok;
+    }
+
     //TODO treat pipes
     char* evaluateTree(Tree t) {
+       char* tmp[MAX_NUMBER_OF_PARAMS];
+        for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
+            tmp[i] = malloc(sizeof(MAX_NUMBER_OF_PARAMS));
+        }
+
+
+        if(sizeTree(t) == 1)
+        {
+            parseStringBySpaces(root(t),tmp);
+            Execute(tmp);
+            return "";
+            
+        }
         if(strcmp(root(t),"&&") == true || strcmp(root(t),"||") == true)
         {
-            char** tmp;
+            
             parseStringBySpaces(root(left(t)),tmp);
-            bool ok;
-            if((ok = CallCommands(tmp)) == false)
-            {
-                ok = ExecuteCommand(tmp);
-
-            }
-
+            bool res = Execute(tmp);
             if(strcmp(root(t),"&&") == true){
-                if(ok == true)
-                {            
+                if(res == true)
+                {          
                     evaluateTree(right(t));
                 }
                 else
                 {
+
                     return "";
                 }
             }else{
-                if(ok == false)
+                if(res == false)
                 {            
                     evaluateTree(right(t));
                 }

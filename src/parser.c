@@ -41,7 +41,6 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
                 if(result[c] == NULL || strcmp(result[c],"") == true)
                 {
                     result[c] = tmp;
-                    //strcpy(result[c],parsed[i]);
                 }
                 else{
                     strcat(result[c], tmp);
@@ -56,10 +55,11 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
             if(result[c] == NULL || strcmp(result[c],"") == true)
             {
                 result[c] = tmp;
-                //strcpy(result[c],parsed[i]);
             }
             else
             {
+                //Keep Spaces during parsing
+                strcat(result[c], " ");
                 strcat(result[c], tmp);
             }
         }
