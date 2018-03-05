@@ -84,6 +84,7 @@ bool ExecuteCommand(char **argv)
         {
             return true;
         }
+
         return false;
         
     }
@@ -171,7 +172,7 @@ void shellReader()
         int size = parseStringBySpaces(command,argv);
         int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
         test = parseStringToStacks(parsed,sizeParsed);
-        //display(test);
+        display(test);
         //parcoursPrefixe(test);
         evaluateTree(test);
 
@@ -217,6 +218,7 @@ void shellReader()
                 if(res == true && strcmp(root(t),"&&") == true)
                 {          
                     evaluateTree(right(t));
+                    
                 }
                 else if(res == false)
                 {
