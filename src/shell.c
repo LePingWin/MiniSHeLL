@@ -202,7 +202,6 @@ void shellReader()
             tmp[i] = malloc(sizeof(MAX_NUMBER_OF_PARAMS));
         }
 
-
         if(sizeTree(t) == 1)
         {
             parseStringBySpaces(root(t),tmp);
@@ -210,31 +209,24 @@ void shellReader()
             return "";
             
         }
+
         if(strcmp(root(t),"&&") == true || strcmp(root(t),"||") == true)
         {
-            
             parseStringBySpaces(root(left(t)),tmp);
             bool res = Execute(tmp);
-            if(strcmp(root(t),"&&") == true){
-                if(res == true)
+                if(res == true && strcmp(root(t),"&&") == true)
                 {          
                     evaluateTree(right(t));
                 }
-                else
+                else if(res == false)
                 {
-
-                    return "";
-                }
-            }else{
-                if(res == false)
-                {            
                     evaluateTree(right(t));
                 }
                 else
                 {
                     return "";
                 }
-            }
+
         } 
         else if (strcmp(root(t),"<") == true)
         {
