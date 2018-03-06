@@ -10,14 +10,21 @@
 
 const char* SPECIAL_CHARS = "([&|><]+)";
 
-int parseStringBySpaces(char* arg,char** parsed)
+
+
+int parseStringBySep(char* arg,char** parsed,char* sep)
 {
     int i;
     for(i=0; i < MAX_NUMBER_OF_PARAMS; i++) {
-        parsed[i] = strsep(&arg, " ");
+        parsed[i] = strsep(&arg, sep);
         if(parsed[i] == NULL) break;
     }
     return i;
+}
+
+int parseStringBySpaces(char* arg,char** parsed)
+{
+    return parseStringBySep(arg,parsed," ");
 }
 
 int parseStringBySpecialChars(char** parsed,char** result,int size){
@@ -36,19 +43,8 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
         reti = regexec(&regex,parsed[i], 0, NULL, 0);
         if (!reti) 
         {
-            if(strcmp(tmp,"|") == true || strcmp(tmp,"&") == true){
-
-                if(result[c] == NULL || strcmp(result[c],"") == true)
-                {
-                    result[c] = tmp;
-                }
-                else{
-                    strcat(result[c], tmp);
-                }
-            }else{
                 result[++c] = tmp;
                 c++;
-            }
         }
         else if (reti == REG_NOMATCH) 
         {

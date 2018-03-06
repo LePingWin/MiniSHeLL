@@ -48,7 +48,7 @@ bool ExecuteCommand(char **argv)
     if (pipe(pfd) == -1)
     {
         perror("pipe failed\n");
-        return;
+        return false;
     }
 
     /* create the child */
@@ -56,7 +56,7 @@ bool ExecuteCommand(char **argv)
     if ((pid = fork()) < 0)
     {
         perror("fork failed\n");
-        return;
+        return false;
     }
 
     if (pid == 0)
@@ -157,31 +157,44 @@ void PrintWorkingDirColored()
 
 void shellReader()
 {
-    char command[MAX_COMMAND_LENGTH];
+    char *commands[MAX_COMMAND_LENGTH];
+    char* command;
+    char cmd[MAX_COMMAND_LENGTH];
+
+
     char *stopShell = "exit";
     char *argv[MAX_COMMAND_LENGTH];
     Tree test;
     char *parsed[MAX_COMMAND_LENGTH];
 
     do{
-        for(int i=0;i < MAX_COMMAND_LENGTH;i++){
-            parsed[i] = malloc(sizeof(command));
-            parsed[i] = "";
+        for(int i=0;i < MAX_NUMBER_OF_CMD;i++){
+            commands[i] = malloc(sizeof(cmd));
+            commands[i] = "";
         }
-        ReadInput(command, MAX_COMMAND_LENGTH);
-        int size = parseStringBySpaces(command,argv);
-        int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
-        test = parseStringToStacks(parsed,sizeParsed);
-        display(test);
-        //parcoursPrefixe(test);
-        evaluateTree(test);
-
+        ReadInput(cmd, MAX_COMMAND_LENGTH);
+        int nbCommand = parseStringBySep(cmd,commands,";");
+        for(int i=0;i<nbCommand;i++)
+        {
+            command = commands[i];
+            for(int j=0;j < MAX_COMMAND_LENGTH;j++){
+            parsed[j] = malloc(sizeof(command));
+            parsed[j] = "";
+            }
+            int size = parseStringBySpaces(command,argv);
+            int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
+            test = parseStringToStacks(parsed,sizeParsed);
+            display(test);
+            //parcoursPrefixe(test);
+            evaluateTree(test);
         // while(endOfCommand(command,size) != 1)
         // {
         //    readerL(command, size);
         //  printf("%s", command);
         //}    
-        free(test);
+            free(test);
+            
+        }
     } while (strcmp(command, stopShell) != true);
 
 }

@@ -13,11 +13,21 @@
 
 /**
  * \fn void parseStringBySpaces(char* arg,char** parsed)
+ * \brief Découpe la chaîne par la chaîne spécifié 
+ *
+ * \return argc
+ */
+int parseStringBySep(char* arg,char** parsed,char* sep);
+
+/**
+ * \fn void parseStringBySpaces(char* arg,char** parsed)
  * \brief Découpe la chaîne par caractère espace
  *
  * \return argc
  */
 int parseStringBySpaces(char* arg,char** parsed);
+
+
 
 /**
  * \fn int parseStringBySpecialChars(char** parsed,char** result,int size)

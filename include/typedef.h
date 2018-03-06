@@ -12,6 +12,7 @@
 
 #define MAX_COMMAND_LENGTH 100
 #define MAX_NUMBER_OF_PARAMS 10
+#define MAX_NUMBER_OF_CMD 10
 /**
  * \enum bool
  * \brief Booléen
