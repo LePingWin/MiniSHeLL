@@ -254,10 +254,14 @@ void shellReader()
                     return "";
                 }
 
-        } 
+        }
+        else if (strcmp(root(t),"|") == true)
+        {
+            //Pipe management
+        }
         else if (strcmp(root(t),"<") == true)
         {
-
+            
         }
         else if (strcmp(root(t),">") == true)
         {
