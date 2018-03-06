@@ -173,16 +173,28 @@ void shellReader()
             commands[i] = "";
         }
         ReadInput(cmd, MAX_COMMAND_LENGTH);
+
+        
         int nbCommand = parseStringBySep(cmd,commands,";");
         for(int i=0;i<nbCommand;i++)
         {
+            bool background = false;
             command = commands[i];
+
             for(int j=0;j < MAX_COMMAND_LENGTH;j++){
-            parsed[j] = malloc(sizeof(command));
-            parsed[j] = "";
+                parsed[j] = malloc(sizeof(command));
+                parsed[j] = "";
             }
+
             int size = parseStringBySpaces(command,argv);
             int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
+
+            if(strcmp(parsed[sizeParsed-1],"&") == true)
+            {
+                sizeParsed--;
+                background = true;
+            }
+
             test = parseStringToStacks(parsed,sizeParsed);
             display(test);
             //parcoursPrefixe(test);
