@@ -198,7 +198,12 @@ void shellReader()
             test = parseStringToStacks(parsed,sizeParsed);
             display(test);
             //parcoursPrefixe(test);
-            evaluateTree(test);
+            if(background == true){
+                //TODO
+            }else{
+                evaluateTree(test);
+            }
+            
         // while(endOfCommand(command,size) != 1)
         // {
         //    readerL(command, size);
