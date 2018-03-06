@@ -245,6 +245,10 @@ void shellReader()
                     evaluateTree(right(t));
                     
                 }
+                else if(res == false && strcmp(root(right(t)),"||") == true)
+                {
+                    evaluateTree(right(right(t)));
+                }
                 else if(res == false)
                 {
                     evaluateTree(right(t));
