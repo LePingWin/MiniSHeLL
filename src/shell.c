@@ -164,38 +164,43 @@ void shellReader()
 
     char *stopShell = "exit";
     char *argv[MAX_COMMAND_LENGTH];
-    Tree test;
-    char *parsed[MAX_COMMAND_LENGTH];
-
     do{
         for(int i=0;i < MAX_NUMBER_OF_CMD;i++){
             commands[i] = malloc(sizeof(cmd));
             commands[i] = "";
         }
         ReadInput(cmd, MAX_COMMAND_LENGTH);
-
-        
         int nbCommand = parseStringBySep(cmd,commands,";");
         for(int i=0;i<nbCommand;i++)
         {
             bool background = false;
             command = commands[i];
+            int size = parseStringBySpaces(command,argv);
+            ProcessCommands(argv,size);
+        }
+    } while (strcmp(command, stopShell) != true);
 
+}
+
+    void ProcessCommands(char** argv,int argc)
+    {
+            char *parsed[MAX_COMMAND_LENGTH];
+            Tree test;
+            bool background = false;
             for(int j=0;j < MAX_COMMAND_LENGTH;j++){
-                parsed[j] = malloc(sizeof(command));
+                parsed[j] = malloc(sizeof(char*)*MAX_COMMAND_LENGTH);
                 parsed[j] = "";
             }
 
-            int size = parseStringBySpaces(command,argv);
-            int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
-
-            if(strcmp(parsed[sizeParsed-1],"&") == true)
+            int sizeParsed = parseStringBySpecialChars(argv,parsed,argc);
+            if(sizeParsed-1 >= 0 && strcmp(parsed[sizeParsed-1],"&") == true)
             {
                 sizeParsed--;
                 background = true;
             }
 
             test = parseStringToStacks(parsed,sizeParsed);
+            
             display(test);
             //parcoursPrefixe(test);
             if(background == true){
@@ -203,18 +208,8 @@ void shellReader()
             }else{
                 evaluateTree(test);
             }
-            
-        // while(endOfCommand(command,size) != 1)
-        // {
-        //    readerL(command, size);
-        //  printf("%s", command);
-        //}    
             free(test);
-            
-        }
-    } while (strcmp(command, stopShell) != true);
-
-}
+    }
 
     bool Execute(char** argv)
     {

@@ -6,7 +6,16 @@
 
 int main(int argc, char* argv[])
 {
-    shellReader();
+    
+    if(argc > 1)
+    {
+        argv++;
+        ProcessCommands(argv,argc-1);
+    }
+    else
+    {
+        shellReader();
+    }
     /*char* test1 = "cd";
     char* test2 = "grep";
     char* test3 = "ls";
