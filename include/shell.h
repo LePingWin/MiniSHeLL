@@ -69,6 +69,7 @@ bool CallCommands(char **argv);
  */
 bool ExecuteCommand(char **argv);
 
+
 /**
  * \fn int spawn_proc(int in, int out, struct command *cmd)
  * \brief Creer un processus pour ecrire le resultat dans le pipe de sortie, redirection d'entree standard
@@ -76,7 +77,7 @@ bool ExecuteCommand(char **argv);
  * \param int in entree du pipe, int out sortie du pipe, struct command *cmd commande a executer
  * \return pid du processus
  */
-int spawn_proc(int in, int out, struct command *cmd);
+int spawn_proc(int in, int out, char** cmd);
 
 /**
  * \fn int fork_pipes(int n, struct command *cmd)
@@ -85,7 +86,7 @@ int spawn_proc(int in, int out, struct command *cmd);
  * \param int n nombre de commandes, struct command *cmd commande a executer
  * \return statut de la fonction
  */
-int fork_pipes(int n, struct command *cmd);
+//int fork_pipes(int n, struct command *cmd);
 
 
 /**
