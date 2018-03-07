@@ -268,21 +268,44 @@ void shellReader()
         {
             //Pipe management
         }
-        else if (strcmp(root(t),"<") == true)
+        else if  (root(t)[0] == '<')
         {
-            
-        }
-        else if (strcmp(root(t),">") == true)
-        {
+            //if(file) 
+            int original_dup = dup(STDIN);
+            if (strcmp(root(t),"<<") == true)
+            {
+                //TODO : Saisie au clavier https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/les-flux-de-redirection
+            }
+            else
+            {
+                freopen(root(right(t)), "r", stdin); 
+            }
+            //Execute
+            evaluateTree(left(t));
+            //Reset
+            fflush(stdin);
+            dup2(original_dup,STDIN);
+            close(original_dup);  
 
         }
-        else if (strcmp(root(t),">>") == true)
+        else if (root(t)[0] == '>')
         {
-
-        }
-        else if(strcmp(root(t),"<<") == true)
-        {
-        
+            //if(file) 
+            int original_dup = dup(STDOUT);
+            if (strcmp(root(t),">>") == true)
+            {
+                freopen(root(right(t)), "a+", stdout); 
+            }
+            else
+            {
+                freopen(root(right(t)), "w", stdout); 
+            }
+            //Execute
+            evaluateTree(left(t));
+            //Reset
+            fflush(stdout);
+            dup2(original_dup,STDOUT);
+            close(original_dup);  
         }
         else
         {
