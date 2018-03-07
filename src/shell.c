@@ -53,6 +53,7 @@ bool ExecuteCommand(char **argv)
 
     /* create the child */
     int pid;
+    
     if ((pid = fork()) < 0)
     {
         perror("fork failed\n");
@@ -62,9 +63,13 @@ bool ExecuteCommand(char **argv)
     if (pid == 0)
     {
         /* child */
-        close(pfd[0]);   /* close the unused read side */
+        //close(STDIN);
+        
+        //dup2(pfd[0],STDIN);
+        //close(pfd[0]);   /* close the unused read side */
         dup2(1, 2);      /* redirect stderr to stdout */
         dup2(pfd[1], 1); /* connect the write side with stdout */
+        close(pfd[1]);
         execvp(argv[0],argv);
         exit(errno);
     }
@@ -200,12 +205,11 @@ void shellReader()
             
             if(sizeParsed % 2 != 0 )
             {
-                printf("Wrong Syntax\n");
+                perror("Wrong Syntax\n");
                 return;
             }
 
             test = parseStringToStacks(parsed,sizeParsed);
-            
             display(test);
             //parcoursPrefixe(test);
             if(background == true){
@@ -231,16 +235,18 @@ void shellReader()
        char* tmp[MAX_NUMBER_OF_PARAMS];
         for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
             tmp[i] = malloc(sizeof(MAX_NUMBER_OF_PARAMS));
+            tmp[i] = NULL;
         }
-
+        
         if(sizeTree(t) == 1)
         {
+            //close(stdin);
             parseStringBySpaces(root(t),tmp);
+            //printf("%s\n",tmp[1]);
             Execute(tmp);
             return "";
             
         }
-
         if(strcmp(root(t),"&&") == true || strcmp(root(t),"||") == true)
         {
             parseStringBySpaces(root(left(t)),tmp);
@@ -268,29 +274,54 @@ void shellReader()
         {
             //Pipe management
         }
-        else if  (root(t)[0] == '<')
+        else if (root(t)[0] == '<')
         {
-            //if(file) 
-            int original_dup = dup(STDIN);
             if (strcmp(root(t),"<<") == true)
             {
+                char cat[1024];
+                char chaine[255];
+                fflush(stdin);
                 //TODO : Saisie au clavier https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/les-flux-de-redirection
+                 char* tmp2 = root(right(t));
+                 do{
+                    printf("> ");
+                    readerL(chaine,255);
+                    // Use the input if you want to
+                     // Throw away the input
+                     
+                     strcpy(cat,chaine);
+                    chaine[strcspn(chaine, "\n") ] = '\0';
+                   if(cat == NULL){
+                       strcpy(cat,chaine);
+                   }else{
+                       strcat(cat,"\n");
+                       strcat(cat,chaine);
+                   }
+                 }while(strcmp(chaine,tmp2) != true);
+
+                 //close(STDIN);
+                 //Execute(tmp);
+               
+                 //strcat(root(left(t))," ");
+                 //strcat(root(left(t)),cat);
+                evaluateTree(left(t));
+                   
+            //Reset
+                //fflush(stdin);
             }
             else
             {
+                int original_dup = dup(STDIN);
                 freopen(root(right(t)), "r", stdin); 
+                evaluateTree(left(t));
+                fflush(stdin);
+                dup2(original_dup,STDIN);
+                close(original_dup); 
             }
-            //Execute
-            evaluateTree(left(t));
-            //Reset
-            fflush(stdin);
-            dup2(original_dup,STDIN);
-            close(original_dup);  
 
         }
         else if (root(t)[0] == '>')
         {
-            //if(file) 
             int original_dup = dup(STDOUT);
             if (strcmp(root(t),">>") == true)
             {
@@ -339,7 +370,7 @@ int endOfCommand(char *chaine, int longueur)
 
 int readerL(char *chaine, int longueur)
 {
-    char *positionEntree = NULL;
+        char *positionEntree = NULL;
 
     // On lit le texte saisi au clavier
     if (fgets(chaine, longueur, stdin) != NULL) // Pas d'erreur de saisie ?
@@ -369,6 +400,7 @@ void cleanBuffer()
     {
         c = getchar();
     }
+    
 }
 
 void historize(char *arg)
