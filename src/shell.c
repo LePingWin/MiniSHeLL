@@ -108,38 +108,48 @@ void shellReader()
 
     char *stopShell = "exit";
     char *argv[MAX_COMMAND_LENGTH];
-    Tree test;
-    char *parsed[MAX_COMMAND_LENGTH];
-
     do{
         for(int i=0;i < MAX_NUMBER_OF_CMD;i++){
             commands[i] = malloc(sizeof(cmd));
             commands[i] = "";
         }
         ReadInput(cmd, MAX_COMMAND_LENGTH);
-
-        
         int nbCommand = parseStringBySep(cmd,commands,";");
         for(int i=0;i<nbCommand;i++)
         {
-            bool background = false;
             command = commands[i];
+            int size = parseStringBySpaces(command,argv);
+            ProcessCommands(argv,size);
+        }
+    } while (strcmp(command, stopShell) != true);
 
+}
+
+    void ProcessCommands(char** argv,int argc)
+    {
+            char *parsed[MAX_COMMAND_LENGTH];
+            Tree test;
+            bool background = false;
             for(int j=0;j < MAX_COMMAND_LENGTH;j++){
-                parsed[j] = malloc(sizeof(command));
+                parsed[j] = malloc(sizeof(char*)*MAX_COMMAND_LENGTH);
                 parsed[j] = "";
             }
 
-            int size = parseStringBySpaces(command,argv);
-            int sizeParsed = parseStringBySpecialChars(argv,parsed,size);
-
-            if(strcmp(parsed[sizeParsed-1],"&") == true)
+            int sizeParsed = parseStringBySpecialChars(argv,parsed,argc);
+            if(sizeParsed-1 >= 0 && strcmp(parsed[sizeParsed-1],"&") == true)
             {
                 sizeParsed--;
                 background = true;
             }
+            
+            if(sizeParsed % 2 != 0 )
+            {
+                printf("Wrong Syntax\n");
+                return;
+            }
 
             test = parseStringToStacks(parsed,sizeParsed);
+            
             display(test);
             //parcoursPrefixe(test);
             if(background == true){
@@ -148,14 +158,13 @@ void shellReader()
                 printf("CALL - EVALUATE TREE \n");
                 evaluateTree(test);
             }
+<<<<<<< HEAD
             
          
+=======
+>>>>>>> cf6e4b55203ef1207b0441d436e484ca2c94b72a
             free(test);
-            
-        }
-    } while (strcmp(command, stopShell) != true);
-
-}
+    }
 
 bool Execute(char** argv)
 {
@@ -256,7 +265,6 @@ char* evaluateTree(Tree t) {
 
             close(fd[0]);
             close(fd[1]);
-
             
             //execvp(cmd2[0], cmd2);
 
@@ -268,22 +276,45 @@ char* evaluateTree(Tree t) {
         // TODO Bug de redirection des resultats des pipes intermediaires. 
         // + comment on enchaine de la suite de levaluation si le pipe est en plein milieu de la commande tapper dans le shell ?!
     }
-    else if (strcmp(root(t),"<") == true)
-    {
-        
-    }
-    else if (strcmp(root(t),">") == true)
-    {
+    else if  (root(t)[0] == '<')
+        {
+            //if(file) 
+            int original_dup = dup(STDIN);
+            if (strcmp(root(t),"<<") == true)
+            {
+                //TODO : Saisie au clavier https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/les-flux-de-redirection
+            }
+            else
+            {
+                freopen(root(right(t)), "r", stdin); 
+            }
+            //Execute
+            evaluateTree(left(t));
+            //Reset
+            fflush(stdin);
+            dup2(original_dup,STDIN);
+            close(original_dup);  
 
-    }
-    else if (strcmp(root(t),">>") == true)
-    {
-
-    }
-    else if(strcmp(root(t),"<<") == true)
-    {
-    
-    }
+        }
+        else if (root(t)[0] == '>')
+        {
+            //if(file) 
+            int original_dup = dup(STDOUT);
+            if (strcmp(root(t),">>") == true)
+            {
+                freopen(root(right(t)), "a+", stdout); 
+            }
+            else
+            {
+                freopen(root(right(t)), "w", stdout); 
+            }
+            //Execute
+            evaluateTree(left(t));
+            //Reset
+            fflush(stdout);
+            dup2(original_dup,STDOUT);
+            close(original_dup);
+        }
     else
     {
         perror("EVALUATE TREE - ELSE \n");

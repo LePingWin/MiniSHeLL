@@ -25,6 +25,15 @@ int parseStringBySep(char* arg,char** parsed,char* sep)
     return i;
 }
 
+void removeAllChars(char* str, char c) {
+    char *pr = str, *pw = str;
+    while (*pr) {
+        *pw = *pr++;
+        pw += (*pw != c);
+    }
+    *pw = '\0';
+}
+
 int parseStringBySpaces(char* arg,char** parsed)
 {
     return parseStringBySep(arg,parsed," ");
@@ -42,6 +51,7 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
     for(int i = 0; i < size; i++) {
         char* tmp = malloc(sizeof(parsed[i]));
         strcpy(tmp,parsed[i]);
+        
         /* Execute regular expression */
         reti = regexec(&regex,parsed[i], 0, NULL, 0);
         if (!reti) 
@@ -67,9 +77,10 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
             regerror(reti, &regex, msgbuf, sizeof(msgbuf));
             perror(msgbuf);
         }
+        
     }
      /* Free memory allocated to the pattern buffer by regcomp() */
-    regfree(&regex);
+     regfree(&regex);
     return c;
 }
 

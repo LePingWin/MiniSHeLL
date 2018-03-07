@@ -112,4 +112,6 @@ void DecryptArgs(char* cmd,char** params);
 
 char* evaluateTree(Tree t);
 
+void ProcessCommands(char** argv,int argc);
+
 #endif

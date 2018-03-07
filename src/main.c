@@ -2,45 +2,80 @@
 #include <stdlib.h>
 #include "../include/builtin.h"
 #include "../include/shell.h"
+#include "../include/parser.h"
+#include <string.h>
 
+#define USAGE_SYNTAX "[OPTIONS] -c \"COMMAND\""
+#define USAGE_PARAMS "OPTIONS:\n\
+  -i, --command  COMMAND  : command string between double quotes\n\
+"
 
-static void
-cisshPipe(char **command1, char **command2)
+/**
+ * Procedure which displays binary usage
+ * by printing on stdout all available options
+ *
+ * \return void
+ */
+void print_usage(char* bin_name)
 {
-    int fd[2];
-    pid_t childPid;
-    if (pipe(fd) != 0)
-        error("failed to create pipe");
-
-    if ((childPid = fork()) == -1)
-        error("failed to fork");
-
-    if (childPid == 0)
-    {
-        dup2(fd[1], 1);
-        close(fd[0]);
-        close(fd[1]);
-        execvp(command1[0], command1);
-        error("failed to exec command 1");
-    }
-    else
-    {
-        dup2(fd[0], 0);
-        close(fd[0]);
-        close(fd[1]);
-        execvp(command2[0], command2);
-        error("failed to exec command 2");
-    }
+  dprintf(1, "USAGE: %s %s\n\n%s\n", bin_name, USAGE_SYNTAX, USAGE_PARAMS);
 }
+
+
+
 
 int main(int argc, char* argv[])
 {
-    shellReader();
-    
-    //char *ls[] = { "ls", 0 };
-    //char *sort[] = { "grep", "Mak", 0 };
-    //cisshPipe(ls, sort);
-    return EXIT_SUCCESS;
+    if(argc > 1)
+    {
+        if(strcmp(argv[1],"-c") == true){
+            argv += 2;
+            ProcessCommands(argv,argc-2);
+        }
+        else
+        {
+            print_usage(argv[0]);
+        }
+    }
+    else
+    {
+        shellReader();
+    }
+    /*char* test1 = "cd";
+    char* test2 = "grep";
+    char* test3 = "ls";
+    char* test4 = "grep";
+
+    Tree a = createTree(test1,NULL,NULL);
+
+    Tree b = createTree(test2, NULL,NULL);
+    Tree d = createTree(test3,b,NULL);
+    Tree c = createTree(test4,a,d);
+    printf("%s\n",c->left->value);
+    printf("%d\n",isEmpty(c));
+    //parcoursPrefixe(a);
+    save_dot(c,"graph.dot");
+*/
+
+
+    /*
+    char* test = "ls -a | grep git && echo hallo || echo test";
+    printf("Before build tree I\n");
+
+
+    Tree I = createTree(test, NULL, NULL);
+    printf("Before call\n");
+    printf("%d",isEmpty(I));
+    */
+
+    /*const char *ls[] = { "ls", "-l", 0 };
+    const char *awk[] = { "awk", "{print $1}", 0 };
+    const char *sort[] = { "sort", 0 };
+    const char *uniq[] = { "uniq", 0 };
+
+    struct command cmd [] = { {ls}, {awk}, {sort}, {uniq} };
+
+    return fork_pipes (4, cmd);*/
 }
 
 
