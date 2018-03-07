@@ -40,9 +40,10 @@ bool CallCommands(char **argv)
     printf("\n");
     return true;
 }
-
+//TODO Revoir le fonctionnement si on utilise les pipes
 bool ExecuteCommand(char **argv)
 {
+    printf("[0] : %s - [1] : %s \n", argv[0], argv[1]);
     int pfd[2];
     int status;
     if (pipe(pfd) == -1)
@@ -78,8 +79,8 @@ bool ExecuteCommand(char **argv)
         //wait(NULL);
         waitpid(pid,&status,0);
         int size = 1;
-        /* parent */
-        close(pfd[1]); /* close the unused write side */
+        // parent 
+        close(pfd[1]); // close the unused write side 
         char reading_buf[size];
         while (read(pfd[0], reading_buf, size) > 0)
         {
@@ -93,63 +94,6 @@ bool ExecuteCommand(char **argv)
         return false;
         
     }
-}
-
-int spawn_proc (int in, int out, struct command *cmd)
-{
-  pid_t pid;
-
-  if ((pid = fork ()) == 0)
-    {
-      if (in != 0)
-        {
-          dup2 (in, 0);
-          close (in);
-        }
-
-      if (out != 1)
-        {
-          dup2 (out, 1);
-          close (out);
-        }
-
-      return execvp (cmd->argv [0], (char * const *)cmd->argv);
-    }
-
-  return pid;
-}
-
-int fork_pipes (int n, struct command *cmd)
-{
-  int i;
-  pid_t pid;
-  int in, fd [2];
-
-  // Le premier processus devrait obtenir son entree du descripteur de fichier original 0
-  in = 0;
-
-  // Execution de toutes les commande sauf de la derniere
-  for (i = 0; i < n - 1; ++i)
-    {
-      pipe (fd);
-
-      // f [1] est la fin d'ecriture du pipe, 'in' = de la precedente iteration
-      spawn_proc (in, fd [1], cmd + i);
-
-      // Pas besoin d'ecrire a la fin du pipe, le fils ecrira dedans
-      close (fd [1]);
-
-      // Garde la fin de lecture du pipe, le prochain fils lira depuis celui-ci
-      in = fd [0];
-    }
-
-    // Derniere etape du pipe, setter stdin en lecture de fin du precedent pipe 
-    // et en sortie du descripteur 1 original  
-    if (in != 0)
-        dup2 (in, 0);
-
-    // Execute la derniere etape avec le processus courant
-    return execvp (cmd [i].argv [0], (char * const *)cmd [i].argv);
 }
 
 void PrintWorkingDirColored()
@@ -215,66 +159,123 @@ void shellReader()
             if(background == true){
                 //TODO
             }else{
+                printf("CALL - EVALUATE TREE \n");
                 evaluateTree(test);
             }
             free(test);
     }
 
-    bool Execute(char** argv)
+bool Execute(char** argv)
+{
+        bool ok;
+        if((ok = CallCommands(argv)) == false)
+        {
+            return ExecuteCommand(argv);
+        }
+        return ok;
+}
+
+//TODO Pipe avec pipe necessite de revoir le fonctionnement de Execute !
+char* evaluateTree(Tree t) {
+    perror("EVALUATE TREE \n");
+    char* tmp[MAX_NUMBER_OF_PARAMS];
+    for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
+        tmp[i] = malloc(sizeof(MAX_NUMBER_OF_PARAMS));
+        tmp[i] = "";
+    }
+    display(t);
+    if(sizeTree(t) == 1)
     {
-            bool ok;
-            if((ok = CallCommands(argv)) == false)
-            {
-               return ExecuteCommand(argv);
-            }
-            return ok;
+        printf("EVALUATE TREE - SIZE 1 \n");
+        
+        parseStringBySpaces(root(t),tmp);
+        
+        printf("[0] : %s - [1] : %s \n", tmp[0], tmp[1]);
+        //Execute(tmp);
+        //dup(0);
+        execvp(tmp[0], tmp);
+        return "";
+        
     }
 
-    //TODO treat pipes
-    char* evaluateTree(Tree t) {
-       char* tmp[MAX_NUMBER_OF_PARAMS];
+    if(strcmp(root(t),"&&") == true || strcmp(root(t),"||") == true)
+    {
+        printf("EVALUATE TREE - && ||\n");
+        parseStringBySpaces(root(left(t)),tmp);
+        bool res = Execute(tmp);
+            if(res == true && strcmp(root(t),"&&") == true)
+            {          
+                evaluateTree(right(t));
+                
+            }
+            else if(res == false && strcmp(root(right(t)),"||") == true)
+            {
+                evaluateTree(right(right(t)));
+            }
+            else if(res == false)
+            {
+                evaluateTree(right(t));
+            }
+            else
+            {
+                return "";
+            }
+
+    }
+    else if (strcmp(root(t),"|") == true)
+    {
+        //Pipe management
+        printf("EVALUATE TREE - PIPE \n");
+        char* cmd2[MAX_NUMBER_OF_PARAMS];
         for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
-            tmp[i] = malloc(sizeof(MAX_NUMBER_OF_PARAMS));
-            tmp[i] = NULL;
+            cmd2[i] = malloc(sizeof(MAX_NUMBER_OF_PARAMS));
+            cmd2[i] = "";
         }
-        
-        if(sizeTree(t) == 1)
+        parseStringBySpaces(root(left(t)),tmp);
+        //parseStringBySpaces(root(right(t)),cmd2);
+        //executePipe(tmp,cmd2);
+
+        int fd[2];
+        pid_t childPid;
+        printf("PIPE executing \n");
+
+        if (pipe(fd) != 0)
+            //error("failed to create pipe");
+            printf("failed to create pipe \n");
+        if ((childPid = fork()) == -1)
+            //error("failed to fork");
+            printf("failed to fork \n");
+
+        if (childPid == 0)
         {
-            //close(stdin);
-            parseStringBySpaces(root(t),tmp);
-            //printf("%s\n",tmp[1]);
-            Execute(tmp);
+            //printf("fils \n");
+            dup2(fd[1], 1);
+            close(fd[0]);
+            close(fd[1]);
+            //Execute(tmp);
+            execvp(tmp[0], tmp);
+            return "";
+            //error("failed to exec command 1");
+        }
+        else
+        {       
+            dup2(fd[0], 0);
+            //parseStringBySpaces(root(right(t)),cmd2);
+
+            close(fd[0]);
+            close(fd[1]);
+            
+            //execvp(cmd2[0], cmd2);
+
+            evaluateTree(right(t));     
             return "";
             
-        }
-        if(strcmp(root(t),"&&") == true || strcmp(root(t),"||") == true)
-        {
-            parseStringBySpaces(root(left(t)),tmp);
-            bool res = Execute(tmp);
-                if(res == true && strcmp(root(t),"&&") == true)
-                {          
-                    evaluateTree(right(t));
-                    
-                }
-                else if(res == false && strcmp(root(right(t)),"||") == true)
-                {
-                    evaluateTree(right(right(t)));
-                }
-                else if(res == false)
-                {
-                    evaluateTree(right(t));
-                }
-                else
-                {
-                    return "";
-                }
+        }                                                       
 
-        }
-        else if (strcmp(root(t),"|") == true)
-        {
-            //Pipe management
-        }
-        else if (root(t)[0] == '<')
+        // TODO Bug de redirection des resultats des pipes intermediaires. 
+        // + comment on enchaine de la suite de levaluation si le pipe est en plein milieu de la commande tapper dans le shell ?!
+    }
+    else if  (root(t)[0] == '<')
         {
             if (strcmp(root(t),"<<") == true)
             {
@@ -336,18 +337,47 @@ void shellReader()
             //Reset
             fflush(stdout);
             dup2(original_dup,STDOUT);
-            close(original_dup);  
+            close(original_dup);
         }
-        else
-        {
-            return root(t);
-        }
-        return "";
+    else
+    {
+        perror("EVALUATE TREE - ELSE \n");
+        return root(t);
     }
+    return "";
+}
+
+
+
+
+int spawn_proc (int in, int out, char** cmd)
+{
+  pid_t pid;
+
+  if ((pid = fork ()) == 0)
+    {
+      if (in != 0)
+        {
+          dup2 (in, 0);
+          close (in);
+        }
+
+      if (out != 1)
+        {
+          dup2 (out, 1);
+          close (out);
+        }
+
+      return execvp (cmd[0], cmd);
+    }
+
+  return pid;
+}
 
 
 void ReadInput(char *command, int size)
 {
+    printf("CALL - READInput \n");
     PrintWorkingDirColored();
     readerL(command, size);
     historize(command);

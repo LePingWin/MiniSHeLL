@@ -22,6 +22,8 @@ void print_usage(char* bin_name)
 }
 
 
+
+
 int main(int argc, char* argv[])
 {
     if(argc > 1)
@@ -74,13 +76,7 @@ int main(int argc, char* argv[])
     struct command cmd [] = { {ls}, {awk}, {sort}, {uniq} };
 
     return fork_pipes (4, cmd);*/
-
-    /*const char *ls[] = { "ls", "-a", 0 };
-    const char *awk[] = { "grep", "git", 0 };
-   
-
-    struct command cmd [] = { {ls}, {awk} };
-
-    return fork_pipes (2, cmd);*/
-    return EXIT_SUCCESS;
 }
+
+
+

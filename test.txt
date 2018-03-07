@@ -1,1 +1,8 @@
-banane
+bin
+doc
+include
+Makefile
+obj
+README.md
+src
+test.txt

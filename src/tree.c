@@ -76,6 +76,9 @@ void display(Tree t){
 		printf("%s -> %s\n",root(t),root(right(t)));	
 		display(right(t));
     }
+    if(isEmpty(t) == false && sizeTree(t) == 1){
+		printf("%s\n",root(t));	
+    }
 }
 
 
