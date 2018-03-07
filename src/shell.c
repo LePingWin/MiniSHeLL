@@ -173,7 +173,6 @@ void shellReader()
         int nbCommand = parseStringBySep(cmd,commands,";");
         for(int i=0;i<nbCommand;i++)
         {
-            bool background = false;
             command = commands[i];
             int size = parseStringBySpaces(command,argv);
             ProcessCommands(argv,size);
