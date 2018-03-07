@@ -50,4 +50,6 @@ void addNodeStackTree(StackTree stack, char* operator);
  */
 Tree parseStringToStacks(char** parsed,int sizeParsed);
 
+void removeAllChars(char* str, char c);
+
 #endif

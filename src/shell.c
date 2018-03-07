@@ -197,6 +197,12 @@ void shellReader()
                 sizeParsed--;
                 background = true;
             }
+            
+            if(sizeParsed % 2 != 0 )
+            {
+                printf("Wrong Syntax\n");
+                return;
+            }
 
             test = parseStringToStacks(parsed,sizeParsed);
             
