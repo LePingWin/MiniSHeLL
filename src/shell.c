@@ -158,11 +158,6 @@ void shellReader()
                 printf("CALL - EVALUATE TREE \n");
                 evaluateTree(test);
             }
-<<<<<<< HEAD
-            
-         
-=======
->>>>>>> cf6e4b55203ef1207b0441d436e484ca2c94b72a
             free(test);
     }
 
