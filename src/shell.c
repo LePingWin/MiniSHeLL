@@ -151,7 +151,7 @@ void ProcessCommands(char** argv,int argc)
         background = true;
     }
     
-    if(sizeParsed % 2 != 0 )
+    if(sizeParsed % 2 != 0 && sizeParsed > 1) 
     {
         perror("Wrong Syntax\n");
         return;
@@ -161,7 +161,23 @@ void ProcessCommands(char** argv,int argc)
     //display(test);
     //parcoursPrefixe(test);
     if(background == true){
-        //TODO
+        // Pid pour le fils
+        int pid;
+        
+        // Test si fils cree
+        if ((pid = fork()) < 0)
+        {
+            perror("Erreur creation fork\n");
+            
+        }
+
+        // Fils
+        if (pid == 0)
+        {
+            evaluateTree(test);
+            exit(errno);
+        }
+
     }else{
         evaluateTree(test);
     }
