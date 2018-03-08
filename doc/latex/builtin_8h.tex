@@ -1,0 +1,98 @@
+\hypertarget{builtin_8h}{}\section{include/builtin.h File Reference}
+\label{builtin_8h}\index{include/builtin.\+h@{include/builtin.\+h}}
+
+
+Fonctions du Shell.  
+
+
+{\ttfamily \#include \char`\"{}typedef.\+h\char`\"{}}\\*
+Include dependency graph for builtin.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{builtin_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{builtin_8h_ac2badb93ccbe02d9462229285fc0184b}{cd\+Cmd} (char $\ast$$\ast$arg)
+\begin{DoxyCompactList}\small\item\em Reproduit la commande \char`\"{}cd\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{builtin_8h_a7363ac1891ce8f70c4c548aaebb16d24}{pwd\+Cmd} ()
+\begin{DoxyCompactList}\small\item\em Reproduit la commande \char`\"{}pwd\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{builtin_8h_ac9aab741f67d8c4ed42dff107e1cabdd}{exit\+Cmd} ()\hypertarget{builtin_8h_ac9aab741f67d8c4ed42dff107e1cabdd}{}\label{builtin_8h_ac9aab741f67d8c4ed42dff107e1cabdd}
+
+\begin{DoxyCompactList}\small\item\em Quitte le processus courant. \end{DoxyCompactList}\item 
+void \hyperlink{builtin_8h_ab2a46d03e0f6275654d6afdb4b092283}{echo\+Cmd} (char $\ast$$\ast$arg)
+\begin{DoxyCompactList}\small\item\em Reproduit la commande \char`\"{}echo\char`\"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Fonctions du Shell. 
+
+Gestion du Shell.
+
+\begin{DoxyAuthor}{Author}
+Loïc.\+B
+\end{DoxyAuthor}
+Reproduction des fonctions du Shell
+
+\begin{DoxyAuthor}{Author}
+Jean.\+S
+\end{DoxyAuthor}
+Gestion du Shell et de l\textquotesingle{}I\+HM 
+
+\subsection{Function Documentation}
+\index{builtin.\+h@{builtin.\+h}!cd\+Cmd@{cd\+Cmd}}
+\index{cd\+Cmd@{cd\+Cmd}!builtin.\+h@{builtin.\+h}}
+\subsubsection[{\texorpdfstring{cd\+Cmd(char $\ast$$\ast$arg)}{cdCmd(char **arg)}}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ cd\+Cmd (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{arg}
+\end{DoxyParamCaption}
+)}\hypertarget{builtin_8h_ac2badb93ccbe02d9462229285fc0184b}{}\label{builtin_8h_ac2badb93ccbe02d9462229285fc0184b}
+
+
+Reproduit la commande \char`\"{}cd\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Chemin} & du répertoire cible \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Chemin du répertoire cible 
+\end{DoxyReturn}
+\index{builtin.\+h@{builtin.\+h}!echo\+Cmd@{echo\+Cmd}}
+\index{echo\+Cmd@{echo\+Cmd}!builtin.\+h@{builtin.\+h}}
+\subsubsection[{\texorpdfstring{echo\+Cmd(char $\ast$$\ast$arg)}{echoCmd(char **arg)}}]{\setlength{\rightskip}{0pt plus 5cm}void echo\+Cmd (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{arg}
+\end{DoxyParamCaption}
+)}\hypertarget{builtin_8h_ab2a46d03e0f6275654d6afdb4b092283}{}\label{builtin_8h_ab2a46d03e0f6275654d6afdb4b092283}
+
+
+Reproduit la commande \char`\"{}echo\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Chaîne} & à afficher \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Chaîne à afficher 
+\end{DoxyReturn}
+\index{builtin.\+h@{builtin.\+h}!pwd\+Cmd@{pwd\+Cmd}}
+\index{pwd\+Cmd@{pwd\+Cmd}!builtin.\+h@{builtin.\+h}}
+\subsubsection[{\texorpdfstring{pwd\+Cmd()}{pwdCmd()}}]{\setlength{\rightskip}{0pt plus 5cm}void pwd\+Cmd (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{builtin_8h_a7363ac1891ce8f70c4c548aaebb16d24}{}\label{builtin_8h_a7363ac1891ce8f70c4c548aaebb16d24}
+
+
+Reproduit la commande \char`\"{}pwd\char`\"{}. 
+
+\begin{DoxyReturn}{Returns}
+Chemin du répertoire courant 
+\end{DoxyReturn}
