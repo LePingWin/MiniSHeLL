@@ -148,6 +148,7 @@ void ProcessCommands(char** argv,int argc)
     if(sizeParsed-1 >= 0 && strcmp(parsed[sizeParsed-1],"&") == true)
     {
         sizeParsed--;
+        sizeParsed--;
         background = true;
     }
     
@@ -170,12 +171,13 @@ void ProcessCommands(char** argv,int argc)
             perror("Erreur creation fork\n");
             
         }
-
+        
         // Fils
         if (pid == 0)
         {
             evaluateTree(test);
-            exit(errno);
+            //exit(0  );
+        
         }
 
     }else{
@@ -206,6 +208,7 @@ char* evaluateTree(Tree t) {
     if(sizeTree(t) == 1)
     {
         parseStringBySpaces(root(t),tmp);
+    
         Execute(tmp);
         return "";
     }
