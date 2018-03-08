@@ -12,8 +12,6 @@
 #include <errno.h>
 
 
-
-
 bool CallCommands(char **argv)
 {
     //Appel les bonnes fonctions
@@ -40,57 +38,63 @@ bool CallCommands(char **argv)
     printf("\n");
     return true;
 }
-//TODO Revoir le fonctionnement si on utilise les pipes
+
 bool ExecuteCommand(char **argv)
 {
-    printf("[0] : %s - [1] : %s \n", argv[0], argv[1]);
-    int pfd[2];
-    int status;
+    
+    int pfd[2]; // entree  et sortie du pipe
+    int status; // savoir si le processus esst termine ou non
+
+    // Test echec pipe
     if (pipe(pfd) == -1)
     {
-        perror("pipe failed\n");
+        perror("Erreur creation pipe\n");
         return false;
     }
 
-    /* create the child */
+    // Pid pour le fils
     int pid;
     
+    // Test si fils cree
     if ((pid = fork()) < 0)
     {
-        perror("fork failed\n");
+        perror("Erreur creation fork\n");
         return false;
     }
 
+    // Fils
     if (pid == 0)
     {
-        /* child */
-        //close(STDIN);
         
-        //dup2(pfd[0],STDIN);
-        //close(pfd[0]);   /* close the unused read side */
-        dup2(1, 2);      /* redirect stderr to stdout */
-        dup2(pfd[1], 1); /* connect the write side with stdout */
+       
+        //close(pfd[0]);   // Ferme le cote de lecture inutilise
+        dup2(1, 2);      // redirige stderr vers stdout
+        dup2(pfd[1], 1); // Connecte l'entree avec stdout
         close(pfd[1]);
-        execvp(argv[0],argv);
-        exit(errno);
+        execvp(argv[0],argv); // Exe la commande
+        exit(errno); // Permet de quitter le fils correctement
     }
+    // Pere
     else
-    {
-        //wait(NULL);
+    {   
         waitpid(pid,&status,0);
-        int size = 1;
-        // parent 
-        close(pfd[1]); // close the unused write side 
-        char reading_buf[size];
+        int size = 1; // pour lire un caractere apres l'autre
+        
+        close(pfd[1]); // Ferme l'entree 
+        char reading_buf[size]; // Buffer de lecture
+
+        // Lecture tant qu'il y a des donnees
         while (read(pfd[0], reading_buf, size) > 0)
         {
-          write(1, reading_buf, size);
+          write(1, reading_buf, size); // Ecrit dans sdout ce qui est envoye par le fils
         }
+
+        // Si tout s'est bien passe, return true
         if(WEXITSTATUS(status) == 0)
         {
             return true;
         }
-
+        // Sinon false
         return false;
         
     }
@@ -130,77 +134,68 @@ void shellReader()
 
 }
 
-    void ProcessCommands(char** argv,int argc)
-    {
-            char *parsed[MAX_COMMAND_LENGTH];
-            Tree test;
-            bool background = false;
-            for(int j=0;j < MAX_COMMAND_LENGTH;j++){
-                parsed[j] = malloc(sizeof(char*)*MAX_COMMAND_LENGTH);
-                parsed[j] = "";
-            }
-
-            int sizeParsed = parseStringBySpecialChars(argv,parsed,argc);
-            if(sizeParsed-1 >= 0 && strcmp(parsed[sizeParsed-1],"&") == true)
-            {
-                sizeParsed--;
-                background = true;
-            }
-            
-            if(sizeParsed % 2 != 0 )
-            {
-                perror("Wrong Syntax\n");
-                return;
-            }
-
-            test = parseStringToStacks(parsed,sizeParsed);
-            display(test);
-            //parcoursPrefixe(test);
-            if(background == true){
-                //TODO
-            }else{
-                printf("CALL - EVALUATE TREE \n");
-                evaluateTree(test);
-            }
-            free(test);
+void ProcessCommands(char** argv,int argc)
+{
+    char *parsed[MAX_COMMAND_LENGTH];
+    Tree test;
+    bool background = false;
+    for(int j=0;j < MAX_COMMAND_LENGTH;j++){
+        parsed[j] = malloc(sizeof(char*)*MAX_COMMAND_LENGTH);
+        parsed[j] = "";
     }
+
+    int sizeParsed = parseStringBySpecialChars(argv,parsed,argc);
+    if(sizeParsed-1 >= 0 && strcmp(parsed[sizeParsed-1],"&") == true)
+    {
+        sizeParsed--;
+        background = true;
+    }
+    
+    if(sizeParsed % 2 != 0 )
+    {
+        perror("Wrong Syntax\n");
+        return;
+    }
+
+    test = parseStringToStacks(parsed,sizeParsed);
+    //display(test);
+    //parcoursPrefixe(test);
+    if(background == true){
+        //TODO
+    }else{
+        evaluateTree(test);
+    }
+    free(test);
+}
 
 bool Execute(char** argv)
 {
-        bool ok;
-        if((ok = CallCommands(argv)) == false)
-        {
-            return ExecuteCommand(argv);
-        }
-        return ok;
+    bool ok;
+    if((ok = CallCommands(argv)) == false)
+    {
+        return ExecuteCommand(argv);
+    }
+    return ok;
 }
 
-//TODO Pipe avec pipe necessite de revoir le fonctionnement de Execute !
+//TODO Attention : ls -a | grep git && echo ok | ls -l || echo nok
 char* evaluateTree(Tree t) {
-    perror("EVALUATE TREE \n");
+    
     char* tmp[MAX_NUMBER_OF_PARAMS];
     for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
         tmp[i] = malloc(sizeof(MAX_NUMBER_OF_PARAMS));
         tmp[i] = "";
     }
-    display(t);
+    
     if(sizeTree(t) == 1)
     {
-        printf("EVALUATE TREE - SIZE 1 \n");
-        
         parseStringBySpaces(root(t),tmp);
-        
-        printf("[0] : %s - [1] : %s \n", tmp[0], tmp[1]);
-        //Execute(tmp);
-        //dup(0);
-        execvp(tmp[0], tmp);
+        Execute(tmp);
         return "";
-        
     }
 
     if(strcmp(root(t),"&&") == true || strcmp(root(t),"||") == true)
     {
-        printf("EVALUATE TREE - && ||\n");
         parseStringBySpaces(root(left(t)),tmp);
         bool res = Execute(tmp);
             if(res == true && strcmp(root(t),"&&") == true)
@@ -224,56 +219,31 @@ char* evaluateTree(Tree t) {
     }
     else if (strcmp(root(t),"|") == true)
     {
-        //Pipe management
-        printf("EVALUATE TREE - PIPE \n");
-        char* cmd2[MAX_NUMBER_OF_PARAMS];
-        for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
-            cmd2[i] = malloc(sizeof(MAX_NUMBER_OF_PARAMS));
-            cmd2[i] = "";
-        }
-        parseStringBySpaces(root(left(t)),tmp);
-        //parseStringBySpaces(root(right(t)),cmd2);
-        //executePipe(tmp,cmd2);
+        char* filename = "/tmp/pipe.txt";
+        //Pipe management        
+        // Fonctionnement via File
+        fflush(stdout); // Vide le buffer (ici sortie standard)
+        int original_dup = dup(STDOUT);
+        freopen(filename, "w", stdout);
+        
+        //Execute partie de gauche
+        evaluateTree(left(t));
+        
+        //Reset
+        fflush(stdout);
+        dup2(original_dup,STDOUT);
+        close(original_dup);
+        
+        // Partie de droite
+        int original_dup2 = dup(STDIN);
+        freopen(filename, "r", stdin); 
+        evaluateTree(right(t));
+        //Reset
+        fflush(stdin);
+        dup2(original_dup2,STDIN);
+        close(original_dup2);
 
-        int fd[2];
-        pid_t childPid;
-        printf("PIPE executing \n");
-
-        if (pipe(fd) != 0)
-            //error("failed to create pipe");
-            printf("failed to create pipe \n");
-        if ((childPid = fork()) == -1)
-            //error("failed to fork");
-            printf("failed to fork \n");
-
-        if (childPid == 0)
-        {
-            //printf("fils \n");
-            dup2(fd[1], 1);
-            close(fd[0]);
-            close(fd[1]);
-            //Execute(tmp);
-            execvp(tmp[0], tmp);
-            return "";
-            //error("failed to exec command 1");
-        }
-        else
-        {       
-            dup2(fd[0], 0);
-            //parseStringBySpaces(root(right(t)),cmd2);
-
-            close(fd[0]);
-            close(fd[1]);
-            
-            //execvp(cmd2[0], cmd2);
-
-            evaluateTree(right(t));     
-            return "";
-            
-        }                                                       
-
-        // TODO Bug de redirection des resultats des pipes intermediaires. 
-        // + comment on enchaine de la suite de levaluation si le pipe est en plein milieu de la commande tapper dans le shell ?!
+        remove(filename); 
     }
     else if  (root(t)[0] == '<')
         {
@@ -284,15 +254,14 @@ char* evaluateTree(Tree t) {
                 char* filename = "/tmp/tmp-miniShell.txt";
                 FILE *p1;
                 p1=fopen(filename,"w+");
-                 do{
+                do{
                     printf("> ");
                     readerL(chaine,255);
                     fprintf(p1, "%s\n", chaine);
                     chaine[strcspn(chaine, "\n") ] = '\0';
-                 }while(strcmp(chaine,tmp2) != true);
+                }while(strcmp(chaine,tmp2) != true);
                 
-                 //close(STDIN);
-                 //Execute(tmp);
+                 
                 fclose(p1);
                  strcat(root(left(t))," ");
                  strcat(root(left(t)),filename);
@@ -333,43 +302,13 @@ char* evaluateTree(Tree t) {
         }
     else
     {
-        perror("EVALUATE TREE - ELSE \n");
         return root(t);
     }
     return "";
 }
 
-
-
-
-int spawn_proc (int in, int out, char** cmd)
-{
-  pid_t pid;
-
-  if ((pid = fork ()) == 0)
-    {
-      if (in != 0)
-        {
-          dup2 (in, 0);
-          close (in);
-        }
-
-      if (out != 1)
-        {
-          dup2 (out, 1);
-          close (out);
-        }
-
-      return execvp (cmd[0], cmd);
-    }
-
-  return pid;
-}
-
-
 void ReadInput(char *command, int size)
 {
-    printf("CALL - READInput \n");
     PrintWorkingDirColored();
     readerL(command, size);
     historize(command);
@@ -392,7 +331,7 @@ int endOfCommand(char *chaine, int longueur)
 
 int readerL(char *chaine, int longueur)
 {
-        char *positionEntree = NULL;
+    char *positionEntree = NULL;
 
     // On lit le texte saisi au clavier
     if (fgets(chaine, longueur, stdin) != NULL) // Pas d'erreur de saisie ?

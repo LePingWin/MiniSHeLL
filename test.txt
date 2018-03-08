@@ -1,0 +1,8 @@
+bin
+include
+Makefile
+obj
+pipe.txt
+README.md
+src
+test.txt

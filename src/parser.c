@@ -18,7 +18,6 @@ int parseStringBySep(char* arg,char** parsed,char* sep)
     for(i=0; i < MAX_NUMBER_OF_PARAMS; i++) {
         parsed[i] = strsep(&arg, sep);
         if(parsed[i] == NULL){
-            //parsed[i] = 0;
             break;
         }
     }
