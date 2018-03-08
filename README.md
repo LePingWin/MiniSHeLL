@@ -22,31 +22,31 @@ Les commandes sont lancées par des processus fils laissant au père le rôle d�
 
 Le livrable attendu pour ce projet se résume en un code source compilable et exécutable répondant d’une part aux fonctions métiers suivantes :
 
-- FM01 – Le binaire est capable d’exécuter une commande simple (ie : ls –l ; ps ; who)
-- FM02 – Le binaire est capable d’exécuter un sous-ensemble de plusieurs commandes de sorte à prendre en compte :
+- FM01 – Le binaire est capable d’exécuter une commande simple (ie : ls –l ; ps ; who) ✓
+- FM02 – Le binaire est capable d’exécuter un sous-ensemble de plusieurs commandes de sorte à prendre en compte : ✓
     - Les opérateurs de contrôle : && et ||
     - Les redirections de flux simples : |, >, <, >>, <<
     - L’exécution en arrière-plan : &
-- FM03 – L’exécution des commandes internes (fonctionnalités built-in) suivantes :
+- FM03 – L’exécution des commandes internes (fonctionnalités built-in) suivantes : ✓
     - cd - Permettant de se déplacer au sein d’une arborescence de fichier.
     - pwd – Affichant la valeur de la variable contenant le chemin du répertoire courant.
     - exit – Permettant de quitter l’interpréteur.
     - echo – Permettant d’afficher du texte sur la sortie standard.
-- FM04 - La persistance des commandes saisie dans un fichier (historique)
+- FM04 - La persistance des commandes saisie dans un fichier (historique) ✓
 
 D’autres fonctionnalités optionnelles peuvent êtres implémentés :
 
-- FO01 – La réalisation d’un mode batch (ie : ./my_shell –c « ls –al | grep toto »)
+- FO01 – La réalisation d’un mode batch (ie : ./my_shell –c « ls –al | grep toto ») ~
 - FO02 – La création de variables d’environnement
 - FO03 – La prise en charge d’alias
 
 Concernant les exigences techniques attendues, vous devez respecter les contraintes suivantes :
 
-- CT01 – La compilation du projet doit se faire via un Makefile.
-- CT02 – La définitions des structures doit se faire dans un fichier typedef.h.
-- CT03 – La définition des méthodes protoype (.h) & implémentation (.c) doit se faire de manière séparée autant que faire se peut.
-- CT04 – Le code produit doit être documenté.
-- CT05 – La gestion des erreurs doit se faire via « les mécanismes proposés par errno ».
+- CT01 – La compilation du projet doit se faire via un Makefile. ✓
+- CT02 – La définitions des structures doit se faire dans un fichier typedef.h. ✓
+- CT03 – La définition des méthodes protoype (.h) & implémentation (.c) doit se faire de manière séparée autant que faire se peut. ✓
+- CT04 – Le code produit doit être documenté. ~
+- CT05 – La gestion des erreurs doit se faire via « les mécanismes proposés par errno ». ✓
 
 D’autres contraintes techniques peuvent être prises en compte :
 - CTO01 – La documentation du code générée via l’utilitaire doxygen.
