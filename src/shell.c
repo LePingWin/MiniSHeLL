@@ -279,36 +279,28 @@ char* evaluateTree(Tree t) {
         {
             if (strcmp(root(t),"<<") == true)
             {
-                char cat[1024];
                 char chaine[255];
-                fflush(stdin);
-                //TODO : Saisie au clavier https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/les-flux-de-redirection
                  char* tmp2 = root(right(t));
+                char* filename = "/tmp/tmp-miniShell.txt";
+                FILE *p1;
+                p1=fopen(filename,"w+");
                  do{
                     printf("> ");
                     readerL(chaine,255);
-                    // Use the input if you want to
-                     // Throw away the input
-                     
-                     strcpy(cat,chaine);
+                    fprintf(p1, "%s\n", chaine);
                     chaine[strcspn(chaine, "\n") ] = '\0';
-                   if(cat == NULL){
-                       strcpy(cat,chaine);
-                   }else{
-                       strcat(cat,"\n");
-                       strcat(cat,chaine);
-                   }
                  }while(strcmp(chaine,tmp2) != true);
-
+                
                  //close(STDIN);
                  //Execute(tmp);
-               
-                 //strcat(root(left(t))," ");
-                 //strcat(root(left(t)),cat);
+                fclose(p1);
+                 strcat(root(left(t))," ");
+                 strcat(root(left(t)),filename);
+                 
                 evaluateTree(left(t));
-                   
-            //Reset
-                //fflush(stdin);
+
+                
+                remove(filename);
             }
             else
             {
