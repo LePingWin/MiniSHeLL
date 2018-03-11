@@ -130,12 +130,18 @@ void shellReader()
             int size = parseStringBySpaces(command,argv);
             ProcessCommands(argv,size);
         }
+        //for(int i=0;i < MAX_NUMBER_OF_CMD;i++){
+        //    free(commands[i]);
+        //}
+        //free(commands);
+        
     } while (strcmp(command, stopShell) != true);
 
 }
 
 void ProcessCommands(char** argv,int argc)
 {
+    
     char *parsed[MAX_COMMAND_LENGTH];
     Tree test;
     bool background = false;
@@ -144,6 +150,7 @@ void ProcessCommands(char** argv,int argc)
         parsed[j] = "";
     }
 
+    
     int sizeParsed = parseStringBySpecialChars(argv,parsed,argc);
     if(sizeParsed-1 >= 0 && strcmp(parsed[sizeParsed-1],"&") == true)
     {
