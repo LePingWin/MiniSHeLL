@@ -36,7 +36,7 @@ Le livrable attendu pour ce projet se résume en un code source compilable et ex
 
 D’autres fonctionnalités optionnelles peuvent êtres implémentés :
 
-- FO01 – La réalisation d’un mode batch (ie : ./my_shell –c « ls –al | grep toto ») ~
+- FO01 – La réalisation d’un mode batch (ie : ./my_shell –c « ls –al | grep toto ») ✓
 - FO02 – La création de variables d’environnement
 - FO03 – La prise en charge d’alias
 

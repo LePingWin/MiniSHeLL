@@ -69,7 +69,6 @@ bool CallCommands(char **argv);
  */
 bool ExecuteCommand(char **argv);
 
-
 /**
  * \fn void ExecuteCommand(char *cmd,char* cmdArg)
  * \brief Historise les commandes dans un fichier
@@ -90,9 +89,16 @@ void PrintWorkingDirColored();
  */
 void DecryptArgs(char* cmd,char** params);
 
-
+/**
+ * \fn char* evaluateTree(Tree t)
+ * \brief Permet d'evaluer l'arbre compose des commandes et operateurs
+ */ 
 char* evaluateTree(Tree t);
 
+/**
+ * \fn char* evaluateTree(Tree t)
+ * \brief Permet d'executer la commande et d'evaluer si cette derniere doit s'executer en arriere plan
+ */ 
 void ProcessCommands(char** argv,int argc);
 
 #endif

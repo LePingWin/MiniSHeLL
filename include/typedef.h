@@ -9,10 +9,14 @@
 #ifndef TYPEDEF_H
 #define TYPEDEF_H
 
-
+/**
+ * Variable globale, gere la taille des differents tableaux du shell
+ *
+ */
 #define MAX_COMMAND_LENGTH 100
 #define MAX_NUMBER_OF_PARAMS 20
 #define MAX_NUMBER_OF_CMD 20
+
 /**
  * \enum bool
  * \brief Booléen
@@ -20,6 +24,7 @@
  */
 typedef enum { true,false } bool;
 
+// Definition differentes entrees/sorties
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2
@@ -48,15 +53,10 @@ struct node
 };
 
 /**
- * \struct commande
- * \brief Structure des commandes, tableau de la commande et de ses arguments
+ * \struct stackNode
+ * \brief Structure noeud de pile contenant la donnee et le noeud suivant
  *
  */
-struct command
-{
-  const char **argv;
-};
-
 typedef struct stackNode *Stack;
 struct stackNode
 {
@@ -64,6 +64,11 @@ struct stackNode
     Stack next;
 };
 
+/**
+ * \struct stackTree
+ * \brief Structure pile d'arbre contenant un arbre et l'arbre suivant
+ *
+ */
 typedef struct stackTree *StackTree;
 struct stackTree
 {
