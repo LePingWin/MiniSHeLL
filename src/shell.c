@@ -127,26 +127,33 @@ void shellReader()
         readInput(cmd, MAX_COMMAND_LENGTH);
         
         //Sortie shell
-        if(strcmp(cmd, stopShell) == true)
-            flagContinue = false;   
+        if(strcmp(cmd, stopShell) == true){
+            flagContinue = false;
+            //Libere allocation
+            free(cmd);
+            for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+                free(argv[i]);
+                free(commands[i]);  
+            }
+        }   
         //Sinon execute cmd
         else{
-            //Split par paquet de commandes 
+            //Split par paquet de commandes en prevision des multiples fork
             int nbCommand = parseStringBySep(cmd,commands,";");
+            //Libere allocation
+            free(cmd);
+            
             //Evalue et lance l'execution des cmd
             for(int i=0;i<nbCommand;i++)
             {
                 int size = parseStringBySpaces(commands[i],argv);
+                for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+                    free(commands[i]);  
+                }
                 //printf("%s \n",argv[0]);
                 processCommands(argv,size);
             }
-        }
-        //Libere allocation
-        free(cmd);
-        for(int i=0;i < MAX_COMMAND_LENGTH;i++){
-            free(argv[i]);
-            free(commands[i]);  
-        } 
+        }    
     }
     //Libere allocation
     free(commands);
@@ -400,39 +407,6 @@ bool evaluateTree(Tree t) {
             return true;
         }
     }
-    //else if (strcmp(root(t),"|") == true)
-    //{
-        /*
-        char* filename = "/tmp/pipe.txt";
-        //Pipe management        
-        // Fonctionnement via File
-        fflush(stdout); // Vide le buffer (ici sortie standard)
-        int original_dup = dup(STDOUT);
-        freopen(filename, "w", stdout);
-        
-        //Execute partie de gauche
-        evaluateTree(left(t));
-        
-        //Reset
-        fflush(stdout);
-        dup2(original_dup,STDOUT);
-        close(original_dup);
-        
-        // Partie de droite
-        int original_dup2 = dup(STDIN);
-        freopen(filename, "r", stdin); 
-        evaluateTree(right(t));
-        //Reset
-        fflush(stdin);
-        dup2(original_dup2,STDIN);
-        close(original_dup2);
-
-        remove(filename); 
-
-        */
-
-
-    //}
     else if  (root(t)[0] == '<')
     {
         if (strcmp(root(t),"<<") == true)
