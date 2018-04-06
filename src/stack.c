@@ -8,8 +8,7 @@
  
 Stack newNode(char* data)
 {
-    Stack stackNode =
-              (Stack) malloc(sizeof(struct stackNode));
+    Stack stackNode = (Stack) malloc(sizeof(struct stackNode));
     stackNode->data = data;
     stackNode->next = NULL;
     return stackNode;

@@ -12,7 +12,7 @@
 #include <errno.h>
 
 
-bool CallCommands(char **argv)
+bool callCommands(char **argv)
 {
     //Appel les bonnes fonctions
     if (strcmp(argv[0], "cd") == true)
@@ -39,9 +39,8 @@ bool CallCommands(char **argv)
     return true;
 }
 
-bool ExecuteCommand(char **argv)
+bool executeCommand(char **argv)
 {
-    
     int pfd[2]; // entree  et sortie du pipe
     int status; // savoir si le processus esst termine ou non
 
@@ -65,8 +64,6 @@ bool ExecuteCommand(char **argv)
     // Fils
     if (pid == 0)
     {
-        
-       
         //close(pfd[0]);   // Ferme le cote de lecture inutilise
         dup2(1, 2);      // redirige stderr vers stdout
         dup2(pfd[1], 1); // Connecte l'entree avec stdout
@@ -100,7 +97,7 @@ bool ExecuteCommand(char **argv)
     }
 }
 
-void PrintWorkingDirColored()
+void printWorkingDirColored()
 {
     printf("%s", KYEL);
     pwdCmd("");
@@ -110,38 +107,61 @@ void PrintWorkingDirColored()
 
 void shellReader()
 {
-    char *commands[MAX_COMMAND_LENGTH];
-    char* command;
-    char cmd[MAX_COMMAND_LENGTH];
+    char* stopShell = "exit"; //CMD d'arret du shell
+    bool flagContinue = true; // Flag pour le prompt du shell
 
+    char* cmd ;//CMD entree par user
+    char** commands = calloc(sizeof(char*),MAX_COMMAND_LENGTH); //CMDs spliter par ;
+    char** argv = calloc(sizeof(char*),MAX_COMMAND_LENGTH); //Contient les cmds, args et operateurs spliter par espace
 
-    char *stopShell = "exit";
-    char *argv[MAX_COMMAND_LENGTH];
-    do{
-        for(int i=0;i < MAX_NUMBER_OF_CMD;i++){
-            commands[i] = malloc(sizeof(cmd));
-            commands[i] = "";
+    //Prompt shell
+    while (flagContinue == true){
+        // Alloue memoire
+        cmd = calloc(sizeof(char),MAX_COMMAND_LENGTH);
+        for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+            commands[i] = calloc(sizeof(char),MAX_COMMAND_LENGTH);
+            argv[i] = calloc(sizeof(char),MAX_COMMAND_LENGTH);
         }
-        ReadInput(cmd, MAX_COMMAND_LENGTH);
-        int nbCommand = parseStringBySep(cmd,commands,";");
-        for(int i=0;i<nbCommand;i++)
-        {
-            command = commands[i];
-            int size = parseStringBySpaces(command,argv);
-            ProcessCommands(argv,size);
-        }
-    } while (strcmp(command, stopShell) != true);
 
+        //Lecture entree utilisateur
+        readInput(cmd, MAX_COMMAND_LENGTH);
+        
+        //Sortie shell
+        if(strcmp(cmd, stopShell) == true)
+            flagContinue = false;   
+        //Sinon execute cmd
+        else{
+            //Split par paquet de commandes 
+            int nbCommand = parseStringBySep(cmd,commands,";");
+            //Evalue et lance l'execution des cmd
+            for(int i=0;i<nbCommand;i++)
+            {
+                int size = parseStringBySpaces(commands[i],argv);
+                //printf("%s \n",argv[0]);
+                processCommands(argv,size);
+            }
+        }
+        //Libere allocation
+        free(cmd);
+        for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+            free(argv[i]);
+            free(commands[i]);  
+        } 
+    }
+    //Libere allocation
+    free(commands);
+    free(argv);  
 }
 
-void ProcessCommands(char** argv,int argc)
+void processCommands(char** argv,int argc)
 {
-    char *parsed[MAX_COMMAND_LENGTH];
-    Tree test;
-    bool background = false;
-    for(int j=0;j < MAX_COMMAND_LENGTH;j++){
-        parsed[j] = malloc(sizeof(char*)*MAX_COMMAND_LENGTH);
-        parsed[j] = "";
+    Tree arbreCMD; //Arbre contenant les operateurs et cmd
+    bool background = false; //Lancer la commande en arriere plan
+    
+    //Alloue memoire
+    char** parsed = calloc(sizeof(char*),MAX_COMMAND_LENGTH); //Contient les CMDs + Args spliter par operateurs
+    for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+        parsed[i] = calloc(sizeof(char),MAX_COMMAND_LENGTH);  
     }
 
     int sizeParsed = parseStringBySpecialChars(argv,parsed,argc);
@@ -158,86 +178,223 @@ void ProcessCommands(char** argv,int argc)
         return;
     }
 
-    test = parseStringToStacks(parsed,sizeParsed);
-    //display(test);
+    arbreCMD = parseStringToStacks(parsed,sizeParsed);
+    //display(arbreCMD);
     //parcoursPrefixe(test);
-    if(background == true){
+    //Arriere plan
+    if(background == true)
+    {
         // Pid pour le fils
         int pid;
-        
         // Test si fils cree
         if ((pid = fork()) < 0)
-        {
             perror("Erreur creation fork\n");
-            
-        }
-        
         // Fils
         if (pid == 0)
-        {
-            evaluateTree(test);
-            //exit(0  );
-        
-        }
-
-    }else{
-        evaluateTree(test);
+            evaluateTree(arbreCMD);
     }
-    free(test);
+    else
+        evaluateTree(arbreCMD);
+    
+    //Libere memoire
+    for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+        free(parsed[i]);
+    }
+    free(parsed);
+    free(arbreCMD);
 }
 
-bool Execute(char** argv)
+bool execute(char** argv)
 {
-    bool ok;
-    if((ok = CallCommands(argv)) == false)
-    {
-        return ExecuteCommand(argv);
-    }
+    bool ok;//True si cmd maison, false sinon --> (execvp)
+
+    if((ok = callCommands(argv)) == false)
+        return executeCommand(argv);
     return ok;
 }
 
-//TODO Attention : ls -a | grep git && echo ok | ls -l || echo nok
-char* evaluateTree(Tree t) {
+bool loopPipe(char ***cmd) 
+{
+    int   p[2]; //In OUT pipe
+    pid_t pid; //pid fils
+    int   fd_in = STDIN; //In pipe pour partager les infos entre cmd
+    int status = true; // savoir si le processus esst termine ou non
     
-    char* tmp[MAX_NUMBER_OF_PARAMS];
-    for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
-        tmp[i] = malloc(sizeof(MAX_NUMBER_OF_PARAMS));
-        tmp[i] = "";
+    //Execution pour cmd dans un processus fils
+    while (*cmd != NULL)
+    {
+        pipe(p);
+        if ((pid = fork()) == -1)
+        {
+            perror("Erreur creation fork\n");
+            exit(1);
+        }
+        //Fils
+        else if (pid == 0)
+        {
+            dup2(fd_in, STDIN); //change l'entree vers stdin
+            if (*(cmd + 1) != NULL)
+                dup2(p[1], 1);
+            close(p[0]);
+
+        //execvp((*cmd)[0], *cmd);
+            execute(*cmd);
+            exit(1);
+        }
+        //Pere
+        else
+        {
+            wait(NULL);
+            close(p[1]);
+            fd_in = p[0]; //sauvegarde entree pipe pour la prochaine cmd
+            cmd++;
+            //printf("ok\n");
+            // Si tout s'est bien passe, return true
+            if(WEXITSTATUS(status) == 0)
+            {
+                status = true;
+            }
+            else{
+                // Sinon false
+            status = false;
+            }
+            
+        }
     }
+    return status;
+}
+bool executePipe(char** tmp, int nbCMDs)
+{
+    int status = true;
+    //Alloue memoire 
+    char ***cmd = calloc(sizeof(char**),MAX_NUMBER_OF_PARAMS); //Tableau contenant les cmds contenant les args 
+    for(int i = 0; i < MAX_NUMBER_OF_PARAMS; i++){
+        cmd[i] = calloc(sizeof(char*),MAX_NUMBER_OF_PARAMS); 
+        for(int j = 0 ; j < MAX_NUMBER_OF_PARAMS ; j++){
+            cmd[i][j] = calloc(sizeof(char),MAX_COMMAND_LENGTH);
+        }
+    }
+
+    for(int i = 0; i < nbCMDs ; i++){
+        char** cmdsParsed = calloc(sizeof(char*),MAX_NUMBER_OF_PARAMS);
+        for(int j = 0; j < MAX_NUMBER_OF_PARAMS; j++){
+            cmdsParsed[j] = calloc(sizeof(char),MAX_COMMAND_LENGTH);
+        }
+
+        int nbstr = parseStringBySpaces(tmp[i],cmdsParsed);
+
+        for(int j = 0 ; j < MAX_NUMBER_OF_PARAMS ; j++){
+            if(j<nbstr){
+                strcpy(cmd[i][j],cmdsParsed[j]);
+            }else{
+                free(cmd[i][j]);
+            }
+        }
+
+        for(int j = 0 ; j < MAX_NUMBER_OF_PARAMS ; j++){        
+            free(cmdsParsed[j]);
+        }
+        free(cmdsParsed);
+
+        cmd[i][nbstr] = 0; // End of cmd
+    }
+    //Désalloue le reste de la case contenant la fin des commandes.
+    for(int j=0 ; j < MAX_NUMBER_OF_PARAMS ; j++){
+        free(cmd[nbCMDs][j]);
+    }
+    free(cmd[nbCMDs]);
+    //Fin du tableau de cmd
+    cmd[nbCMDs] = 0; 
+            
+    status = loopPipe(cmd);
     
+    //Libere memoire
+    for(int i = 0; i < MAX_NUMBER_OF_PARAMS; i++){
+        //@ valide
+        if(cmd[i] != 0){
+            for(int j = 0; j < MAX_NUMBER_OF_PARAMS;j++){
+                if(cmd[i][j] ==0)
+                    break;
+                free(cmd[i][j]);
+            }
+            free(cmd[i]);
+        } 
+    }
+    free(cmd);
+
+    return status;
+}
+
+
+//TODO Attention : ls -a | grep git && echo ok | ls -l || echo nok
+bool evaluateTree(Tree t) {
+    int status = true; //Statut de l'execution de la cmd
+    
+    //Une seule " "cmd + args ou un groupe de cmds + args pipées
     if(sizeTree(t) == 1)
     {
-        parseStringBySpaces(root(t),tmp);
-    
-        Execute(tmp);
-        return "";
-    }
+        //Alloue memoire
+        char** CMDsByPipe = calloc(sizeof(char*),MAX_NUMBER_OF_PARAMS); // contient cdms + args splites
+        for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
+            CMDsByPipe[i] = calloc(sizeof(char),MAX_NUMBER_OF_PARAMS);
+            
+        }
+        // Execution des cmds pipee
+        int nb = parseStringBySep(root(t),CMDsByPipe,"|");
+        if(nb > 1 ){
+            status = executePipe(CMDsByPipe, nb);
+        }
+        //Une cmd + args
+        else
+        {
+            //Alloue memoire
+            char** CMDsBySpaces = calloc(sizeof(char*),MAX_NUMBER_OF_PARAMS); // contient cdms + args splites
+            for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
+                CMDsBySpaces[i] = calloc(sizeof(char),MAX_NUMBER_OF_PARAMS);
+            }
 
+            parseStringBySpaces(root(t),CMDsBySpaces);
+
+            status = execute(CMDsBySpaces);
+             //Libere memoire
+            for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
+                free(CMDsBySpaces[i]);
+            }
+            free(CMDsBySpaces);
+        }
+        //Libere memoire
+        for(int i=0;i < MAX_NUMBER_OF_PARAMS;i++){
+            free(CMDsByPipe[i]);
+        }
+        free(CMDsByPipe);
+        return status;
+        
+    }
+    // Traitement operateur && et ||
     if(strcmp(root(t),"&&") == true || strcmp(root(t),"||") == true)
     {
-        parseStringBySpaces(root(left(t)),tmp);
-        bool res = Execute(tmp);
-            if(res == true && strcmp(root(t),"&&") == true)
-            {          
-                evaluateTree(right(t));
-                
-            }
-            else if(res == false && strcmp(root(right(t)),"||") == true)
-            {
-                evaluateTree(right(right(t)));
-            }
-            else if(res == false)
-            {
-                evaluateTree(right(t));
-            }
-            else
-            {
-                return "";
-            }
+        bool status = evaluateTree(left(t));
+        if(status == true && strcmp(root(t),"&&") == true)
+        {          
+            return evaluateTree(right(t));
+        }
+        else if(status == false && strcmp(root(right(t)),"||") == true)
+        {
+            return evaluateTree(right(right(t)));
+        }
+        else if(status == false)
+        {
+            return evaluateTree(right(t));
+        }
+        else
+        {
+            return status;
+        }
 
     }
-    else if (strcmp(root(t),"|") == true)
-    {
+    //else if (strcmp(root(t),"|") == true)
+    //{
+        /*
         char* filename = "/tmp/pipe.txt";
         //Pipe management        
         // Fonctionnement via File
@@ -263,72 +420,79 @@ char* evaluateTree(Tree t) {
         close(original_dup2);
 
         remove(filename); 
-    }
+
+        */
+
+
+    //}
     else if  (root(t)[0] == '<')
+    {
+        if (strcmp(root(t),"<<") == true)
         {
-            if (strcmp(root(t),"<<") == true)
-            {
-                char chaine[255];
-                 char* tmp2 = root(right(t));
-                char* filename = "/tmp/tmp-miniShell.txt";
-                FILE *p1;
-                p1=fopen(filename,"w+");
-                do{
-                    printf("> ");
-                    readerL(chaine,255);
-                    fprintf(p1, "%s\n", chaine);
-                    chaine[strcspn(chaine, "\n") ] = '\0';
-                }while(strcmp(chaine,tmp2) != true);
+            char chaine[255];
+            //char* tmp2 = root(right(t));
+            char* filename = "/tmp/tmp-miniShell.txt";
+            FILE *p1;
+            p1=fopen(filename,"w+");
+            do{
+                printf("> ");
+                readerL(chaine,255);
+                fprintf(p1, "%s\n", chaine);
+                chaine[strcspn(chaine, "\n") ] = '\0';
+            }while(strcmp(chaine,root(right(t))) != true);
+            
                 
-                 
-                fclose(p1);
-                 strcat(root(left(t))," ");
-                 strcat(root(left(t)),filename);
-                 
-                evaluateTree(left(t));
+            fclose(p1);
+                strcat(root(left(t))," ");
+                strcat(root(left(t)),filename);
+                
+            status = evaluateTree(left(t));
 
-                
-                remove(filename);
-            }
-            else
-            {
-                int original_dup = dup(STDIN);
-                freopen(root(right(t)), "r", stdin); 
-                evaluateTree(left(t));
-                fflush(stdin);
-                dup2(original_dup,STDIN);
-                close(original_dup); 
-            }
+            
+            remove(filename);
 
         }
-        else if (root(t)[0] == '>')
+        else
         {
-            int original_dup = dup(STDOUT);
-            if (strcmp(root(t),">>") == true)
-            {
-                freopen(root(right(t)), "a+", stdout); 
-            }
-            else
-            {
-                freopen(root(right(t)), "w", stdout); 
-            }
-            //Execute
-            evaluateTree(left(t));
-            //Reset
-            fflush(stdout);
-            dup2(original_dup,STDOUT);
-            close(original_dup);
+            int original_dup = dup(STDIN);
+            freopen(root(right(t)), "r", stdin); 
+            status = evaluateTree(left(t));
+            fflush(stdin);
+            dup2(original_dup,STDIN);
+            close(original_dup); 
         }
-    else
+        return status;
+
+    }
+    else if (root(t)[0] == '>')
+    {
+        int original_dup = dup(STDOUT);
+        if (strcmp(root(t),">>") == true)
+        {
+            freopen(root(right(t)), "a+", stdout); 
+        }
+        else
+        {
+            freopen(root(right(t)), "w", stdout); 
+        }
+        //Execute
+        status = evaluateTree(left(t));
+        //Reset
+        fflush(stdout);
+        dup2(original_dup,STDOUT);
+        close(original_dup);
+        return status;
+    }
+    /*else
     {
         return root(t);
-    }
-    return "";
+    }*/
+    return status;
 }
 
-void ReadInput(char *command, int size)
+void readInput(char *command, int size)
 {
-    PrintWorkingDirColored();
+    printWorkingDirColored();
     readerL(command, size);
     historize(command);
 }

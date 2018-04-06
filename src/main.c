@@ -22,8 +22,6 @@ void print_usage(char* bin_name)
 }
 
 
-
-
 int main(int argc, char* argv[])
 {
     if(argc > 1)
@@ -44,7 +42,7 @@ int main(int argc, char* argv[])
             {
                 command = commands[i];
                 int size = parseStringBySpaces(command,argvcmd);
-                ProcessCommands(argvcmd,size);
+                processCommands(argvcmd,size);
             }
         }
         // Erreur lors du passage de l'argument

@@ -8,19 +8,23 @@
 #include "../include/stackTree.h"
 #include "../include/tree.h"
 
-const char* SPECIAL_CHARS = "([&|><]+)";
-
-
+const char* SPECIAL_CHARS = "([&><]+)";
 
 int parseStringBySep(char* arg,char** parsed,char* sep)
 {
-    int i;
-    for(i=0; i < MAX_NUMBER_OF_PARAMS; i++) {
-        parsed[i] = strsep(&arg, sep);
-        if(parsed[i] == NULL){
-            break;
-        }
+    int i =0; //nb d'elements
+    char* token = strtok(arg, sep);
+    // Continue tant que le sperateur est present
+    while (token != NULL && i < MAX_NUMBER_OF_PARAMS)
+    {
+        strcpy(parsed[i],token);
+        token = strtok(NULL, sep);
+        i++;
     }
+    //Insere charactere de fin de commande, 
+    //Il faut d'abord libere la memoire
+    free(parsed[i]);
+    parsed[i] = NULL;
     return i;
 }
 
@@ -47,28 +51,25 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
     if (reti) {
         perror("Could not compile regex\n");
     }
-    for(int i = 0; i < size; i++) {
-        char* tmp = malloc(sizeof(parsed[i]));
-        strcpy(tmp,parsed[i]);
-        
-        /* Execute regular expression */
+    for(int i = 0; i < size; i++) {        
+        //Execute expression reguliere 
         reti = regexec(&regex,parsed[i], 0, NULL, 0);
         if (!reti) 
         {
-                result[++c] = tmp;
-                c++;
+            strcpy(result[++c],parsed[i]);
+            c++;
         }
         else if (reti == REG_NOMATCH) 
         {
             if(result[c] == NULL || strcmp(result[c],"") == true)
             {
-                result[c] = tmp;
+                strcpy(result[c],parsed[i]);
             }
             else
             {
-                //Keep Spaces during parsing
+                //Garde espace pendant le parsing
                 strcat(result[c], " ");
-                strcat(result[c], tmp);
+                strcat(result[c], parsed[i]);
             }
         }
         else 
@@ -76,10 +77,9 @@ int parseStringBySpecialChars(char** parsed,char** result,int size){
             regerror(reti, &regex, msgbuf, sizeof(msgbuf));
             perror(msgbuf);
         }
-        
     }
-     /* Free memory allocated to the pattern buffer by regcomp() */
-     regfree(&regex);
+    // Libere memoire allouee au pattern par regcomp()
+    regfree(&regex);
     return c;
 }
 
@@ -100,7 +100,7 @@ Tree parseStringToStacks(char** parsed,int sizeParsed)
     for(i = 0; i <= sizeParsed;i++)
     {
         char* tmp = parsed[i];
-        if(strcmp(tmp,"&&") == true || tmp[0] == '>' || tmp[0] == '<' || tmp[0] == '|')
+        if(strcmp(tmp,"&&") == true || tmp[0] == '>' || tmp[0] == '<' /*|| tmp[0] == '|'*/)
         {
             push(&operators,tmp);
         }

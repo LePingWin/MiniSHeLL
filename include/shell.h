@@ -25,7 +25,7 @@ void shellReader();
  * \param Chaîne d'entrée
  * \param Longueur de la chaîne d'entrée
  */
-void ReadInput(char* command, int size);
+void readInput(char* command, int size);
 
 /**
  * \fn int readerL(char *chaine, int longueur)
@@ -59,15 +59,24 @@ void cleanBuffer();
  * \param Chaîne d'entrée
  * \return Vrai si executé, faux si doit déléguer
  */
-bool CallCommands(char **argv);
+bool callCommands(char **argv);
 
 /**
- * \fn bool ExecuteCommand(char** argv)
+ * \fn bool executeCommand(char** argv)
  * \brief Délègue l'appel via fork/execvp à un processus fils
  *
  * \param Chaîne d'entrée
  */
-bool ExecuteCommand(char **argv);
+bool executeCommand(char **argv);
+
+/**
+ * \fn bool executeCommand(char** argv)
+ * \brief Redirige l'execution des cmds vers les commandes programmees maison quand c'est necessaire
+ *
+ * \param Chaîne d'entrée, cmd + args
+ */
+bool execute(char **argv);
+
 
 /**
  * \fn void ExecuteCommand(char *cmd,char* cmdArg)
@@ -82,23 +91,23 @@ void historize(char* arg);
  * \brief Affiche le chemin du répertoire courant
  *
  */
-void PrintWorkingDirColored();
+void printWorkingDirColored();
 /**
  * \fn void DecryptArgs(char* arg,char** params)
  * \brief Sépare la chaine de commande en deux chaînes de caractères
  */
-void DecryptArgs(char* cmd,char** params);
+void decryptArgs(char* cmd,char** params);
 
 /**
  * \fn char* evaluateTree(Tree t)
  * \brief Permet d'evaluer l'arbre compose des commandes et operateurs
  */ 
-char* evaluateTree(Tree t);
+bool evaluateTree(Tree t);
 
 /**
  * \fn char* evaluateTree(Tree t)
  * \brief Permet d'executer la commande et d'evaluer si cette derniere doit s'executer en arriere plan
  */ 
-void ProcessCommands(char** argv,int argc);
+void processCommands(char** argv,int argc);
 
 #endif
