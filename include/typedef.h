@@ -13,9 +13,9 @@
  * Variable globale, gere la taille des differents tableaux du shell
  *
  */
-#define MAX_COMMAND_LENGTH 100
-#define MAX_NUMBER_OF_PARAMS 20
-#define MAX_NUMBER_OF_CMD 20
+#define MAX_COMMAND_LENGTH 150
+#define MAX_NUMBER_OF_PARAMS 30
+#define MAX_NUMBER_OF_CMD 30
 
 /**
  * \enum bool

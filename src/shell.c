@@ -69,7 +69,7 @@ bool executeCommand(char **argv)
         dup2(pfd[1], 1); // Connecte l'entree avec stdout
         close(pfd[1]);
         execvp(argv[0],argv); // Exe la commande
-        exit(errno); // Permet de quitter le fils correctement
+        exit(1); // Permet de quitter le fils correctement
     }
     // Pere
     else
@@ -179,7 +179,7 @@ void processCommands(char** argv,int argc)
     }
 
     arbreCMD = parseStringToStacks(parsed,sizeParsed);
-    display(arbreCMD);
+    //display(arbreCMD);
     //parcoursPrefixe(test);
     //Arriere plan
     if(background == true)
@@ -238,25 +238,24 @@ bool loopPipe(char ***cmd)
             close(p[0]);
 
         //execvp((*cmd)[0], *cmd);
-            execute(*cmd);
-            exit(1);
+            status = execute(*cmd);
+            exit(status);
         }
         //Pere
         else
         {
-            wait(NULL);
+            //wait(NULL);
+            waitpid(pid,&status,0);
             close(p[1]);
             fd_in = p[0]; //sauvegarde entree pipe pour la prochaine cmd
             cmd++;
-            //printf("ok\n");
             // Si tout s'est bien passe, return true
             if(WEXITSTATUS(status) == 0)
             {
                 status = true;
             }
             else{
-                // Sinon false
-            status = false;
+                status = false;
             }
             
         }
@@ -378,19 +377,28 @@ bool evaluateTree(Tree t) {
         {          
             return evaluateTree(right(t));
         }
-        else if(status == false && strcmp(root(right(t)),"||") == true)
-        {
-            return evaluateTree(right(right(t)));
-        }
-        else if(status == false)
+        else if(status == false && strcmp(root(t),"||") == true)
         {
             return evaluateTree(right(t));
         }
+        //Case root(t) == && et status == false donc Switch jusqu'au prochain operateur != && s'il existe
+        //Case root(t) == || et status == true donc Switch jusqu'au prochain operateur != || s'il existe
         else
         {
+            bool flagOtherOperator = false;
+            Tree Ttmp = t;
+            while(flagOtherOperator == false && sizeTree(right(Ttmp)) > 1)
+            {
+                Ttmp = right(Ttmp);
+                if((strcmp(root(Ttmp),"&&") != true && status == false) || (strcmp(root(Ttmp),"||") != true && status == true))
+                {
+                    flagOtherOperator = true;
+                } 
+            }
+            if(flagOtherOperator == true)
+                return evaluateTree(right(Ttmp));
             return true;
         }
-
     }
     //else if (strcmp(root(t),"|") == true)
     //{
