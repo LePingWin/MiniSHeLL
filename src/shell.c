@@ -179,7 +179,7 @@ void processCommands(char** argv,int argc)
     }
 
     arbreCMD = parseStringToStacks(parsed,sizeParsed);
-    //display(arbreCMD);
+    display(arbreCMD);
     //parcoursPrefixe(test);
     //Arriere plan
     if(background == true)
@@ -388,7 +388,7 @@ bool evaluateTree(Tree t) {
         }
         else
         {
-            return status;
+            return true;
         }
 
     }

@@ -8,7 +8,7 @@
 #include "../include/stackTree.h"
 #include "../include/tree.h"
 
-const char* SPECIAL_CHARS = "([&><]+)";
+const char* SPECIAL_CHARS = "([&><]+)|(\\|{2,})";
 
 int parseStringBySep(char* arg,char** parsed,char* sep)
 {
@@ -100,7 +100,7 @@ Tree parseStringToStacks(char** parsed,int sizeParsed)
     for(i = 0; i <= sizeParsed;i++)
     {
         char* tmp = parsed[i];
-        if(strcmp(tmp,"&&") == true || tmp[0] == '>' || tmp[0] == '<' /*|| tmp[0] == '|'*/)
+        if(strcmp(tmp,"||") == true || strcmp(tmp,"&&") == true || tmp[0] == '>' || tmp[0] == '<')
         {
             push(&operators,tmp);
         }
