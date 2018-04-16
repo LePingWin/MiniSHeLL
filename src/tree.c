@@ -6,7 +6,6 @@
 Tree createTree(char* val, Tree ls, Tree rs)
 {
     Tree res;
-    //printf("%s\n",val);
     res = malloc(sizeof(*res));
 
     if(res == NULL)
@@ -31,11 +30,6 @@ void addNode(Tree t, char* val)
         t->right = createTree(val,NULL,NULL);
     else
         addNode(left(t),val);
-}
-
-void constructTree()
-{
-    
 }
 
 char* root(Tree t)
@@ -93,7 +87,7 @@ Tree right(Tree t)
 
 bool isLeaf(Tree t)
 {
-    if(isEmpty(t))
+    if(isEmpty(t) == true)
         return false;
     else if (sizeTree(t) == 1 )
         return true;
