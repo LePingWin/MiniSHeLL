@@ -23,10 +23,6 @@ bool callCommands(char **argv)
     {
         pwdCmd("");
     }
-    else if (strcmp(argv[0], "exit") == true)
-    {
-        exitCmd("");
-    }
     else if (strcmp(argv[0], "echo") == true)
     {
         echoCmd(argv);

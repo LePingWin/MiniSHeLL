@@ -24,11 +24,6 @@ void pwdCmd()
        perror("Can't print working directory");
 }
 
-void exitCmd()
-{
-    exit(EXIT_SUCCESS);
-}
-
 void echoCmd(char** argv)
 {
     printf("%s",argv[1]);

@@ -27,11 +27,6 @@ void cdCmd(char** arg);
  */
 void pwdCmd();
 /**
- * \fn void exitCmd()
- * \brief Quitte le processus courant
- */
-void exitCmd();
-/**
  * \fn void echoCmd(char** arg)
  * \brief Reproduit la commande "echo" 
  *
