@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-04-16 15:03:54</td>
+            <td class="headerValue">2018-04-16 16:11:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -70,13 +70,13 @@
 <span class="lineNum">       8 </span>            : char cwd[1024];
 <a name="9"><span class="lineNum">       9 </span>            : const int NBFunc = 3;</a>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">          3 : void cdCmd(char** arg)</span>
+<span class="lineNum">      11 </span><span class="lineCov">          4 : void cdCmd(char** arg)</span>
 <span class="lineNum">      12 </span>            : {
-<span class="lineNum">      13 </span><span class="lineCov">          3 :     if(chdir(arg[1]) == true)</span>
+<span class="lineNum">      13 </span><span class="lineCov">          4 :     if(chdir(arg[1]) == true)</span>
 <span class="lineNum">      14 </span><span class="lineCov">          2 :         pwdCmd();</span>
 <span class="lineNum">      15 </span>            :     else
-<span class="lineNum">      16 </span><span class="lineCov">          1 :         perror(&quot;This directory doesn't exists&quot;);</span>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          3 : }</span></a>
+<span class="lineNum">      16 </span><span class="lineCov">          2 :         perror(&quot;This directory doesn't exists&quot;);</span>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          4 : }</span></a>
 <span class="lineNum">      18 </span>            : 
 <span class="lineNum">      19 </span><span class="lineCov">          5 : void pwdCmd()</span>
 <span class="lineNum">      20 </span>            : {

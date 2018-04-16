@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['max_5fcommand_5flength',['MAX_COMMAND_LENGTH',['../typedef_8h.html#af1abcb51a4aa27a5a5a7958c03448134',1,'typedef.h']]],
-  ['minishell',['MiniSHeLL',['../md_README.html',1,'']]]
+  ['newnode',['newNode',['../stack_8h.html#ada4fdce0f2ef228b35f9eb95c11f9c9a',1,'stack.c']]],
+  ['newnodestacktree',['newNodeStackTree',['../stackTree_8h.html#ac7860315aeb4e2ba097574b9e293146f',1,'stackTree.c']]],
+  ['node',['node',['../structnode.html',1,'']]]
 ];

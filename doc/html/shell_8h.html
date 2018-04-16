@@ -125,13 +125,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>readInput</b> (char *
 <tr class="memitem:a11b419f784bac628d7bbe2c8c2c5e21a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8h.html#a11b419f784bac628d7bbe2c8c2c5e21a">readerL</a> (char *chaine, int longueur)</td></tr>
 <tr class="memdesc:a11b419f784bac628d7bbe2c8c2c5e21a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lecture des elements renseignes par l'utilisateur afin d'executer les commandes avec ses parametres.  <a href="#a11b419f784bac628d7bbe2c8c2c5e21a">More...</a><br /></td></tr>
 <tr class="separator:a11b419f784bac628d7bbe2c8c2c5e21a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6a056a6f5706bd9d625cb813f9e8c8f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8h.html#ae6a056a6f5706bd9d625cb813f9e8c8f">endOfCommand</a> (char *chaine, int longueur)</td></tr>
-<tr class="memdesc:ae6a056a6f5706bd9d625cb813f9e8c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de savoir si la chaine contient le caractere de fin de chaine.  <a href="#ae6a056a6f5706bd9d625cb813f9e8c8f">More...</a><br /></td></tr>
-<tr class="separator:ae6a056a6f5706bd9d625cb813f9e8c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a750be53afe22b006b8b36b42f3c12323"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a750be53afe22b006b8b36b42f3c12323"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="shell_8h.html#a750be53afe22b006b8b36b42f3c12323">cleanBuffer</a> ()</td></tr>
-<tr class="memdesc:a750be53afe22b006b8b36b42f3c12323"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vide le buffer. <br /></td></tr>
-<tr class="separator:a750be53afe22b006b8b36b42f3c12323"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc4c8860ec6ba2bcfaa0fdebad5e896b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc4c8860ec6ba2bcfaa0fdebad5e896b"></a>
 <a class="el" href="typedef_8h.html#af6a258d8f3ee5206d682d799316314b1">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><b>callCommands</b> (char **argv)</td></tr>
 <tr class="separator:abc4c8860ec6ba2bcfaa0fdebad5e896b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,42 +155,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>processCommands</b> (
 <dl class="section author"><dt>Author</dt><dd>Loïc.B et Jean.S</dd></dl>
 <p>Gestion du Shell et de l'IHM </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="ae6a056a6f5706bd9d625cb813f9e8c8f"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int endOfCommand </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>chaine</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>longueur</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Permet de savoir si la chaine contient le caractere de fin de chaine. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Chaîne</td><td>d'entrée </td></tr>
-    <tr><td class="paramname">Longueur</td><td>de la chaîne d'entrée </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>int 1 si caract de fin, 0 sinon </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="ae2b795612ce582293c9c2e58492d161e"></a>
 <div class="memitem">
 <div class="memproto">

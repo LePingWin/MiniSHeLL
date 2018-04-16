@@ -1,0 +1,36 @@
+/home/jean/Documents/shellProject/MiniSHeLL
+total 856
+drwxrwxr-x 11 jean jean   4096 avril 16 16:11 .
+drwxrwxr-x  5 jean jean   4096 avril 16 14:16 ..
+-rw-rw-r--  1 jean jean 446256 avril 16 09:43 archive_miniSHell.tar.gz
+drwxrwxr-x  2 jean jean   4096 avril 16 14:22 bin
+-rw-rw-r--  1 jean jean    744 avril 16 16:11 builtin.gcda
+-rw-rw-r--  1 jean jean   1060 avril 16 16:11 builtin.gcno
+-rw-rw-r--  1 jean jean     44 avril 16 16:11 cat.txt
+-rw-rw-r--  1 jean jean    149 avril 16 16:09 CMDTests.txt
+drwxrwxr-x  4 jean jean   4096 mars  11 17:13 doc
+drwxrwxr-x  3 jean jean   4096 avril 16 16:11 gcov
+drwxrwxr-x  8 jean jean   4096 avril 16 16:10 .git
+-rw-rw-r--  1 jean jean    430 mars   5 20:06 .gitignore
+-rw-rw-r--  1 jean jean   1024 mars   5 20:10 ..gitignore.swp
+drwxrwxr-x  2 jean jean   4096 avril 16 09:43 include
+drwxrwxr-x  2 jean jean   4096 mars  11 17:13 latex
+-rw-rw-r--  1 jean jean    732 avril 16 16:11 main.gcda
+-rw-rw-r--  1 jean jean   1680 avril 16 16:11 main.gcno
+-rw-rw-r--  1 jean jean   1561 avril 16 16:08 Makefile
+-rw-rw-r--  1 jean jean    537 mars  20 11:18 MiniSHeLL.8
+drwxrwxr-x  2 jean jean   4096 avril 16 15:53 obj
+-rw-rw-r--  1 jean jean   1056 avril 16 16:11 parser.gcda
+-rw-rw-r--  1 jean jean   4232 avril 16 16:11 parser.gcno
+-rw-rw-r--  1 jean jean 270526 avril 16 15:47 Rapport_MiniShell_LoicBINE_JeanSTILL.pdf
+-rw-rw-r--  1 jean jean   4421 mars  11 17:44 README.md
+-rw-rw-r--  1 jean jean   2444 avril 16 16:11 shell.gcda
+-rw-rw-r--  1 jean jean  18552 avril 16 16:11 shell.gcno
+drwxrwxr-x  2 jean jean   4096 avril 16 09:43 src
+-rw-rw-r--  1 jean jean    740 avril 16 16:11 stack.gcda
+-rw-rw-r--  1 jean jean   1052 avril 16 16:11 stack.gcno
+-rw-rw-r--  1 jean jean    792 avril 16 16:11 stackTree.gcda
+-rw-rw-r--  1 jean jean   1540 avril 16 16:11 stackTree.gcno
+-rw-rw-r--  1 jean jean    960 avril 16 16:11 tree.gcda
+-rw-rw-r--  1 jean jean   2812 avril 16 16:11 tree.gcno
+drwxrwxr-x  2 jean jean   4096 mars   5 20:06 .vscode

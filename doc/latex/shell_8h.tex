@@ -6,8 +6,7 @@ Gestion du Shell.
 
 
 {\ttfamily \#include \char`\"{}typedef.\+h\char`\"{}}\\*
-Include dependency graph for shell.\+h\+:
-\nopagebreak
+Include dependency graph for shell.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,11 +30,6 @@ void {\bfseries read\+Input} (char $\ast$command, int size)\hypertarget{shell_8h
 \item 
 int \hyperlink{shell_8h_a11b419f784bac628d7bbe2c8c2c5e21a}{readerL} (char $\ast$chaine, int longueur)
 \begin{DoxyCompactList}\small\item\em Lecture des elements renseignes par l\textquotesingle{}utilisateur afin d\textquotesingle{}executer les commandes avec ses parametres. \end{DoxyCompactList}\item 
-int \hyperlink{shell_8h_ae6a056a6f5706bd9d625cb813f9e8c8f}{end\+Of\+Command} (char $\ast$chaine, int longueur)
-\begin{DoxyCompactList}\small\item\em Permet de savoir si la chaine contient le caractere de fin de chaine. \end{DoxyCompactList}\item 
-void \hyperlink{shell_8h_a750be53afe22b006b8b36b42f3c12323}{clean\+Buffer} ()\hypertarget{shell_8h_a750be53afe22b006b8b36b42f3c12323}{}\label{shell_8h_a750be53afe22b006b8b36b42f3c12323}
-
-\begin{DoxyCompactList}\small\item\em Vide le buffer. \end{DoxyCompactList}\item 
 \hyperlink{typedef_8h_af6a258d8f3ee5206d682d799316314b1}{bool} {\bfseries call\+Commands} (char $\ast$$\ast$argv)\hypertarget{shell_8h_abc4c8860ec6ba2bcfaa0fdebad5e896b}{}\label{shell_8h_abc4c8860ec6ba2bcfaa0fdebad5e896b}
 
 \item 
@@ -69,28 +63,6 @@ Loïc.\+B et Jean.\+S
 Gestion du Shell et de l\textquotesingle{}I\+HM 
 
 \subsection{Function Documentation}
-\index{shell.\+h@{shell.\+h}!end\+Of\+Command@{end\+Of\+Command}}
-\index{end\+Of\+Command@{end\+Of\+Command}!shell.\+h@{shell.\+h}}
-\subsubsection[{\texorpdfstring{end\+Of\+Command(char $\ast$chaine, int longueur)}{endOfCommand(char *chaine, int longueur)}}]{\setlength{\rightskip}{0pt plus 5cm}int end\+Of\+Command (
-\begin{DoxyParamCaption}
-\item[{char $\ast$}]{chaine, }
-\item[{int}]{longueur}
-\end{DoxyParamCaption}
-)}\hypertarget{shell_8h_ae6a056a6f5706bd9d625cb813f9e8c8f}{}\label{shell_8h_ae6a056a6f5706bd9d625cb813f9e8c8f}
-
-
-Permet de savoir si la chaine contient le caractere de fin de chaine. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em Chaîne} & d\textquotesingle{}entrée \\
-\hline
-{\em Longueur} & de la chaîne d\textquotesingle{}entrée \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-int 1 si caract de fin, 0 sinon 
-\end{DoxyReturn}
 \index{shell.\+h@{shell.\+h}!evaluate\+Tree@{evaluate\+Tree}}
 \index{evaluate\+Tree@{evaluate\+Tree}!shell.\+h@{shell.\+h}}
 \subsubsection[{\texorpdfstring{evaluate\+Tree(\+Tree t)}{evaluateTree(Tree t)}}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ evaluate\+Tree (

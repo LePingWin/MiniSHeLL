@@ -1,1 +1,1 @@
-ls | grep sdfsd && echo ok1 && echo ok2 || echo nok | pwd > cat.txt && ls -al >> cat.txt ; cat < cat.txt ; cd .. ; cd MiniSHeLL ; wc << ; cd sdfsd ; ls &
+ls | grep fds && echo ok1 && echo ok2 || echo nok | pwd > cat.txt ; ls -al >> cat.txt ; cat < cat.txt ; cd .. ; cd MiniSHeLL ; wc << ; ls & ; cd fds
