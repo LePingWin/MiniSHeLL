@@ -28,15 +28,6 @@ int parseStringBySep(char* arg,char** parsed,char* sep)
     return i;
 }
 
-void removeAllChars(char* str, char c) {
-    char *pr = str, *pw = str;
-    while (*pr) {
-        *pw = *pr++;
-        pw += (*pw != c);
-    }
-    *pw = '\0';
-}
-
 int parseStringBySpaces(char* arg,char** parsed)
 {
     return parseStringBySep(arg,parsed," ");

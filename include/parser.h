@@ -50,10 +50,4 @@ void addNodeStackTree(StackTree stack, char* operator);
  */
 Tree parseStringToStacks(char** parsed,int sizeParsed);
 
-/**
- * \fn void removeAllChars(char* str, char c)
- * \brief Supprime le caractere c de la chaine str
- */ 
-void removeAllChars(char* str, char c);
-
 #endif
