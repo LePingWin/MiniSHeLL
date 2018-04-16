@@ -334,7 +334,7 @@ bool evaluateTree(Tree t) {
     int status = true; //Statut de l'execution de la cmd
     
     //Une seule " "cmd + args ou un groupe de cmds + args pipées
-    if(sizeTree(t) == 1)
+    if(isLeaf(t) == true)
     {
         //Alloue memoire
         char** CMDsByPipe = calloc(sizeof(char*),MAX_NUMBER_OF_PARAMS); // contient cdms + args splites
