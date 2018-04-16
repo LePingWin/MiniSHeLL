@@ -45,13 +45,13 @@ Concernant les exigences techniques attendues, vous devez respecter les contrain
 - CT01 – La compilation du projet doit se faire via un Makefile. ✓
 - CT02 – La définitions des structures doit se faire dans un fichier typedef.h. ✓
 - CT03 – La définition des méthodes protoype (.h) & implémentation (.c) doit se faire de manière séparée autant que faire se peut. ✓
-- CT04 – Le code produit doit être documenté. ~
+- CT04 – Le code produit doit être documenté. ✓
 - CT05 – La gestion des erreurs doit se faire via « les mécanismes proposés par errno ». ✓
 
 D’autres contraintes techniques peuvent être prises en compte :
-- CTO01 – La documentation du code générée via l’utilitaire doxygen.
-- CTO02 – Le code est soumis à un contrôle de couverture via l’utilitaire gcov.
-- CTO03 – Une page de manuel Linux est rédigée pour détailler l’exécution du shell.
+- CTO01 – La documentation du code générée via l’utilitaire doxygen. ✓
+- CTO02 – Le code est soumis à un contrôle de couverture via l’utilitaire gcov. ✓
+- CTO03 – Une page de manuel Linux est rédigée pour détailler l’exécution du shell. ✓
 
 ## IV – Evaluation
 
