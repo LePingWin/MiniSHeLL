@@ -95,7 +95,7 @@ bool isLeaf(Tree t)
 {
     if(isEmpty(t))
         return false;
-    else if (isEmpty(left(t)) && isEmpty(right(t)))
+    else if (sizeTree(t) == 1 )
         return true;
     else
         return false;

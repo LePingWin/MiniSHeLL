@@ -10,5 +10,6 @@ ls | grep sdfsdfdfd || echo nok
 // Manque avec simple <
 
 //Look si cleanBuffer utilisé
-
+//Lancé en arrière plan
+//Lancé cmd builtin : CD + pwd
 exit
