@@ -1,7 +1,7 @@
 /**
  * \file builtin.h
  * \brief Gestion du Shell
- * \author Jean.S
+ * \author Loïc.B et Jean.S
  *
  *  Gestion du Shell et de l'IHM
  *
@@ -101,6 +101,9 @@ void decryptArgs(char* cmd,char** params);
 /**
  * \fn char* evaluateTree(Tree t)
  * \brief Permet d'evaluer l'arbre compose des commandes et operateurs
+ * 
+ * \param Tree noeud a évaluer
+ * \return resultat d'exécution du noeuf passé en paramètre
  */ 
 bool evaluateTree(Tree t);
 

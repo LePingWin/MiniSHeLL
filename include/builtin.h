@@ -1,7 +1,7 @@
 /**
  * \file builtin.h
  * \brief Fonctions du Shell
- * \author Loïc.B
+ * \author Loïc.B et Jean.S
  *
  * Reproduction des fonctions du Shell
  *

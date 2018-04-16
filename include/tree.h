@@ -1,7 +1,7 @@
 /**
  * \file builtin.h
  * \brief Gestion du Shell
- * \author Jean.S
+ * \author Loïc.B et Jean.S
  *
  *  Gestion du Shell et de l'IHM
  *
@@ -105,6 +105,12 @@ Tree right(Tree t);
  */
 bool isLeaf(Tree t);
 
+/**
+ * \fn parcoursPrefixe(Tree a)
+ * \brief Parcours l'arbre e manière préfixé et affiche l'arbre
+ *
+ * \param Tree arbre en entrée
+ */
 void parcoursPrefixe(Tree a);
 
 #endif
