@@ -331,8 +331,6 @@ bool executePipe(char** tmp, int nbCMDs)
     return status;
 }
 
-
-//TODO Attention : ls -a | grep git && echo ok | ls -l || echo nok
 bool evaluateTree(Tree t) {
     int status = true; //Statut de l'execution de la cmd
     

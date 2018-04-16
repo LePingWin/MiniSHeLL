@@ -1,5 +1,5 @@
 /**
- * \file builtin.h
+ * \file shell.h
  * \brief Gestion du Shell
  * \author Loïc.B et Jean.S
  *

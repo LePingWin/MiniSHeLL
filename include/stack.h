@@ -1,13 +1,14 @@
+/**
+ * \file stack.h
+ * \brief Pile contenant des strings (et on parle bien des chaînes de caractères ;))
+ * \author Loïc B.
+ */
 /*
 �* File:��  stack.h
 �* Author:  zentut.com
 �* Purpose: linked stack header file
 �*/
-/**
- * \file Stack.h
- * \brief Pile contenant des strings (et on parle bien des chaînes de caractères ;))
- * \author Loïc B.
- */
+
 #ifndef _STACK_H_
 #define _STACK_H_
 

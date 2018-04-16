@@ -1,0 +1,133 @@
+\hypertarget{stackTree_8h}{}\section{include/stack\+Tree.h File Reference}
+\label{stackTree_8h}\index{include/stack\+Tree.\+h@{include/stack\+Tree.\+h}}
+
+
+Pile contenant des arbres.  
+
+
+{\ttfamily \#include \char`\"{}../include/typedef.\+h\char`\"{}}\\*
+Include dependency graph for stack\+Tree.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{stackTree_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structstackTree}{Stack\+Tree} \hyperlink{stackTree_8h_ac7860315aeb4e2ba097574b9e293146f}{new\+Node\+Stack\+Tree} (\hyperlink{structnode}{Tree} data)
+\begin{DoxyCompactList}\small\item\em Initialise une pile. \end{DoxyCompactList}\item 
+\hyperlink{typedef_8h_af6a258d8f3ee5206d682d799316314b1}{bool} \hyperlink{stackTree_8h_a3e101266a4325d242ea73417931989f5}{is\+Empty\+Stack\+Tree} (\hyperlink{structstackTree}{Stack\+Tree} \hyperlink{tree_8h_a66fb9b676a07f944e35a2171cff66e4b}{root})
+\begin{DoxyCompactList}\small\item\em Si pile vide renvoi 0. \end{DoxyCompactList}\item 
+void \hyperlink{stackTree_8h_a8be59de159b13bbbac7ccaf531c3f638}{push\+Stack\+Tree} (\hyperlink{structstackTree}{Stack\+Tree} $\ast$\hyperlink{tree_8h_a66fb9b676a07f944e35a2171cff66e4b}{root}, \hyperlink{structnode}{Tree} data)
+\begin{DoxyCompactList}\small\item\em Ajoute un élément à la pile passée en paramètre. \end{DoxyCompactList}\item 
+\hyperlink{structnode}{Tree} \hyperlink{stackTree_8h_a072fcedcbe8214ca0dc0918e2ab3c309}{pop\+Stack\+Tree} (\hyperlink{structstackTree}{Stack\+Tree} $\ast$\hyperlink{tree_8h_a66fb9b676a07f944e35a2171cff66e4b}{root})
+\begin{DoxyCompactList}\small\item\em Enlève l\textquotesingle{}élement au sommet de la pile et renvoi son contenu. \end{DoxyCompactList}\item 
+\hyperlink{structnode}{Tree} \hyperlink{stackTree_8h_a857f386c967b559a2b55013bda48ec00}{peek\+Stack\+Tree} (\hyperlink{structstackTree}{Stack\+Tree} \hyperlink{tree_8h_a66fb9b676a07f944e35a2171cff66e4b}{root})
+\begin{DoxyCompactList}\small\item\em Renvoi la donnée de l\textquotesingle{}élement au sommet de la pile. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Pile contenant des arbres. 
+
+\begin{DoxyAuthor}{Author}
+Loïc.\+B et Jean.\+S 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\index{stack\+Tree.\+h@{stack\+Tree.\+h}!is\+Empty\+Stack\+Tree@{is\+Empty\+Stack\+Tree}}
+\index{is\+Empty\+Stack\+Tree@{is\+Empty\+Stack\+Tree}!stack\+Tree.\+h@{stack\+Tree.\+h}}
+\subsubsection[{\texorpdfstring{is\+Empty\+Stack\+Tree(\+Stack\+Tree root)}{isEmptyStackTree(StackTree root)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} is\+Empty\+Stack\+Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Stack\+Tree}}]{root}
+\end{DoxyParamCaption}
+)}\hypertarget{stackTree_8h_a3e101266a4325d242ea73417931989f5}{}\label{stackTree_8h_a3e101266a4325d242ea73417931989f5}
+
+
+Si pile vide renvoi 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Stack\+Tree} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\index{stack\+Tree.\+h@{stack\+Tree.\+h}!new\+Node\+Stack\+Tree@{new\+Node\+Stack\+Tree}}
+\index{new\+Node\+Stack\+Tree@{new\+Node\+Stack\+Tree}!stack\+Tree.\+h@{stack\+Tree.\+h}}
+\subsubsection[{\texorpdfstring{new\+Node\+Stack\+Tree(\+Tree data)}{newNodeStackTree(Tree data)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Stack\+Tree} new\+Node\+Stack\+Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree}}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{stackTree_8h_ac7860315aeb4e2ba097574b9e293146f}{}\label{stackTree_8h_ac7860315aeb4e2ba097574b9e293146f}
+
+
+Initialise une pile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tree$\ast$} & donnée à stocker \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stack\+Tree 
+\end{DoxyReturn}
+\index{stack\+Tree.\+h@{stack\+Tree.\+h}!peek\+Stack\+Tree@{peek\+Stack\+Tree}}
+\index{peek\+Stack\+Tree@{peek\+Stack\+Tree}!stack\+Tree.\+h@{stack\+Tree.\+h}}
+\subsubsection[{\texorpdfstring{peek\+Stack\+Tree(\+Stack\+Tree root)}{peekStackTree(StackTree root)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree} peek\+Stack\+Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Stack\+Tree}}]{root}
+\end{DoxyParamCaption}
+)}\hypertarget{stackTree_8h_a857f386c967b559a2b55013bda48ec00}{}\label{stackTree_8h_a857f386c967b559a2b55013bda48ec00}
+
+
+Renvoi la donnée de l\textquotesingle{}élement au sommet de la pile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Stack\+Tree} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tree data 
+\end{DoxyReturn}
+\index{stack\+Tree.\+h@{stack\+Tree.\+h}!pop\+Stack\+Tree@{pop\+Stack\+Tree}}
+\index{pop\+Stack\+Tree@{pop\+Stack\+Tree}!stack\+Tree.\+h@{stack\+Tree.\+h}}
+\subsubsection[{\texorpdfstring{pop\+Stack\+Tree(\+Stack\+Tree $\ast$root)}{popStackTree(StackTree *root)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree} pop\+Stack\+Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Stack\+Tree} $\ast$}]{root}
+\end{DoxyParamCaption}
+)}\hypertarget{stackTree_8h_a072fcedcbe8214ca0dc0918e2ab3c309}{}\label{stackTree_8h_a072fcedcbe8214ca0dc0918e2ab3c309}
+
+
+Enlève l\textquotesingle{}élement au sommet de la pile et renvoi son contenu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Stack\+Tree$\ast$} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tree data 
+\end{DoxyReturn}
+\index{stack\+Tree.\+h@{stack\+Tree.\+h}!push\+Stack\+Tree@{push\+Stack\+Tree}}
+\index{push\+Stack\+Tree@{push\+Stack\+Tree}!stack\+Tree.\+h@{stack\+Tree.\+h}}
+\subsubsection[{\texorpdfstring{push\+Stack\+Tree(\+Stack\+Tree $\ast$root, Tree data)}{pushStackTree(StackTree *root, Tree data)}}]{\setlength{\rightskip}{0pt plus 5cm}push\+Stack\+Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Stack\+Tree} $\ast$}]{root, }
+\item[{{\bf Tree}}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{stackTree_8h_a8be59de159b13bbbac7ccaf531c3f638}{}\label{stackTree_8h_a8be59de159b13bbbac7ccaf531c3f638}
+
+
+Ajoute un élément à la pile passée en paramètre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Stack\+Tree$\ast$} & la pile et Tree la donnée \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,193 @@
+\hypertarget{tree_8h}{}\section{include/tree.h File Reference}
+\label{tree_8h}\index{include/tree.\+h@{include/tree.\+h}}
+
+
+Gestion du Shell.  
+
+
+{\ttfamily \#include \char`\"{}typedef.\+h\char`\"{}}\\*
+Include dependency graph for tree.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=155pt]{tree_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries \+\_\+\+T\+R\+E\+E\+\_\+\+H\+\_\+}~/$\ast$ Edit suite aux corrections des posts suivants -\/$>$ $\ast$/\hypertarget{tree_8h_ae79288a9c2d6e61b357d8fbc6f6d9e5d}{}\label{tree_8h_ae79288a9c2d6e61b357d8fbc6f6d9e5d}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structnode}{Tree} \hyperlink{tree_8h_a39fee9e551235f35ffb7c7c84831cfcf}{create\+Tree} (char $\ast$val, \hyperlink{structnode}{Tree} ls, \hyperlink{structnode}{Tree} rs)
+\begin{DoxyCompactList}\small\item\em Cree un arbre. \end{DoxyCompactList}\item 
+void \hyperlink{tree_8h_a42de0a8d12e01a75f477b3a6bfac4027}{add\+Node} (\hyperlink{structnode}{Tree} t, char $\ast$val)
+\begin{DoxyCompactList}\small\item\em Ajout d\textquotesingle{}un noeud a un arbre. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{tree_8h_a66fb9b676a07f944e35a2171cff66e4b}{root} (\hyperlink{structnode}{Tree} t)
+\begin{DoxyCompactList}\small\item\em Retourne la valeur de l\textquotesingle{}arbre. \end{DoxyCompactList}\item 
+void {\bfseries write\+Tree} (\hyperlink{structnode}{Tree} t, F\+I\+LE $\ast$fp)\hypertarget{tree_8h_aa189767efdb91832c3e3005ed5a75e6f}{}\label{tree_8h_aa189767efdb91832c3e3005ed5a75e6f}
+
+\item 
+void \hyperlink{tree_8h_a0bd2f6637ff829975a5c0349fc7ee22a}{save\+\_\+dot} (\hyperlink{structnode}{Tree} t, char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em dessine la representation de l\textquotesingle{}arbre. \end{DoxyCompactList}\item 
+void \hyperlink{tree_8h_ae2f270c14406b7dfaf6b566d643f233a}{display} (\hyperlink{structnode}{Tree} t)\hypertarget{tree_8h_ae2f270c14406b7dfaf6b566d643f233a}{}\label{tree_8h_ae2f270c14406b7dfaf6b566d643f233a}
+
+\begin{DoxyCompactList}\small\item\em affiche la representation de l\textquotesingle{}arbre. \end{DoxyCompactList}\item 
+int \hyperlink{tree_8h_ab471c13de30182fb7b9a0e0f2a0b7d6e}{size\+Tree} (\hyperlink{structnode}{Tree} t)
+\begin{DoxyCompactList}\small\item\em Calcul la taille de l\textquotesingle{}arbre. \end{DoxyCompactList}\item 
+\hyperlink{typedef_8h_af6a258d8f3ee5206d682d799316314b1}{bool} \hyperlink{tree_8h_ae4ea4d4d609b15ac54146adeb64eb435}{is\+Empty} (\hyperlink{structnode}{Tree} t)
+\begin{DoxyCompactList}\small\item\em Test si l\textquotesingle{}arbre est vide. \end{DoxyCompactList}\item 
+\hyperlink{structnode}{Tree} {\bfseries left} (\hyperlink{structnode}{Tree} t)\hypertarget{tree_8h_a626356b3c8f3e0130d0e043a1dd8547c}{}\label{tree_8h_a626356b3c8f3e0130d0e043a1dd8547c}
+
+\item 
+\hyperlink{structnode}{Tree} {\bfseries right} (\hyperlink{structnode}{Tree} t)\hypertarget{tree_8h_a098460d0916242eebda50610e2a86e39}{}\label{tree_8h_a098460d0916242eebda50610e2a86e39}
+
+\item 
+\hyperlink{typedef_8h_af6a258d8f3ee5206d682d799316314b1}{bool} {\bfseries is\+Leaf} (\hyperlink{structnode}{Tree} t)\hypertarget{tree_8h_ae932bf12c2804f0f647c68a32038191c}{}\label{tree_8h_ae932bf12c2804f0f647c68a32038191c}
+
+\item 
+void \hyperlink{tree_8h_a47969070eb9b124b455b59d587f66bb4}{parcours\+Prefixe} (\hyperlink{structnode}{Tree} a)
+\begin{DoxyCompactList}\small\item\em Parcours l\textquotesingle{}arbre e manière préfixé et affiche l\textquotesingle{}arbre. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gestion du Shell. 
+
+\begin{DoxyAuthor}{Author}
+Loïc.\+B et Jean.\+S
+\end{DoxyAuthor}
+Gestion du Shell et de l\textquotesingle{}I\+HM 
+
+\subsection{Function Documentation}
+\index{tree.\+h@{tree.\+h}!add\+Node@{add\+Node}}
+\index{add\+Node@{add\+Node}!tree.\+h@{tree.\+h}}
+\subsubsection[{\texorpdfstring{add\+Node(\+Tree t, char $\ast$val)}{addNode(Tree t, char *val)}}]{\setlength{\rightskip}{0pt plus 5cm}void add\+Node (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree}}]{t, }
+\item[{char $\ast$}]{val}
+\end{DoxyParamCaption}
+)}\hypertarget{tree_8h_a42de0a8d12e01a75f477b3a6bfac4027}{}\label{tree_8h_a42de0a8d12e01a75f477b3a6bfac4027}
+
+
+Ajout d\textquotesingle{}un noeud a un arbre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tree} & t arbre source, char$\ast$ val valeur du noeud \\
+\hline
+\end{DoxyParams}
+\index{tree.\+h@{tree.\+h}!create\+Tree@{create\+Tree}}
+\index{create\+Tree@{create\+Tree}!tree.\+h@{tree.\+h}}
+\subsubsection[{\texorpdfstring{create\+Tree(char $\ast$val, Tree ls, Tree rs)}{createTree(char *val, Tree ls, Tree rs)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tree} create\+Tree (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{val, }
+\item[{{\bf Tree}}]{ls, }
+\item[{{\bf Tree}}]{rs}
+\end{DoxyParamCaption}
+)}\hypertarget{tree_8h_a39fee9e551235f35ffb7c7c84831cfcf}{}\label{tree_8h_a39fee9e551235f35ffb7c7c84831cfcf}
+
+
+Cree un arbre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em char$\ast$} & valeur du noeud, Tree ls arbre de gauche,Tree ls arbre de droite \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Tree \+: retourne l\textquotesingle{}arbre cree 
+\end{DoxyReturn}
+\index{tree.\+h@{tree.\+h}!is\+Empty@{is\+Empty}}
+\index{is\+Empty@{is\+Empty}!tree.\+h@{tree.\+h}}
+\subsubsection[{\texorpdfstring{is\+Empty(\+Tree t)}{isEmpty(Tree t)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} is\+Empty (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree}}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{tree_8h_ae4ea4d4d609b15ac54146adeb64eb435}{}\label{tree_8h_ae4ea4d4d609b15ac54146adeb64eb435}
+
+
+Test si l\textquotesingle{}arbre est vide. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tree} & arbre en entree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool \+: resultat vrai si vide, faux sinon 
+\end{DoxyReturn}
+\index{tree.\+h@{tree.\+h}!parcours\+Prefixe@{parcours\+Prefixe}}
+\index{parcours\+Prefixe@{parcours\+Prefixe}!tree.\+h@{tree.\+h}}
+\subsubsection[{\texorpdfstring{parcours\+Prefixe(\+Tree a)}{parcoursPrefixe(Tree a)}}]{\setlength{\rightskip}{0pt plus 5cm}parcours\+Prefixe (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree}}]{a}
+\end{DoxyParamCaption}
+)}\hypertarget{tree_8h_a47969070eb9b124b455b59d587f66bb4}{}\label{tree_8h_a47969070eb9b124b455b59d587f66bb4}
+
+
+Parcours l\textquotesingle{}arbre e manière préfixé et affiche l\textquotesingle{}arbre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tree} & arbre en entrée \\
+\hline
+\end{DoxyParams}
+\index{tree.\+h@{tree.\+h}!root@{root}}
+\index{root@{root}!tree.\+h@{tree.\+h}}
+\subsubsection[{\texorpdfstring{root(\+Tree t)}{root(Tree t)}}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ root (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree}}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{tree_8h_a66fb9b676a07f944e35a2171cff66e4b}{}\label{tree_8h_a66fb9b676a07f944e35a2171cff66e4b}
+
+
+Retourne la valeur de l\textquotesingle{}arbre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tree} & t arbre source \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ la valeur de la racine de l\textquotesingle{}arbre 
+\end{DoxyReturn}
+\index{tree.\+h@{tree.\+h}!save\+\_\+dot@{save\+\_\+dot}}
+\index{save\+\_\+dot@{save\+\_\+dot}!tree.\+h@{tree.\+h}}
+\subsubsection[{\texorpdfstring{save\+\_\+dot(\+Tree t, char $\ast$filename)}{save_dot(Tree t, char *filename)}}]{\setlength{\rightskip}{0pt plus 5cm}void save\+\_\+dot (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree}}]{t, }
+\item[{char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}\hypertarget{tree_8h_a0bd2f6637ff829975a5c0349fc7ee22a}{}\label{tree_8h_a0bd2f6637ff829975a5c0349fc7ee22a}
+
+
+dessine la representation de l\textquotesingle{}arbre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tree} & arbre en entree, char$\ast$ nom du fichier dans lequel sauvegarder la representation de l\textquotesingle{}arbre \\
+\hline
+\end{DoxyParams}
+\index{tree.\+h@{tree.\+h}!size\+Tree@{size\+Tree}}
+\index{size\+Tree@{size\+Tree}!tree.\+h@{tree.\+h}}
+\subsubsection[{\texorpdfstring{size\+Tree(\+Tree t)}{sizeTree(Tree t)}}]{\setlength{\rightskip}{0pt plus 5cm}int size\+Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree}}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{tree_8h_ab471c13de30182fb7b9a0e0f2a0b7d6e}{}\label{tree_8h_ab471c13de30182fb7b9a0e0f2a0b7d6e}
+
+
+Calcul la taille de l\textquotesingle{}arbre. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tree} & arbre en entree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int \+: retourne la taille de l\textquotesingle{}arbre, nombre de noeud 
+\end{DoxyReturn}

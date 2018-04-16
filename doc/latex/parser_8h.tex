@@ -1,0 +1,79 @@
+\hypertarget{parser_8h}{}\section{include/parser.h File Reference}
+\label{parser_8h}\index{include/parser.\+h@{include/parser.\+h}}
+
+
+Gestion du Shell.  
+
+
+{\ttfamily \#include \char`\"{}typedef.\+h\char`\"{}}\\*
+Include dependency graph for parser.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{parser_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries parse\+String\+By\+Sep} (char $\ast$arg, char $\ast$$\ast$parsed, char $\ast$sep)\hypertarget{parser_8h_a456dd62605f1ae7895558a1db7692faf}{}\label{parser_8h_a456dd62605f1ae7895558a1db7692faf}
+
+\item 
+int \hyperlink{parser_8h_a7f017fe174474f089db38bc8711a0726}{parse\+String\+By\+Spaces} (char $\ast$arg, char $\ast$$\ast$parsed)
+\begin{DoxyCompactList}\small\item\em Découpe la chaîne par la chaîne spécifié \end{DoxyCompactList}\item 
+int \hyperlink{parser_8h_ae2fd2e91f032ebee234b6d2e6aae0bdf}{parse\+String\+By\+Special\+Chars} (char $\ast$$\ast$parsed, char $\ast$$\ast$result, int size)
+\begin{DoxyCompactList}\small\item\em Découpe la chaîne par caractère special. \end{DoxyCompactList}\item 
+void \hyperlink{parser_8h_aba964f39ec7b770c9e6ce65f3214b9ae}{add\+Node\+Stack\+Tree} (\hyperlink{structstackTree}{Stack\+Tree} stack, char $\ast$operator)\hypertarget{parser_8h_aba964f39ec7b770c9e6ce65f3214b9ae}{}\label{parser_8h_aba964f39ec7b770c9e6ce65f3214b9ae}
+
+\begin{DoxyCompactList}\small\item\em Ajoute des noeuds à l\textquotesingle{}arbre. \end{DoxyCompactList}\item 
+\hyperlink{structnode}{Tree} \hyperlink{parser_8h_aeef948f3c1413d818faf4cddad49c46c}{parse\+String\+To\+Stacks} (char $\ast$$\ast$parsed, int size\+Parsed)\hypertarget{parser_8h_aeef948f3c1413d818faf4cddad49c46c}{}\label{parser_8h_aeef948f3c1413d818faf4cddad49c46c}
+
+\begin{DoxyCompactList}\small\item\em Construit l\textquotesingle{}arbre syntaxique. \end{DoxyCompactList}\item 
+void {\bfseries remove\+All\+Chars} (char $\ast$str, char c)\hypertarget{parser_8h_a20e3dd4792062941cced7d59e1578593}{}\label{parser_8h_a20e3dd4792062941cced7d59e1578593}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gestion du Shell. 
+
+\begin{DoxyAuthor}{Author}
+Loïc.\+B et Jean.\+S
+\end{DoxyAuthor}
+Gestion du Shell et de l\textquotesingle{}I\+HM 
+
+\subsection{Function Documentation}
+\index{parser.\+h@{parser.\+h}!parse\+String\+By\+Spaces@{parse\+String\+By\+Spaces}}
+\index{parse\+String\+By\+Spaces@{parse\+String\+By\+Spaces}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+String\+By\+Spaces(char $\ast$arg, char $\ast$$\ast$parsed)}{parseStringBySpaces(char *arg, char **parsed)}}]{\setlength{\rightskip}{0pt plus 5cm}void parse\+String\+By\+Spaces (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{arg, }
+\item[{char $\ast$$\ast$}]{parsed}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_a7f017fe174474f089db38bc8711a0726}{}\label{parser_8h_a7f017fe174474f089db38bc8711a0726}
+
+
+Découpe la chaîne par la chaîne spécifié 
+
+Découpe la chaîne par caractère espace.
+
+\begin{DoxyReturn}{Returns}
+argc 
+\end{DoxyReturn}
+\index{parser.\+h@{parser.\+h}!parse\+String\+By\+Special\+Chars@{parse\+String\+By\+Special\+Chars}}
+\index{parse\+String\+By\+Special\+Chars@{parse\+String\+By\+Special\+Chars}!parser.\+h@{parser.\+h}}
+\subsubsection[{\texorpdfstring{parse\+String\+By\+Special\+Chars(char $\ast$$\ast$parsed, char $\ast$$\ast$result, int size)}{parseStringBySpecialChars(char **parsed, char **result, int size)}}]{\setlength{\rightskip}{0pt plus 5cm}int parse\+String\+By\+Special\+Chars (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{parsed, }
+\item[{char $\ast$$\ast$}]{result, }
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{parser_8h_ae2fd2e91f032ebee234b6d2e6aae0bdf}{}\label{parser_8h_ae2fd2e91f032ebee234b6d2e6aae0bdf}
+
+
+Découpe la chaîne par caractère special. 
+
+\begin{DoxyReturn}{Returns}
+argc 
+\end{DoxyReturn}
