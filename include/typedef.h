@@ -1,7 +1,7 @@
 /**
  * \file typedef.h
  * \brief Définition des types
- * \author Loïc.B
+ * \author Loïc.B et Jean.S
  *
  *  Définitions des types
  *

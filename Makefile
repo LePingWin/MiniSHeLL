@@ -47,6 +47,7 @@ gcov: $(GEXEC)
 	find ./ -maxdepth 1 -name "*.gcno" -exec mv {} $(GCOV_DIR) \;
 	find ./ -maxdepth 1 -name "*.gcda" -exec mv {} $(GCOV_DIR) \;
 
+
 	gcov -o $(GCOV_DIR) $(GEXEC)
 	lcov -o $(GCOV_DIR)/$(LCOV_REPORT) -c -f -d $(GCOV_DIR)
 	genhtml -o $(GCOV_DIR)/report $(GCOV_DIR)/$(LCOV_REPORT)

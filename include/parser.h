@@ -1,7 +1,7 @@
 /**
  * \file parsr.h
  * \brief Gestion du Shell
- * \author Loïc B.
+ * \author Loïc.B et Jean.S
  *
  *  Gestion du Shell et de l'IHM
  *
