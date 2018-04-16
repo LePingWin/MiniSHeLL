@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['max_5fcommand_5flength',['MAX_COMMAND_LENGTH',['../typedef_8h.html#af1abcb51a4aa27a5a5a7958c03448134',1,'typedef.h']]],
-  ['minishell',['MiniSHeLL',['../md_README.html',1,'']]]
+  ['display',['display',['../tree_8h.html#ae2f270c14406b7dfaf6b566d643f233a',1,'tree.c']]]
 ];

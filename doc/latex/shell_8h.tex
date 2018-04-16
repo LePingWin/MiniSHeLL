@@ -1,0 +1,156 @@
+\hypertarget{shell_8h}{}\section{include/shell.h File Reference}
+\label{shell_8h}\index{include/shell.\+h@{include/shell.\+h}}
+
+
+Gestion du Shell.  
+
+
+{\ttfamily \#include \char`\"{}typedef.\+h\char`\"{}}\\*
+Include dependency graph for shell.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{shell_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries \+\_\+\+S\+H\+E\+L\+L\+\_\+\+H\+\_\+}~/$\ast$ Edit suite aux corrections des posts suivants -\/$>$ $\ast$/\hypertarget{shell_8h_af6d1298673e2abca2dc62735d4b8b949}{}\label{shell_8h_af6d1298673e2abca2dc62735d4b8b949}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{shell_8h_aba0e7cbf36b01d94dd5d0b8a5e3e1c2b}{shell\+Reader} ()\hypertarget{shell_8h_aba0e7cbf36b01d94dd5d0b8a5e3e1c2b}{}\label{shell_8h_aba0e7cbf36b01d94dd5d0b8a5e3e1c2b}
+
+\begin{DoxyCompactList}\small\item\em Fonction de lecture des commande en boucle sur la console. \end{DoxyCompactList}\item 
+void {\bfseries read\+Input} (char $\ast$command, int size)\hypertarget{shell_8h_af8493e88dd434853720a81098bf83a3a}{}\label{shell_8h_af8493e88dd434853720a81098bf83a3a}
+
+\item 
+int \hyperlink{shell_8h_a11b419f784bac628d7bbe2c8c2c5e21a}{readerL} (char $\ast$chaine, int longueur)
+\begin{DoxyCompactList}\small\item\em Lecture des elements renseignes par l\textquotesingle{}utilisateur afin d\textquotesingle{}executer les commandes avec ses parametres. \end{DoxyCompactList}\item 
+int \hyperlink{shell_8h_ae6a056a6f5706bd9d625cb813f9e8c8f}{end\+Of\+Command} (char $\ast$chaine, int longueur)
+\begin{DoxyCompactList}\small\item\em Permet de savoir si la chaine contient le caractere de fin de chaine. \end{DoxyCompactList}\item 
+void \hyperlink{shell_8h_a750be53afe22b006b8b36b42f3c12323}{clean\+Buffer} ()\hypertarget{shell_8h_a750be53afe22b006b8b36b42f3c12323}{}\label{shell_8h_a750be53afe22b006b8b36b42f3c12323}
+
+\begin{DoxyCompactList}\small\item\em Vide le buffer. \end{DoxyCompactList}\item 
+\hyperlink{typedef_8h_af6a258d8f3ee5206d682d799316314b1}{bool} {\bfseries call\+Commands} (char $\ast$$\ast$argv)\hypertarget{shell_8h_abc4c8860ec6ba2bcfaa0fdebad5e896b}{}\label{shell_8h_abc4c8860ec6ba2bcfaa0fdebad5e896b}
+
+\item 
+\hyperlink{typedef_8h_af6a258d8f3ee5206d682d799316314b1}{bool} \hyperlink{shell_8h_ac95dace850d5e2589b1b3ac07bd8ec1b}{execute\+Command} (char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Délègue l\textquotesingle{}appel via fork/execvp à un processus fils. \end{DoxyCompactList}\item 
+\hyperlink{typedef_8h_af6a258d8f3ee5206d682d799316314b1}{bool} {\bfseries execute} (char $\ast$$\ast$argv)\hypertarget{shell_8h_ab7b0baacd76c74612196051b9c12ed74}{}\label{shell_8h_ab7b0baacd76c74612196051b9c12ed74}
+
+\item 
+void {\bfseries historize} (char $\ast$arg)\hypertarget{shell_8h_a85d9d45d2aa5de73f0eec26eb8543803}{}\label{shell_8h_a85d9d45d2aa5de73f0eec26eb8543803}
+
+\item 
+void {\bfseries print\+Working\+Dir\+Colored} ()\hypertarget{shell_8h_aab4dd3d9c3ee9edc0913c58b6d3d63f3}{}\label{shell_8h_aab4dd3d9c3ee9edc0913c58b6d3d63f3}
+
+\item 
+void {\bfseries decrypt\+Args} (char $\ast$cmd, char $\ast$$\ast$params)\hypertarget{shell_8h_a81e3530b03d4772faf566484db0ee62a}{}\label{shell_8h_a81e3530b03d4772faf566484db0ee62a}
+
+\item 
+\hyperlink{typedef_8h_af6a258d8f3ee5206d682d799316314b1}{bool} \hyperlink{shell_8h_ae2b795612ce582293c9c2e58492d161e}{evaluate\+Tree} (\hyperlink{structnode}{Tree} t)
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}evaluer l\textquotesingle{}arbre compose des commandes et operateurs. \end{DoxyCompactList}\item 
+void {\bfseries process\+Commands} (char $\ast$$\ast$argv, int argc)\hypertarget{shell_8h_ac92c8e7f98071905150a302360d0717c}{}\label{shell_8h_ac92c8e7f98071905150a302360d0717c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gestion du Shell. 
+
+\begin{DoxyAuthor}{Author}
+Loïc.\+B et Jean.\+S
+\end{DoxyAuthor}
+Gestion du Shell et de l\textquotesingle{}I\+HM 
+
+\subsection{Function Documentation}
+\index{shell.\+h@{shell.\+h}!end\+Of\+Command@{end\+Of\+Command}}
+\index{end\+Of\+Command@{end\+Of\+Command}!shell.\+h@{shell.\+h}}
+\subsubsection[{\texorpdfstring{end\+Of\+Command(char $\ast$chaine, int longueur)}{endOfCommand(char *chaine, int longueur)}}]{\setlength{\rightskip}{0pt plus 5cm}int end\+Of\+Command (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{chaine, }
+\item[{int}]{longueur}
+\end{DoxyParamCaption}
+)}\hypertarget{shell_8h_ae6a056a6f5706bd9d625cb813f9e8c8f}{}\label{shell_8h_ae6a056a6f5706bd9d625cb813f9e8c8f}
+
+
+Permet de savoir si la chaine contient le caractere de fin de chaine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Chaîne} & d\textquotesingle{}entrée \\
+\hline
+{\em Longueur} & de la chaîne d\textquotesingle{}entrée \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 1 si caract de fin, 0 sinon 
+\end{DoxyReturn}
+\index{shell.\+h@{shell.\+h}!evaluate\+Tree@{evaluate\+Tree}}
+\index{evaluate\+Tree@{evaluate\+Tree}!shell.\+h@{shell.\+h}}
+\subsubsection[{\texorpdfstring{evaluate\+Tree(\+Tree t)}{evaluateTree(Tree t)}}]{\setlength{\rightskip}{0pt plus 5cm}char $\ast$ evaluate\+Tree (
+\begin{DoxyParamCaption}
+\item[{{\bf Tree}}]{t}
+\end{DoxyParamCaption}
+)}\hypertarget{shell_8h_ae2b795612ce582293c9c2e58492d161e}{}\label{shell_8h_ae2b795612ce582293c9c2e58492d161e}
+
+
+Permet d\textquotesingle{}evaluer l\textquotesingle{}arbre compose des commandes et operateurs. 
+
+Permet d\textquotesingle{}executer la commande et d\textquotesingle{}evaluer si cette derniere doit s\textquotesingle{}executer en arriere plan.
+
+
+\begin{DoxyParams}{Parameters}
+{\em Tree} & noeud a évaluer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+resultat d\textquotesingle{}exécution du noeuf passé en paramètre 
+\end{DoxyReturn}
+\index{shell.\+h@{shell.\+h}!execute\+Command@{execute\+Command}}
+\index{execute\+Command@{execute\+Command}!shell.\+h@{shell.\+h}}
+\subsubsection[{\texorpdfstring{execute\+Command(char $\ast$$\ast$argv)}{executeCommand(char **argv)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf bool} execute\+Command (
+\begin{DoxyParamCaption}
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\hypertarget{shell_8h_ac95dace850d5e2589b1b3ac07bd8ec1b}{}\label{shell_8h_ac95dace850d5e2589b1b3ac07bd8ec1b}
+
+
+Délègue l\textquotesingle{}appel via fork/execvp à un processus fils. 
+
+Redirige l\textquotesingle{}execution des cmds vers les commandes programmees maison quand c\textquotesingle{}est necessaire.
+
+
+\begin{DoxyParams}{Parameters}
+{\em Chaîne} & d\textquotesingle{}entrée\\
+\hline
+{\em Chaîne} & d\textquotesingle{}entrée, cmd + args \\
+\hline
+\end{DoxyParams}
+\index{shell.\+h@{shell.\+h}!readerL@{readerL}}
+\index{readerL@{readerL}!shell.\+h@{shell.\+h}}
+\subsubsection[{\texorpdfstring{reader\+L(char $\ast$chaine, int longueur)}{readerL(char *chaine, int longueur)}}]{\setlength{\rightskip}{0pt plus 5cm}int readerL (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{chaine, }
+\item[{int}]{longueur}
+\end{DoxyParamCaption}
+)}\hypertarget{shell_8h_a11b419f784bac628d7bbe2c8c2c5e21a}{}\label{shell_8h_a11b419f784bac628d7bbe2c8c2c5e21a}
+
+
+Lecture des elements renseignes par l\textquotesingle{}utilisateur afin d\textquotesingle{}executer les commandes avec ses parametres. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Chaîne} & d\textquotesingle{}entrée \\
+\hline
+{\em Longueur} & de la chaîne d\textquotesingle{}entrée \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+resultat 
+\end{DoxyReturn}

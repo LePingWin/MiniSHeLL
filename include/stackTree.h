@@ -1,13 +1,14 @@
-/*
-�* File:��  StackTree.h
-�* Author:  zentut.com
-�* Purpose: linked StackTree header file
-�*/
 /**
- * \file StackTree.h
+ * \file stackTree.h
  * \brief Pile contenant des arbres
  * \author Loïc.B et Jean.S
  */
+/*
+�* File:  stackTree.h
+�* Author:  zentut.com
+�* Purpose: linked StackTree header file
+�*/
+
 #ifndef _STACK_TREE_H_
 #define _STACK_TREE_H_
 

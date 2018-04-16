@@ -1,5 +1,5 @@
 /**
- * \file parsr.h
+ * \file parser.h
  * \brief Gestion du Shell
  * \author Loïc.B et Jean.S
  *
