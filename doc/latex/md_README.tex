@@ -10,7 +10,7 @@ Exemple \+: Prompt$>$ ls –a ; who Prompt$>$ ls –a $\vert$ grep toto Prompt$>
 
 \subsection*{II – Démarche}
 
-Les commandes sont lancées par des processus fils laissant au père le rôle d’interpréteur. Ce dernier doit attendre la fin du/des processus fils pour afficher le résultat d’exécution du/des \hyperlink{structcommande}{commande(s)} soumises. Certaines commandes et variables devront être internes (fonctionnalités built-\/in), c’est-\/à-\/dire, directement prises en compte par le code. Ainsi on distinguera trois phases distinctes \+: \begin{DoxyVerb}L’évaluation de l’expression soumise à l’interpréteur.
+Les commandes sont lancées par des processus fils laissant au père le rôle d’interpréteur. Ce dernier doit attendre la fin du/des processus fils pour afficher le résultat d’exécution du/des commande(s) soumises. Certaines commandes et variables devront être internes (fonctionnalités built-\/in), c’est-\/à-\/dire, directement prises en compte par le code. Ainsi on distinguera trois phases distinctes \+: \begin{DoxyVerb}L’évaluation de l’expression soumise à l’interpréteur.
 L’exécution ordonnancée du sous-ensemble de commandes.
 La soumission du résultat d’exécution.
 \end{DoxyVerb}
@@ -43,7 +43,7 @@ D’autres fonctionnalités optionnelles peuvent êtres implémentés \+:
 
 
 \begin{DoxyItemize}
-\item F\+O01 – La réalisation d’un mode batch (ie \+: ./my\+\_\+shell –c « ls –al $\vert$ grep toto ») $\sim$
+\item F\+O01 – La réalisation d’un mode batch (ie \+: ./my\+\_\+shell –c « ls –al $\vert$ grep toto ») ✓
 \item F\+O02 – La création de variables d’environnement
 \item F\+O03 – La prise en charge d’alias
 \end{DoxyItemize}

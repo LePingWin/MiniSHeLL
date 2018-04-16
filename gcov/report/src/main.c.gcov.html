@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">8</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntryLo">72.7 %</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntryLo">47.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-03-08 16:05:30</td>
+            <td class="headerValue">2018-04-16 09:12:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -82,32 +82,47 @@
 <span class="lineNum">      20 </span>            : {
 <span class="lineNum">      21 </span><span class="lineCov">          2 :   dprintf(1, &quot;USAGE: %s %s\n\n%s\n&quot;, bin_name, USAGE_SYNTAX, USAGE_PARAMS);</span>
 <span class="lineNum">      22 </span><span class="lineCov">          2 : }</span>
-<span class="lineNum">      23 </span>            : 
+<a name="23"><span class="lineNum">      23 </span>            : </a>
 <span class="lineNum">      24 </span>            : 
-<a name="25"><span class="lineNum">      25 </span>            : </a>
-<span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">          2 : int main(int argc, char* argv[])</span>
-<span class="lineNum">      28 </span>            : {
-<span class="lineNum">      29 </span><span class="lineCov">          2 :     if(argc &gt; 1)</span>
-<span class="lineNum">      30 </span>            :     {
-<span class="lineNum">      31 </span><span class="lineCov">          2 :         if(strcmp(argv[1],&quot;-c&quot;) == true){</span>
-<span class="lineNum">      32 </span><span class="lineNoCov">          0 :             argv += 2;</span>
-<span class="lineNum">      33 </span><span class="lineNoCov">          0 :             ProcessCommands(argv,argc-2);</span>
-<span class="lineNum">      34 </span>            :         }
-<span class="lineNum">      35 </span>            :         else
-<span class="lineNum">      36 </span>            :         {
-<span class="lineNum">      37 </span><span class="lineCov">          2 :             print_usage(argv[0]);</span>
-<span class="lineNum">      38 </span>            :         }
-<span class="lineNum">      39 </span>            :     }
-<span class="lineNum">      40 </span>            :     else
-<span class="lineNum">      41 </span>            :     {
-<span class="lineNum">      42 </span><span class="lineNoCov">          0 :         shellReader();</span>
-<span class="lineNum">      43 </span>            :     }
-<span class="lineNum">      44 </span><span class="lineCov">          2 :     return 0;</span>
-<span class="lineNum">      45 </span>            : }
-<span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span>            : 
-<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      25 </span><span class="lineCov">          2 : int main(int argc, char* argv[])</span>
+<span class="lineNum">      26 </span>            : {
+<span class="lineNum">      27 </span><span class="lineCov">          2 :     if(argc &gt; 1)</span>
+<span class="lineNum">      28 </span>            :     {
+<span class="lineNum">      29 </span>            :         // Gestion du mode batch
+<span class="lineNum">      30 </span><span class="lineCov">          2 :         if(strcmp(argv[1],&quot;-c&quot;) == true){</span>
+<span class="lineNum">      31 </span>            :             char *commands[MAX_COMMAND_LENGTH]; // Stocke le nombre de commande
+<span class="lineNum">      32 </span>            :             char* command; // Commande en cours d'evaluation
+<span class="lineNum">      33 </span>            :             char *argvcmd[MAX_COMMAND_LENGTH]; // Tableau des arguments de la commande
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :             for(int i=0;i &lt; MAX_NUMBER_OF_CMD;i++){</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :                 commands[i] = malloc(sizeof(char)* MAX_COMMAND_LENGTH);</span>
+<span class="lineNum">      37 </span><span class="lineNoCov">          0 :                 commands[i] = &quot;&quot;;</span>
+<span class="lineNum">      38 </span>            :             }
+<span class="lineNum">      39 </span>            :         
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :             int nbCommand = parseStringBySep(argv[2],commands,&quot;;&quot;);</span>
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 :             for(int i=0;i&lt;nbCommand;i++)</span>
+<span class="lineNum">      42 </span>            :             {
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :                 command = commands[i];</span>
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :                 int size = parseStringBySpaces(command,argvcmd);</span>
+<span class="lineNum">      45 </span><span class="lineNoCov">          0 :                 processCommands(argvcmd,size);</span>
+<span class="lineNum">      46 </span>            :             }
+<span class="lineNum">      47 </span>            :         }
+<span class="lineNum">      48 </span>            :         // Erreur lors du passage de l'argument
+<span class="lineNum">      49 </span>            :         else
+<span class="lineNum">      50 </span>            :         {
+<span class="lineNum">      51 </span><span class="lineCov">          2 :             print_usage(argv[0]);</span>
+<span class="lineNum">      52 </span>            :         }
+<span class="lineNum">      53 </span>            :     }
+<span class="lineNum">      54 </span>            :     // Lancement standard du shell
+<span class="lineNum">      55 </span>            :     else
+<span class="lineNum">      56 </span>            :     {
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :         shellReader();</span>
+<span class="lineNum">      58 </span>            :     }
+<span class="lineNum">      59 </span><span class="lineCov">          2 :     return 0;</span>
+<span class="lineNum">      60 </span>            : }
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            : 
 </pre>
       </td>
     </tr>

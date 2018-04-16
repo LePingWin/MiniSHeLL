@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-03-08 16:05:30</td>
+            <td class="headerValue">2018-04-16 09:12:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -70,43 +70,42 @@
 <span class="lineNum">       8 </span>            :  
 <span class="lineNum">       9 </span><span class="lineNoCov">          0 : Stack newNode(char* data)</span>
 <span class="lineNum">      10 </span>            : {
-<span class="lineNum">      11 </span><span class="lineNoCov">          0 :     Stack stackNode =</span>
-<span class="lineNum">      12 </span>            :               (Stack) malloc(sizeof(struct stackNode));
-<span class="lineNum">      13 </span><span class="lineNoCov">          0 :     stackNode-&gt;data = data;</span>
-<span class="lineNum">      14 </span><span class="lineNoCov">          0 :     stackNode-&gt;next = NULL;</span>
-<span class="lineNum">      15 </span><span class="lineNoCov">          0 :     return stackNode;</span>
-<a name="16"><span class="lineNum">      16 </span>            : }</a>
-<span class="lineNum">      17 </span>            :  
-<span class="lineNum">      18 </span><span class="lineNoCov">          0 : bool empty(Stack root)</span>
-<span class="lineNum">      19 </span>            : {
-<span class="lineNum">      20 </span><span class="lineNoCov">          0 :     return root ? true : false;</span>
-<a name="21"><span class="lineNum">      21 </span>            : }</a>
-<span class="lineNum">      22 </span>            :  
-<span class="lineNum">      23 </span><span class="lineNoCov">          0 : void push(Stack* root, char* data)</span>
-<span class="lineNum">      24 </span>            : {
-<span class="lineNum">      25 </span><span class="lineNoCov">          0 :     Stack stackNode = newNode(data);</span>
-<span class="lineNum">      26 </span><span class="lineNoCov">          0 :     stackNode-&gt;next = *root;</span>
-<span class="lineNum">      27 </span><span class="lineNoCov">          0 :     *root = stackNode;</span>
-<a name="28"><span class="lineNum">      28 </span><span class="lineNoCov">          0 : }</span></a>
-<span class="lineNum">      29 </span>            :  
-<span class="lineNum">      30 </span><span class="lineNoCov">          0 : char* pop(Stack* root)</span>
-<span class="lineNum">      31 </span>            : {
-<span class="lineNum">      32 </span><span class="lineNoCov">          0 :     if (empty(*root))</span>
-<span class="lineNum">      33 </span><span class="lineNoCov">          0 :         return NULL;</span>
-<span class="lineNum">      34 </span><span class="lineNoCov">          0 :     Stack temp = *root;</span>
-<span class="lineNum">      35 </span><span class="lineNoCov">          0 :     *root = (*root)-&gt;next;</span>
-<span class="lineNum">      36 </span><span class="lineNoCov">          0 :     char* popped = temp-&gt;data;</span>
-<span class="lineNum">      37 </span><span class="lineNoCov">          0 :     free(temp);</span>
-<span class="lineNum">      38 </span>            :  
-<span class="lineNum">      39 </span><span class="lineNoCov">          0 :     return popped;</span>
-<a name="40"><span class="lineNum">      40 </span>            : }</a>
-<span class="lineNum">      41 </span>            :  
-<span class="lineNum">      42 </span><span class="lineNoCov">          0 : char* peek(Stack root)</span>
-<span class="lineNum">      43 </span>            : {
-<span class="lineNum">      44 </span><span class="lineNoCov">          0 :     if (empty(root))</span>
-<span class="lineNum">      45 </span><span class="lineNoCov">          0 :         return NULL;</span>
-<span class="lineNum">      46 </span><span class="lineNoCov">          0 :     return root-&gt;data;</span>
-<span class="lineNum">      47 </span>            : }
+<span class="lineNum">      11 </span><span class="lineNoCov">          0 :     Stack stackNode = (Stack) malloc(sizeof(struct stackNode));</span>
+<span class="lineNum">      12 </span><span class="lineNoCov">          0 :     stackNode-&gt;data = data;</span>
+<span class="lineNum">      13 </span><span class="lineNoCov">          0 :     stackNode-&gt;next = NULL;</span>
+<span class="lineNum">      14 </span><span class="lineNoCov">          0 :     return stackNode;</span>
+<a name="15"><span class="lineNum">      15 </span>            : }</a>
+<span class="lineNum">      16 </span>            :  
+<span class="lineNum">      17 </span><span class="lineNoCov">          0 : bool empty(Stack root)</span>
+<span class="lineNum">      18 </span>            : {
+<span class="lineNum">      19 </span><span class="lineNoCov">          0 :     return root ? true : false;</span>
+<a name="20"><span class="lineNum">      20 </span>            : }</a>
+<span class="lineNum">      21 </span>            :  
+<span class="lineNum">      22 </span><span class="lineNoCov">          0 : void push(Stack* root, char* data)</span>
+<span class="lineNum">      23 </span>            : {
+<span class="lineNum">      24 </span><span class="lineNoCov">          0 :     Stack stackNode = newNode(data);</span>
+<span class="lineNum">      25 </span><span class="lineNoCov">          0 :     stackNode-&gt;next = *root;</span>
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 :     *root = stackNode;</span>
+<a name="27"><span class="lineNum">      27 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">      28 </span>            :  
+<span class="lineNum">      29 </span><span class="lineNoCov">          0 : char* pop(Stack* root)</span>
+<span class="lineNum">      30 </span>            : {
+<span class="lineNum">      31 </span><span class="lineNoCov">          0 :     if (empty(*root))</span>
+<span class="lineNum">      32 </span><span class="lineNoCov">          0 :         return NULL;</span>
+<span class="lineNum">      33 </span><span class="lineNoCov">          0 :     Stack temp = *root;</span>
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :     *root = (*root)-&gt;next;</span>
+<span class="lineNum">      35 </span><span class="lineNoCov">          0 :     char* popped = temp-&gt;data;</span>
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :     free(temp);</span>
+<span class="lineNum">      37 </span>            :  
+<span class="lineNum">      38 </span><span class="lineNoCov">          0 :     return popped;</span>
+<a name="39"><span class="lineNum">      39 </span>            : }</a>
+<span class="lineNum">      40 </span>            :  
+<span class="lineNum">      41 </span><span class="lineNoCov">          0 : char* peek(Stack root)</span>
+<span class="lineNum">      42 </span>            : {
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :     if (empty(root))</span>
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :         return NULL;</span>
+<span class="lineNum">      45 </span><span class="lineNoCov">          0 :     return root-&gt;data;</span>
+<span class="lineNum">      46 </span>            : }
 </pre>
       </td>
     </tr>

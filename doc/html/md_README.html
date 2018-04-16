@@ -85,7 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>L’objectif de ce projet et de réaliser -dans une proportion simplifiée- l’implémentation d’un interpréteur de commande similaire à bash. Au lancement ce dernier doit pouvoir afficher un prompt attendant la saisie d’une commande ou d’un sous-ensemble de commandes.</p>
 <p>Exemple : Prompt&gt; ls –a ; who Prompt&gt; ls –a | grep toto Prompt&gt; date</p>
 <h2>II – Démarche</h2>
-<p>Les commandes sont lancées par des processus fils laissant au père le rôle d’interpréteur. Ce dernier doit attendre la fin du/des processus fils pour afficher le résultat d’exécution du/des <a class="el" href="structcommande.html" title="Structure des commandes, tableau de la commande et de ses arguments. ">commande(s)</a> soumises. Certaines commandes et variables devront être internes (fonctionnalités built-in), c’est-à-dire, directement prises en compte par le code. Ainsi on distinguera trois phases distinctes : </p><pre class="fragment">L’évaluation de l’expression soumise à l’interpréteur.
+<p>Les commandes sont lancées par des processus fils laissant au père le rôle d’interpréteur. Ce dernier doit attendre la fin du/des processus fils pour afficher le résultat d’exécution du/des commande(s) soumises. Certaines commandes et variables devront être internes (fonctionnalités built-in), c’est-à-dire, directement prises en compte par le code. Ainsi on distinguera trois phases distinctes : </p><pre class="fragment">L’évaluation de l’expression soumise à l’interpréteur.
 L’exécution ordonnancée du sous-ensemble de commandes.
 La soumission du résultat d’exécution.
 </pre><h2>III – Résultats attendus</h2>
@@ -109,7 +109,7 @@ La soumission du résultat d’exécution.
 </ul>
 <p>D’autres fonctionnalités optionnelles peuvent êtres implémentés :</p>
 <ul>
-<li>FO01 – La réalisation d’un mode batch (ie : ./my_shell –c « ls –al | grep toto ») ~</li>
+<li>FO01 – La réalisation d’un mode batch (ie : ./my_shell –c « ls –al | grep toto ») ✓</li>
 <li>FO02 – La création de variables d’environnement</li>
 <li>FO03 – La prise en charge d’alias</li>
 </ul>
