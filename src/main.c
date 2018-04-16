@@ -28,22 +28,31 @@ int main(int argc, char* argv[])
     {
         // Gestion du mode batch
         if(strcmp(argv[1],"-c") == true){
-            char *commands[MAX_COMMAND_LENGTH]; // Stocke le nombre de commande
-            char* command; // Commande en cours d'evaluation
-            char *argvcmd[MAX_COMMAND_LENGTH]; // Tableau des arguments de la commande
+            char* cmd = calloc(sizeof(char),MAX_COMMAND_LENGTH);//CMD entree par user
+            char** commands = calloc(sizeof(char*),MAX_COMMAND_LENGTH); //CMDs spliter par ;
+            char** argvcmd = calloc(sizeof(char*),MAX_COMMAND_LENGTH); //Contient les cmds, args et operateurs spliter par espace
 
             for(int i=0;i < MAX_NUMBER_OF_CMD;i++){
-                commands[i] = malloc(sizeof(char)* MAX_COMMAND_LENGTH);
-                commands[i] = "";
+                commands[i] = calloc(sizeof(char),MAX_COMMAND_LENGTH);
+                argvcmd[i] = calloc(sizeof(char),MAX_COMMAND_LENGTH);
             }
         
             int nbCommand = parseStringBySep(argv[2],commands,";");
             for(int i=0;i<nbCommand;i++)
             {
-                command = commands[i];
-                int size = parseStringBySpaces(command,argvcmd);
+                strcpy(cmd,commands[i]);
+                int size = parseStringBySpaces(cmd,argvcmd);
                 processCommands(argvcmd,size);
             }
+            //Libere allocation
+            free(cmd);
+            for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+                free(argvcmd[i]);
+                free(commands[i]);  
+            }
+            //Libere allocation
+            free(commands);
+            free(argvcmd); 
         }
         // Erreur lors du passage de l'argument
         else

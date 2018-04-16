@@ -261,7 +261,8 @@ bool loopPipe(char ***cmd)
             {
                 status = true;
             }
-            else{
+            else
+            {
                 status = false;
             }
             
@@ -412,7 +413,6 @@ bool evaluateTree(Tree t) {
         if (strcmp(root(t),"<<") == true)
         {
             char chaine[255];
-            //char* tmp2 = root(right(t));
             char* filename = "/tmp/tmp-miniShell.txt";
             FILE *p1;
             p1=fopen(filename,"w+");
@@ -422,23 +422,22 @@ bool evaluateTree(Tree t) {
                 fprintf(p1, "%s\n", chaine);
                 chaine[strcspn(chaine, "\n") ] = '\0';
             }while(strcmp(chaine,root(right(t))) != true);
-            
                 
             fclose(p1);
-                strcat(root(left(t))," ");
-                strcat(root(left(t)),filename);
+            strcat(root(left(t))," ");
+            strcat(root(left(t)),filename);
                 
             status = evaluateTree(left(t));
 
-            
             remove(filename);
-
         }
         else
         {
             int original_dup = dup(STDIN);
             freopen(root(right(t)), "r", stdin); 
+            //Execute
             status = evaluateTree(left(t));
+            //Reset
             fflush(stdin);
             dup2(original_dup,STDIN);
             close(original_dup); 

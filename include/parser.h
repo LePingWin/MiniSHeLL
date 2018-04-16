@@ -3,7 +3,7 @@
  * \brief Gestion du Shell
  * \author Loïc.B et Jean.S
  *
- *  Gestion du Shell et de l'IHM
+ *  Gestion des parsing des string en vue de la création de l'arbre et exploitation des commandes
  *
  */
 #ifndef _PARSER_H_
@@ -50,6 +50,10 @@ void addNodeStackTree(StackTree stack, char* operator);
  */
 Tree parseStringToStacks(char** parsed,int sizeParsed);
 
+/**
+ * \fn void removeAllChars(char* str, char c)
+ * \brief Supprime le caractere c de la chaine str
+ */ 
 void removeAllChars(char* str, char c);
 
 #endif
