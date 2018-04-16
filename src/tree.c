@@ -19,7 +19,7 @@ Tree createTree(char* val, Tree ls, Tree rs)
     res->right = rs;
     return res;
 }
-
+/*
 void addNode(Tree t, char* val)
 {
     if(isEmpty(t))
@@ -30,13 +30,13 @@ void addNode(Tree t, char* val)
         t->right = createTree(val,NULL,NULL);
     else
         addNode(left(t),val);
-}
+}*/
 
 char* root(Tree t)
 {
 	return t->value;
 }
-
+/*
 void display(Tree t){
     if(isEmpty(left(t)) == false){
 		printf("%s -> %s\n",root(t),root(left(t)));
@@ -50,7 +50,7 @@ void display(Tree t){
 		printf("%s\n",root(t));	
     }
 }
-
+*/
 
 int sizeTree(Tree t)
 {
@@ -93,13 +93,4 @@ bool isLeaf(Tree t)
         return true;
     else
         return false;
-}
-
-void parcoursPrefixe(Tree a){
-	if(isEmpty(a) == false){
-        //do smth
-		printf("%s\n" ,root(a));
-		parcoursPrefixe(left(a));
-		parcoursPrefixe(right(a));
-	}
 }

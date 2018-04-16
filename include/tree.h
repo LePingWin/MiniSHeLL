@@ -26,7 +26,7 @@ Tree createTree(char* val, Tree ls, Tree rs);
  *
  * \param Tree t arbre source, char* val valeur du noeud
  */
-void addNode(Tree t, char* val);
+//void addNode(Tree t, char* val);
 
 /**
  * \fn char* root(Tree t)
@@ -42,7 +42,7 @@ char* root(Tree t);
  * \brief affiche la representation de l'arbre.
  *
  */
-void display(Tree t);
+//void display(Tree t);
 
 /**
  * \fn int sizeTree(Tree t)
@@ -88,13 +88,5 @@ Tree right(Tree t);
  * \return bool : retourne vrai si l'arbre est une feuille, faux sinon
  */
 bool isLeaf(Tree t);
-
-/**
- * \fn parcoursPrefixe(Tree a)
- * \brief Parcours l'arbre e manière préfixé et affiche l'arbre
- *
- * \param Tree arbre en entrée
- */
-void parcoursPrefixe(Tree a);
 
 #endif

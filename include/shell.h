@@ -38,12 +38,6 @@ void readInput(char* command, int size);
 int readerL(char *chaine, int longueur);
 
 /**
- * \fn void cleanBuffer()
- * \brief Vide le buffer
- *
- */
-void cleanBuffer();
-/**
  * \fn bool CallCommands(char *cmd,char* cmdArg)
  * \brief Selectionne la bonne commande à appeler
  *

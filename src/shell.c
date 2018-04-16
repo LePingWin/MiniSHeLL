@@ -143,11 +143,12 @@ void shellReader()
             for(int i=0;i<nbCommand;i++)
             {
                 int size = parseStringBySpaces(commands[i],argv);
-                for(int i=0;i < MAX_COMMAND_LENGTH;i++){
-                    free(commands[i]);  
-                }
+                
                 //printf("%s \n",argv[0]);
                 processCommands(argv,size);
+            }
+            for(int i=0;i < MAX_COMMAND_LENGTH;i++){
+                free(commands[i]);  
             }
         }    
     }
@@ -183,7 +184,7 @@ void processCommands(char** argv,int argc)
 
     arbreCMD = parseStringToStacks(parsed,sizeParsed);
     //display(arbreCMD);
-    //parcoursPrefixe(test);
+
     //Arriere plan
     if(background == true)
     {
@@ -486,27 +487,12 @@ int readerL(char *chaine, int longueur)
         {
             *positionEntree = '\0'; // On remplace ce caractère par \0
         }
-        else
-        {
-            cleanBuffer();
-        }
         return 1; // On renvoie 1 si la fonction s'est déroulée sans erreur
     }
     else
     {
-        cleanBuffer();
         return 0; // On renvoie 0 s'il y a eu une erreur
     }
-}
-
-void cleanBuffer()
-{
-    char c = 0;
-    while (c != '\n' && c != EOF)
-    {
-        c = getchar();
-    }
-    
 }
 
 void historize(char *arg)

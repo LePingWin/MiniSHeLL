@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntryHi">92.3 %</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-04-16 13:31:05</td>
+            <td class="headerValue">2018-04-16 15:03:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -78,20 +78,18 @@
 <span class="lineNum">      16 </span><span class="lineCov">          1 :         perror(&quot;This directory doesn't exists&quot;);</span>
 <a name="17"><span class="lineNum">      17 </span><span class="lineCov">          3 : }</span></a>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">         14 : void pwdCmd()</span>
+<span class="lineNum">      19 </span><span class="lineCov">          5 : void pwdCmd()</span>
 <span class="lineNum">      20 </span>            : {
-<span class="lineNum">      21 </span><span class="lineCov">         14 :    if (getcwd(cwd, sizeof(cwd)) != NULL)</span>
-<span class="lineNum">      22 </span><span class="lineCov">         14 :        printf(&quot;%s&quot;,cwd);</span>
-<span class="lineNum">      23 </span>            :    else
-<span class="lineNum">      24 </span><span class="lineNoCov">          0 :        perror(&quot;Can't print working directory&quot;);</span>
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">         14 : }</span></a>
-<span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">          2 : void echoCmd(char** argv)</span>
-<span class="lineNum">      28 </span>            : {
-<span class="lineNum">      29 </span><span class="lineCov">          2 :     printf(&quot;%s&quot;,argv[1]);</span>
-<span class="lineNum">      30 </span><span class="lineCov">          2 : }</span>
-<span class="lineNum">      31 </span>            : 
-<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      21 </span><span class="lineCov">          5 :    if (getcwd(cwd, sizeof(cwd)) != NULL)</span>
+<span class="lineNum">      22 </span><span class="lineCov">          5 :        printf(&quot;%s&quot;,cwd);</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          5 : }</span></a>
+<span class="lineNum">      24 </span>            : 
+<span class="lineNum">      25 </span><span class="lineCov">          1 : void echoCmd(char** argv)</span>
+<span class="lineNum">      26 </span>            : {
+<span class="lineNum">      27 </span><span class="lineCov">          1 :     printf(&quot;%s&quot;,argv[1]);</span>
+<span class="lineNum">      28 </span><span class="lineCov">          1 : }</span>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            : 
 </pre>
       </td>
     </tr>

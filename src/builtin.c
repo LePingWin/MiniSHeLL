@@ -20,8 +20,6 @@ void pwdCmd()
 {
    if (getcwd(cwd, sizeof(cwd)) != NULL)
        printf("%s",cwd);
-   else
-       perror("Can't print working directory");
 }
 
 void echoCmd(char** argv)

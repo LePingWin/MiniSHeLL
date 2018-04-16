@@ -46,13 +46,5 @@ void push(Stack* root, char* data);
  * \return char* data
  */ 
 char* pop(Stack* root);
-/**
- * \fn char* peek(Stack root)
- * \brief Renvoi la donnée de l'élement au sommet de la pile
- *  
- * \param Stack 
- * \return char* data
- */ 
-char* peek(Stack root);
 
 #endif // LINKEDSTACK_H_INCLUDED

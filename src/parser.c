@@ -95,6 +95,7 @@ Tree parseStringToStacks(char** parsed,int sizeParsed)
         {
             push(&operators,tmp);
         }
+        /* Peut servir dans un futur
         else if(strcmp(tmp,"(")== true)
         {
             push(&operators,tmp);
@@ -108,6 +109,7 @@ Tree parseStringToStacks(char** parsed,int sizeParsed)
             }
             
         }
+        */
         else
         {
             pushStackTree(&operands,createTree(tmp,NULL,NULL));

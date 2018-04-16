@@ -45,6 +45,7 @@ gcov: $(GEXEC)
 	$(GCOV_DIR)/$(GEXEC) -h
 	$(GCOV_DIR)/$(GEXEC) -i input -o output -v
 	./gcov/miniSHell.cov
+	./gcov/miniSHell.cov -c "ls | grep sdfsd && echo ok1 && echo ok2 || echo nok | pwd > cat.txt && ls -al >> cat.txt ; cat < cat.txt ; cd .. ; cd MiniSHeLL ; wc << ; cd sdfsd ; ls &"
 	find ./ -maxdepth 1 -name \*.gcno -exec mv {} $(GCOV_DIR) \;
 	find ./ -maxdepth 1 -name \*.gcda -exec mv {} $(GCOV_DIR) \;
 	

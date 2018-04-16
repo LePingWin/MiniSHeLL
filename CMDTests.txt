@@ -1,13 +1,1 @@
-ls | grep b && echo ok
-ls > cat.txt
-ls -al >> cat.txt
-wc <<
-ls | grep sdfsdfdfd && echo ok1 && echo ok2 || echo nok
-//ls | grep sdfsdfdfd || echo nok
-
-// Manque avec simple <
-
-//Look si cleanBuffer utilisé
-//Lancé en arrière plan
-//Lancé cmd builtin : CD + pwd
-exit
+ls | grep sdfsd && echo ok1 && echo ok2 || echo nok | pwd > cat.txt && ls -al >> cat.txt ; cat < cat.txt ; cd .. ; cd MiniSHeLL ; wc << ; cd sdfsd ; ls &

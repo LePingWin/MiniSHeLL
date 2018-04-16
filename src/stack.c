@@ -37,10 +37,3 @@ char* pop(Stack* root)
  
     return popped;
 }
- 
-char* peek(Stack root)
-{
-    if (empty(root))
-        return NULL;
-    return root->data;
-}
