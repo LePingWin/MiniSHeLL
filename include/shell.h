@@ -36,15 +36,6 @@ void readInput(char* command, int size);
  * \return resultat
  */
 int readerL(char *chaine, int longueur);
-/**
- * \fn int endOfCommand(char *chaine, int longueur)
- * \brief Permet de savoir si la chaine contient le caractere de fin de chaine
- *
- * \param Chaîne d'entrée
- * \param Longueur de la chaîne d'entrée
- * \return int 1 si caract de fin, 0 sinon
- */
-int endOfCommand(char *chaine, int longueur);
 
 /**
  * \fn void cleanBuffer()

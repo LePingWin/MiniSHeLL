@@ -478,21 +478,6 @@ void readInput(char *command, int size)
     historize(command);
 }
 
-int endOfCommand(char *chaine, int longueur)
-{
-    int i = 0;
-    int isEnd = 0;
-    while (i < 10 && isEnd == 0)
-    {
-        if (*chaine == '\n')
-            isEnd = 1;
-
-        chaine = chaine + 1;
-    }
-
-    return isEnd;
-}
-
 int readerL(char *chaine, int longueur)
 {
     char *positionEntree = NULL;

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-04-16 12:00:50</td>
+            <td class="headerValue">2018-04-16 12:13:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -77,9 +77,9 @@
 <span class="lineNum">      15 </span><span class="lineCov">         32 :     return stackNode;</span>
 <a name="16"><span class="lineNum">      16 </span>            : }</a>
 <span class="lineNum">      17 </span>            :  
-<span class="lineNum">      18 </span><span class="lineCov">         30 : bool isEmptyStackTree(StackTree root)</span>
+<span class="lineNum">      18 </span><span class="lineCov">         32 : bool isEmptyStackTree(StackTree root)</span>
 <span class="lineNum">      19 </span>            : {
-<span class="lineNum">      20 </span><span class="lineCov">         30 :     return root ? true : false;</span>
+<span class="lineNum">      20 </span><span class="lineCov">         32 :     return root ? true : false;</span>
 <a name="21"><span class="lineNum">      21 </span>            : }</a>
 <span class="lineNum">      22 </span>            :  
 <span class="lineNum">      23 </span><span class="lineCov">         24 : void pushStackTree(StackTree* root, Tree data)</span>
@@ -89,16 +89,16 @@
 <span class="lineNum">      27 </span><span class="lineCov">         24 :     *root = stackNode;</span>
 <a name="28"><span class="lineNum">      28 </span><span class="lineCov">         24 : }</span></a>
 <span class="lineNum">      29 </span>            :  
-<span class="lineNum">      30 </span><span class="lineCov">         22 : Tree popStackTree(StackTree* root)</span>
+<span class="lineNum">      30 </span><span class="lineCov">         24 : Tree popStackTree(StackTree* root)</span>
 <span class="lineNum">      31 </span>            : {
-<span class="lineNum">      32 </span><span class="lineCov">         22 :     if (isEmptyStackTree(*root))</span>
+<span class="lineNum">      32 </span><span class="lineCov">         24 :     if (isEmptyStackTree(*root))</span>
 <span class="lineNum">      33 </span><span class="lineNoCov">          0 :         return NULL;</span>
-<span class="lineNum">      34 </span><span class="lineCov">         22 :     StackTree temp = *root;</span>
-<span class="lineNum">      35 </span><span class="lineCov">         22 :     *root = (*root)-&gt;next;</span>
-<span class="lineNum">      36 </span><span class="lineCov">         22 :     Tree popped = temp-&gt;data;</span>
-<span class="lineNum">      37 </span><span class="lineCov">         22 :     free(temp);</span>
+<span class="lineNum">      34 </span><span class="lineCov">         24 :     StackTree temp = *root;</span>
+<span class="lineNum">      35 </span><span class="lineCov">         24 :     *root = (*root)-&gt;next;</span>
+<span class="lineNum">      36 </span><span class="lineCov">         24 :     Tree popped = temp-&gt;data;</span>
+<span class="lineNum">      37 </span><span class="lineCov">         24 :     free(temp);</span>
 <span class="lineNum">      38 </span>            :  
-<span class="lineNum">      39 </span><span class="lineCov">         22 :     return popped;</span>
+<span class="lineNum">      39 </span><span class="lineCov">         24 :     return popped;</span>
 <a name="40"><span class="lineNum">      40 </span>            : }</a>
 <span class="lineNum">      41 </span>            :  
 <span class="lineNum">      42 </span><span class="lineCov">          8 : Tree peekStackTree(StackTree root)</span>

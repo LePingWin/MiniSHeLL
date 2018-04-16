@@ -38,22 +38,6 @@ void addNode(Tree t, char* val);
 char* root(Tree t);
 
 /**
- * \fn void writeTree(Tree t, File* fp)
- * \brief Ecrit l'arbre dans un fichier. Il sera interprete pour generer une visualisation de l'arbre
- *
- * \param Tree arbre en entree, File* fichier dans lequel sera ecrit l'arbre
- */
-void writeTree(Tree t, FILE* fp);
-
-/**
- * \fn void save_dot(Tree t, char* filename)
- * \brief dessine la representation de l'arbre.
- *
- * \param Tree arbre en entree, char* nom du fichier dans lequel sauvegarder la representation de l'arbre
- */
-void save_dot(Tree t,char* filename);
-
-/**
  * \fn void display(Tree t);
  * \brief affiche la representation de l'arbre.
  *

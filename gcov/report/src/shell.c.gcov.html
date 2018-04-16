@@ -31,18 +31,18 @@
             <td class="headerValue">report.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">206</td>
-            <td class="headerCovTableEntry">254</td>
-            <td class="headerCovTableEntryMed">81.1 %</td>
+            <td class="headerCovTableEntry">211</td>
+            <td class="headerCovTableEntry">246</td>
+            <td class="headerCovTableEntryMed">85.8 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-04-16 12:00:50</td>
+            <td class="headerValue">2018-04-16 12:13:16</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">14</td>
-            <td class="headerCovTableEntryMed">85.7 %</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryHi">92.3 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -74,31 +74,31 @@
 <span class="lineNum">      12 </span>            : #include &lt;errno.h&gt;
 <a name="13"><span class="lineNum">      13 </span>            : </a>
 <span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span><span class="lineCov">         14 : bool callCommands(char **argv)</span>
+<span class="lineNum">      15 </span><span class="lineCov">         15 : bool callCommands(char **argv)</span>
 <span class="lineNum">      16 </span>            : {
 <span class="lineNum">      17 </span>            :     //Appel les bonnes fonctions
-<span class="lineNum">      18 </span><span class="lineCov">         14 :     if (strcmp(argv[0], &quot;cd&quot;) == true)</span>
+<span class="lineNum">      18 </span><span class="lineCov">         15 :     if (strcmp(argv[0], &quot;cd&quot;) == true)</span>
 <span class="lineNum">      19 </span>            :     {
 <span class="lineNum">      20 </span><span class="lineNoCov">          0 :         cdCmd(argv);</span>
 <span class="lineNum">      21 </span>            :     }
-<span class="lineNum">      22 </span><span class="lineCov">         14 :     else if (strcmp(argv[0], &quot;pwd&quot;) == true)</span>
+<span class="lineNum">      22 </span><span class="lineCov">         15 :     else if (strcmp(argv[0], &quot;pwd&quot;) == true)</span>
 <span class="lineNum">      23 </span>            :     {
 <span class="lineNum">      24 </span><span class="lineNoCov">          0 :         pwdCmd(&quot;&quot;);</span>
 <span class="lineNum">      25 </span>            :     }
-<span class="lineNum">      26 </span><span class="lineCov">         14 :     else if (strcmp(argv[0], &quot;exit&quot;) == true)</span>
+<span class="lineNum">      26 </span><span class="lineCov">         15 :     else if (strcmp(argv[0], &quot;exit&quot;) == true)</span>
 <span class="lineNum">      27 </span>            :     {
 <span class="lineNum">      28 </span><span class="lineNoCov">          0 :         exitCmd(&quot;&quot;);</span>
 <span class="lineNum">      29 </span>            :     }
-<span class="lineNum">      30 </span><span class="lineCov">         14 :     else if (strcmp(argv[0], &quot;echo&quot;) == true)</span>
+<span class="lineNum">      30 </span><span class="lineCov">         15 :     else if (strcmp(argv[0], &quot;echo&quot;) == true)</span>
 <span class="lineNum">      31 </span>            :     {
-<span class="lineNum">      32 </span><span class="lineCov">          2 :         echoCmd(argv);</span>
+<span class="lineNum">      32 </span><span class="lineCov">          3 :         echoCmd(argv);</span>
 <span class="lineNum">      33 </span>            :     }
 <span class="lineNum">      34 </span>            :     else
 <span class="lineNum">      35 </span>            :     {
 <span class="lineNum">      36 </span><span class="lineCov">         12 :         return false;</span>
 <span class="lineNum">      37 </span>            :     }
-<span class="lineNum">      38 </span><span class="lineCov">          2 :     printf(&quot;\n&quot;);</span>
-<span class="lineNum">      39 </span><span class="lineCov">          2 :     return true;</span>
+<span class="lineNum">      38 </span><span class="lineCov">          3 :     printf(&quot;\n&quot;);</span>
+<span class="lineNum">      39 </span><span class="lineCov">          3 :     return true;</span>
 <a name="40"><span class="lineNum">      40 </span>            : }</a>
 <span class="lineNum">      41 </span>            : 
 <span class="lineNum">      42 </span><span class="lineCov">         12 : bool executeCommand(char **argv)</span>
@@ -143,18 +143,18 @@
 <span class="lineNum">      81 </span><span class="lineCov">         12 :         char reading_buf[size]; // Buffer de lecture</span>
 <span class="lineNum">      82 </span>            : 
 <span class="lineNum">      83 </span>            :         // Lecture tant qu'il y a des donnees
-<span class="lineNum">      84 </span><span class="lineCov">       1903 :         while (read(pfd[0], reading_buf, size) &gt; 0)</span>
+<span class="lineNum">      84 </span><span class="lineCov">       3696 :         while (read(pfd[0], reading_buf, size) &gt; 0)</span>
 <span class="lineNum">      85 </span>            :         {
-<span class="lineNum">      86 </span><span class="lineCov">       1879 :           write(1, reading_buf, size); // Ecrit dans sdout ce qui est envoye par le fils</span>
+<span class="lineNum">      86 </span><span class="lineCov">       3672 :           write(1, reading_buf, size); // Ecrit dans sdout ce qui est envoye par le fils</span>
 <span class="lineNum">      87 </span>            :         }
 <span class="lineNum">      88 </span>            : 
 <span class="lineNum">      89 </span>            :         // Si tout s'est bien passe, return true
 <span class="lineNum">      90 </span><span class="lineCov">         12 :         if(WEXITSTATUS(status) == 0)</span>
 <span class="lineNum">      91 </span>            :         {
-<span class="lineNum">      92 </span><span class="lineCov">         11 :             return true;</span>
+<span class="lineNum">      92 </span><span class="lineCov">         10 :             return true;</span>
 <span class="lineNum">      93 </span>            :         }
 <span class="lineNum">      94 </span>            :         // Sinon false
-<span class="lineNum">      95 </span><span class="lineCov">          1 :         return false;</span>
+<span class="lineNum">      95 </span><span class="lineCov">          2 :         return false;</span>
 <span class="lineNum">      96 </span>            :         
 <span class="lineNum">      97 </span>            :     }
 <a name="98"><span class="lineNum">      98 </span>            : }</a>
@@ -273,13 +273,13 @@
 <span class="lineNum">     211 </span><span class="lineCov">          8 :     free(arbreCMD);</span>
 <a name="212"><span class="lineNum">     212 </span>            : }</a>
 <span class="lineNum">     213 </span>            : 
-<span class="lineNum">     214 </span><span class="lineCov">         14 : bool execute(char** argv)</span>
+<span class="lineNum">     214 </span><span class="lineCov">         15 : bool execute(char** argv)</span>
 <span class="lineNum">     215 </span>            : {
 <span class="lineNum">     216 </span>            :     bool ok;//True si cmd maison, false sinon --&gt; (execvp)
 <span class="lineNum">     217 </span>            : 
-<span class="lineNum">     218 </span><span class="lineCov">         14 :     if((ok = callCommands(argv)) == false)</span>
+<span class="lineNum">     218 </span><span class="lineCov">         15 :     if((ok = callCommands(argv)) == false)</span>
 <span class="lineNum">     219 </span><span class="lineCov">         12 :         return executeCommand(argv);</span>
-<span class="lineNum">     220 </span><span class="lineCov">          2 :     return ok;</span>
+<span class="lineNum">     220 </span><span class="lineCov">          3 :     return ok;</span>
 <a name="221"><span class="lineNum">     221 </span>            : }</a>
 <span class="lineNum">     222 </span>            : 
 <span class="lineNum">     223 </span><span class="lineCov">          4 : bool loopPipe(char ***cmd) </span>
@@ -321,11 +321,11 @@
 <span class="lineNum">     259 </span>            :             // Si tout s'est bien passe, return true
 <span class="lineNum">     260 </span><span class="lineCov">          8 :             if(WEXITSTATUS(status) == 0)</span>
 <span class="lineNum">     261 </span>            :             {
-<span class="lineNum">     262 </span><span class="lineCov">          8 :                 status = true;</span>
+<span class="lineNum">     262 </span><span class="lineCov">          6 :                 status = true;</span>
 <span class="lineNum">     263 </span>            :             }
 <span class="lineNum">     264 </span>            :             else
 <span class="lineNum">     265 </span>            :             {
-<span class="lineNum">     266 </span><span class="lineNoCov">          0 :                 status = false;</span>
+<span class="lineNum">     266 </span><span class="lineCov">          2 :                 status = false;</span>
 <span class="lineNum">     267 </span>            :             }
 <span class="lineNum">     268 </span>            :             
 <span class="lineNum">     269 </span>            :         }
@@ -403,71 +403,71 @@
 <span class="lineNum">     341 </span><span class="lineCov">         17 :     if(sizeTree(t) == 1)</span>
 <span class="lineNum">     342 </span>            :     {
 <span class="lineNum">     343 </span>            :         //Alloue memoire
-<span class="lineNum">     344 </span><span class="lineCov">         10 :         char** CMDsByPipe = calloc(sizeof(char*),MAX_NUMBER_OF_PARAMS); // contient cdms + args splites</span>
-<span class="lineNum">     345 </span><span class="lineCov">        310 :         for(int i=0;i &lt; MAX_NUMBER_OF_PARAMS;i++){</span>
-<span class="lineNum">     346 </span><span class="lineCov">        300 :             CMDsByPipe[i] = calloc(sizeof(char),MAX_NUMBER_OF_PARAMS);</span>
+<span class="lineNum">     344 </span><span class="lineCov">         11 :         char** CMDsByPipe = calloc(sizeof(char*),MAX_NUMBER_OF_PARAMS); // contient cdms + args splites</span>
+<span class="lineNum">     345 </span><span class="lineCov">        341 :         for(int i=0;i &lt; MAX_NUMBER_OF_PARAMS;i++){</span>
+<span class="lineNum">     346 </span><span class="lineCov">        330 :             CMDsByPipe[i] = calloc(sizeof(char),MAX_NUMBER_OF_PARAMS);</span>
 <span class="lineNum">     347 </span>            :             
 <span class="lineNum">     348 </span>            :         }
 <span class="lineNum">     349 </span>            :         // Execution des cmds pipee
-<span class="lineNum">     350 </span><span class="lineCov">         10 :         int nb = parseStringBySep(root(t),CMDsByPipe,&quot;|&quot;);</span>
-<span class="lineNum">     351 </span><span class="lineCov">         10 :         if(nb &gt; 1 ){</span>
+<span class="lineNum">     350 </span><span class="lineCov">         11 :         int nb = parseStringBySep(root(t),CMDsByPipe,&quot;|&quot;);</span>
+<span class="lineNum">     351 </span><span class="lineCov">         11 :         if(nb &gt; 1 ){</span>
 <span class="lineNum">     352 </span><span class="lineCov">          4 :             status = executePipe(CMDsByPipe, nb);</span>
 <span class="lineNum">     353 </span>            :         }
 <span class="lineNum">     354 </span>            :         //Une cmd + args
 <span class="lineNum">     355 </span>            :         else
 <span class="lineNum">     356 </span>            :         {
 <span class="lineNum">     357 </span>            :             //Alloue memoire
-<span class="lineNum">     358 </span><span class="lineCov">          6 :             char** CMDsBySpaces = calloc(sizeof(char*),MAX_NUMBER_OF_PARAMS); // contient cdms + args splites</span>
-<span class="lineNum">     359 </span><span class="lineCov">        186 :             for(int i=0;i &lt; MAX_NUMBER_OF_PARAMS;i++){</span>
-<span class="lineNum">     360 </span><span class="lineCov">        180 :                 CMDsBySpaces[i] = calloc(sizeof(char),MAX_NUMBER_OF_PARAMS);</span>
+<span class="lineNum">     358 </span><span class="lineCov">          7 :             char** CMDsBySpaces = calloc(sizeof(char*),MAX_NUMBER_OF_PARAMS); // contient cdms + args splites</span>
+<span class="lineNum">     359 </span><span class="lineCov">        217 :             for(int i=0;i &lt; MAX_NUMBER_OF_PARAMS;i++){</span>
+<span class="lineNum">     360 </span><span class="lineCov">        210 :                 CMDsBySpaces[i] = calloc(sizeof(char),MAX_NUMBER_OF_PARAMS);</span>
 <span class="lineNum">     361 </span>            :             }
 <span class="lineNum">     362 </span>            : 
-<span class="lineNum">     363 </span><span class="lineCov">          6 :             parseStringBySpaces(root(t),CMDsBySpaces);</span>
+<span class="lineNum">     363 </span><span class="lineCov">          7 :             parseStringBySpaces(root(t),CMDsBySpaces);</span>
 <span class="lineNum">     364 </span>            : 
-<span class="lineNum">     365 </span><span class="lineCov">          6 :             status = execute(CMDsBySpaces);</span>
+<span class="lineNum">     365 </span><span class="lineCov">          7 :             status = execute(CMDsBySpaces);</span>
 <span class="lineNum">     366 </span>            :              //Libere memoire
-<span class="lineNum">     367 </span><span class="lineCov">        186 :             for(int i=0;i &lt; MAX_NUMBER_OF_PARAMS;i++){</span>
-<span class="lineNum">     368 </span><span class="lineCov">        180 :                 free(CMDsBySpaces[i]);</span>
+<span class="lineNum">     367 </span><span class="lineCov">        217 :             for(int i=0;i &lt; MAX_NUMBER_OF_PARAMS;i++){</span>
+<span class="lineNum">     368 </span><span class="lineCov">        210 :                 free(CMDsBySpaces[i]);</span>
 <span class="lineNum">     369 </span>            :             }
-<span class="lineNum">     370 </span><span class="lineCov">          6 :             free(CMDsBySpaces);</span>
+<span class="lineNum">     370 </span><span class="lineCov">          7 :             free(CMDsBySpaces);</span>
 <span class="lineNum">     371 </span>            :         }
 <span class="lineNum">     372 </span>            :         //Libere memoire
-<span class="lineNum">     373 </span><span class="lineCov">        310 :         for(int i=0;i &lt; MAX_NUMBER_OF_PARAMS;i++){</span>
-<span class="lineNum">     374 </span><span class="lineCov">        300 :             free(CMDsByPipe[i]);</span>
+<span class="lineNum">     373 </span><span class="lineCov">        341 :         for(int i=0;i &lt; MAX_NUMBER_OF_PARAMS;i++){</span>
+<span class="lineNum">     374 </span><span class="lineCov">        330 :             free(CMDsByPipe[i]);</span>
 <span class="lineNum">     375 </span>            :         }
-<span class="lineNum">     376 </span><span class="lineCov">         10 :         free(CMDsByPipe);</span>
-<span class="lineNum">     377 </span><span class="lineCov">         10 :         return status;</span>
+<span class="lineNum">     376 </span><span class="lineCov">         11 :         free(CMDsByPipe);</span>
+<span class="lineNum">     377 </span><span class="lineCov">         11 :         return status;</span>
 <span class="lineNum">     378 </span>            :         
 <span class="lineNum">     379 </span>            :     }
 <span class="lineNum">     380 </span>            :     // Traitement operateur &amp;&amp; et ||
-<span class="lineNum">     381 </span><span class="lineCov">          7 :     if(strcmp(root(t),&quot;&amp;&amp;&quot;) == true || strcmp(root(t),&quot;||&quot;) == true)</span>
+<span class="lineNum">     381 </span><span class="lineCov">          6 :     if(strcmp(root(t),&quot;&amp;&amp;&quot;) == true || strcmp(root(t),&quot;||&quot;) == true)</span>
 <span class="lineNum">     382 </span>            :     {
-<span class="lineNum">     383 </span><span class="lineCov">          4 :         bool status = evaluateTree(left(t));</span>
-<span class="lineNum">     384 </span><span class="lineCov">          4 :         if(status == true &amp;&amp; strcmp(root(t),&quot;&amp;&amp;&quot;) == true)</span>
+<span class="lineNum">     383 </span><span class="lineCov">          3 :         bool status = evaluateTree(left(t));</span>
+<span class="lineNum">     384 </span><span class="lineCov">          3 :         if(status == true &amp;&amp; strcmp(root(t),&quot;&amp;&amp;&quot;) == true)</span>
 <span class="lineNum">     385 </span>            :         {          
-<span class="lineNum">     386 </span><span class="lineCov">          2 :             return evaluateTree(right(t));</span>
+<span class="lineNum">     386 </span><span class="lineCov">          1 :             return evaluateTree(right(t));</span>
 <span class="lineNum">     387 </span>            :         }
 <span class="lineNum">     388 </span><span class="lineCov">          2 :         else if(status == false &amp;&amp; strcmp(root(t),&quot;||&quot;) == true)</span>
 <span class="lineNum">     389 </span>            :         {
-<span class="lineNum">     390 </span><span class="lineNoCov">          0 :             return evaluateTree(right(t));</span>
+<span class="lineNum">     390 </span><span class="lineCov">          1 :             return evaluateTree(right(t));</span>
 <span class="lineNum">     391 </span>            :         }
 <span class="lineNum">     392 </span>            :         //Case root(t) == &amp;&amp; et status == false donc Switch jusqu'au prochain operateur != &amp;&amp; s'il existe
 <span class="lineNum">     393 </span>            :         //Case root(t) == || et status == true donc Switch jusqu'au prochain operateur != || s'il existe
 <span class="lineNum">     394 </span>            :         else
 <span class="lineNum">     395 </span>            :         {
-<span class="lineNum">     396 </span><span class="lineCov">          2 :             bool flagOtherOperator = false;</span>
-<span class="lineNum">     397 </span><span class="lineCov">          2 :             Tree Ttmp = t;</span>
+<span class="lineNum">     396 </span><span class="lineCov">          1 :             bool flagOtherOperator = false;</span>
+<span class="lineNum">     397 </span><span class="lineCov">          1 :             Tree Ttmp = t;</span>
 <span class="lineNum">     398 </span><span class="lineCov">          4 :             while(flagOtherOperator == false &amp;&amp; sizeTree(right(Ttmp)) &gt; 1)</span>
 <span class="lineNum">     399 </span>            :             {
-<span class="lineNum">     400 </span><span class="lineNoCov">          0 :                 Ttmp = right(Ttmp);</span>
-<span class="lineNum">     401 </span><span class="lineNoCov">          0 :                 if((strcmp(root(Ttmp),&quot;&amp;&amp;&quot;) != true &amp;&amp; status == false) || (strcmp(root(Ttmp),&quot;||&quot;) != true &amp;&amp; status == true))</span>
+<span class="lineNum">     400 </span><span class="lineCov">          2 :                 Ttmp = right(Ttmp);</span>
+<span class="lineNum">     401 </span><span class="lineCov">          2 :                 if((strcmp(root(Ttmp),&quot;&amp;&amp;&quot;) != true &amp;&amp; status == false) || (strcmp(root(Ttmp),&quot;||&quot;) != true &amp;&amp; status == true))</span>
 <span class="lineNum">     402 </span>            :                 {
-<span class="lineNum">     403 </span><span class="lineNoCov">          0 :                     flagOtherOperator = true;</span>
+<span class="lineNum">     403 </span><span class="lineCov">          1 :                     flagOtherOperator = true;</span>
 <span class="lineNum">     404 </span>            :                 } 
 <span class="lineNum">     405 </span>            :             }
-<span class="lineNum">     406 </span><span class="lineCov">          2 :             if(flagOtherOperator == true)</span>
-<span class="lineNum">     407 </span><span class="lineNoCov">          0 :                 return evaluateTree(right(Ttmp));</span>
-<span class="lineNum">     408 </span><span class="lineCov">          2 :             return true;</span>
+<span class="lineNum">     406 </span><span class="lineCov">          1 :             if(flagOtherOperator == true)</span>
+<span class="lineNum">     407 </span><span class="lineCov">          1 :                 return evaluateTree(right(Ttmp));</span>
+<span class="lineNum">     408 </span><span class="lineNoCov">          0 :             return true;</span>
 <span class="lineNum">     409 </span>            :         }
 <span class="lineNum">     410 </span>            :     }
 <span class="lineNum">     411 </span><span class="lineCov">          3 :     else if  (root(t)[0] == '&lt;')</span>
@@ -540,66 +540,51 @@
 <span class="lineNum">     478 </span><span class="lineCov">          9 :     historize(command);</span>
 <a name="479"><span class="lineNum">     479 </span><span class="lineCov">          9 : }</span></a>
 <span class="lineNum">     480 </span>            : 
-<span class="lineNum">     481 </span><span class="lineNoCov">          0 : int endOfCommand(char *chaine, int longueur)</span>
+<span class="lineNum">     481 </span><span class="lineCov">         13 : int readerL(char *chaine, int longueur)</span>
 <span class="lineNum">     482 </span>            : {
-<span class="lineNum">     483 </span><span class="lineNoCov">          0 :     int i = 0;</span>
-<span class="lineNum">     484 </span><span class="lineNoCov">          0 :     int isEnd = 0;</span>
-<span class="lineNum">     485 </span><span class="lineNoCov">          0 :     while (i &lt; 10 &amp;&amp; isEnd == 0)</span>
-<span class="lineNum">     486 </span>            :     {
-<span class="lineNum">     487 </span><span class="lineNoCov">          0 :         if (*chaine == '\n')</span>
-<span class="lineNum">     488 </span><span class="lineNoCov">          0 :             isEnd = 1;</span>
-<span class="lineNum">     489 </span>            : 
-<span class="lineNum">     490 </span><span class="lineNoCov">          0 :         chaine = chaine + 1;</span>
-<span class="lineNum">     491 </span>            :     }
-<span class="lineNum">     492 </span>            : 
-<span class="lineNum">     493 </span><span class="lineNoCov">          0 :     return isEnd;</span>
-<a name="494"><span class="lineNum">     494 </span>            : }</a>
-<span class="lineNum">     495 </span>            : 
-<span class="lineNum">     496 </span><span class="lineCov">         13 : int readerL(char *chaine, int longueur)</span>
-<span class="lineNum">     497 </span>            : {
-<span class="lineNum">     498 </span><span class="lineCov">         13 :     char *positionEntree = NULL;</span>
-<span class="lineNum">     499 </span>            : 
-<span class="lineNum">     500 </span>            :     // On lit le texte saisi au clavier
-<span class="lineNum">     501 </span><span class="lineCov">         13 :     if (fgets(chaine, longueur, stdin) != NULL) // Pas d'erreur de saisie ?</span>
-<span class="lineNum">     502 </span>            :     {
-<span class="lineNum">     503 </span><span class="lineCov">         13 :         positionEntree = strchr(chaine, '\n'); // On recherche l'&quot;Entrée&quot;</span>
-<span class="lineNum">     504 </span><span class="lineCov">         13 :         if (positionEntree != NULL)            // Si on a trouvé le retour à la ligne</span>
-<span class="lineNum">     505 </span>            :         {
-<span class="lineNum">     506 </span><span class="lineCov">         13 :             *positionEntree = '\0'; // On remplace ce caractère par \0</span>
-<span class="lineNum">     507 </span>            :         }
-<span class="lineNum">     508 </span>            :         else
-<span class="lineNum">     509 </span>            :         {
-<span class="lineNum">     510 </span><span class="lineNoCov">          0 :             cleanBuffer();</span>
-<span class="lineNum">     511 </span>            :         }
-<span class="lineNum">     512 </span><span class="lineCov">         13 :         return 1; // On renvoie 1 si la fonction s'est déroulée sans erreur</span>
-<span class="lineNum">     513 </span>            :     }
-<span class="lineNum">     514 </span>            :     else
-<span class="lineNum">     515 </span>            :     {
-<span class="lineNum">     516 </span><span class="lineNoCov">          0 :         cleanBuffer();</span>
-<span class="lineNum">     517 </span><span class="lineNoCov">          0 :         return 0; // On renvoie 0 s'il y a eu une erreur</span>
-<span class="lineNum">     518 </span>            :     }
-<a name="519"><span class="lineNum">     519 </span>            : }</a>
-<span class="lineNum">     520 </span>            : 
-<span class="lineNum">     521 </span><span class="lineNoCov">          0 : void cleanBuffer()</span>
-<span class="lineNum">     522 </span>            : {
-<span class="lineNum">     523 </span><span class="lineNoCov">          0 :     char c = 0;</span>
-<span class="lineNum">     524 </span><span class="lineNoCov">          0 :     while (c != '\n' &amp;&amp; c != EOF)</span>
-<span class="lineNum">     525 </span>            :     {
-<span class="lineNum">     526 </span><span class="lineNoCov">          0 :         c = getchar();</span>
-<span class="lineNum">     527 </span>            :     }
-<span class="lineNum">     528 </span>            :     
-<a name="529"><span class="lineNum">     529 </span><span class="lineNoCov">          0 : }</span></a>
-<span class="lineNum">     530 </span>            : 
-<span class="lineNum">     531 </span><span class="lineCov">          9 : void historize(char *arg)</span>
-<span class="lineNum">     532 </span>            : {
-<span class="lineNum">     533 </span><span class="lineCov">          9 :     FILE *pFile = fopen(&quot;/tmp/hist.txt&quot;, &quot;a&quot;);</span>
-<span class="lineNum">     534 </span><span class="lineCov">          9 :     if (pFile == NULL)</span>
-<span class="lineNum">     535 </span>            :     {
-<span class="lineNum">     536 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     537 </span>            :     }
-<span class="lineNum">     538 </span><span class="lineCov">          9 :     fprintf(pFile, &quot;%s\n&quot;, arg);</span>
-<span class="lineNum">     539 </span><span class="lineCov">          9 :     fclose(pFile);</span>
-<span class="lineNum">     540 </span>            : }
+<span class="lineNum">     483 </span><span class="lineCov">         13 :     char *positionEntree = NULL;</span>
+<span class="lineNum">     484 </span>            : 
+<span class="lineNum">     485 </span>            :     // On lit le texte saisi au clavier
+<span class="lineNum">     486 </span><span class="lineCov">         13 :     if (fgets(chaine, longueur, stdin) != NULL) // Pas d'erreur de saisie ?</span>
+<span class="lineNum">     487 </span>            :     {
+<span class="lineNum">     488 </span><span class="lineCov">         13 :         positionEntree = strchr(chaine, '\n'); // On recherche l'&quot;Entrée&quot;</span>
+<span class="lineNum">     489 </span><span class="lineCov">         13 :         if (positionEntree != NULL)            // Si on a trouvé le retour à la ligne</span>
+<span class="lineNum">     490 </span>            :         {
+<span class="lineNum">     491 </span><span class="lineCov">         13 :             *positionEntree = '\0'; // On remplace ce caractère par \0</span>
+<span class="lineNum">     492 </span>            :         }
+<span class="lineNum">     493 </span>            :         else
+<span class="lineNum">     494 </span>            :         {
+<span class="lineNum">     495 </span><span class="lineNoCov">          0 :             cleanBuffer();</span>
+<span class="lineNum">     496 </span>            :         }
+<span class="lineNum">     497 </span><span class="lineCov">         13 :         return 1; // On renvoie 1 si la fonction s'est déroulée sans erreur</span>
+<span class="lineNum">     498 </span>            :     }
+<span class="lineNum">     499 </span>            :     else
+<span class="lineNum">     500 </span>            :     {
+<span class="lineNum">     501 </span><span class="lineNoCov">          0 :         cleanBuffer();</span>
+<span class="lineNum">     502 </span><span class="lineNoCov">          0 :         return 0; // On renvoie 0 s'il y a eu une erreur</span>
+<span class="lineNum">     503 </span>            :     }
+<a name="504"><span class="lineNum">     504 </span>            : }</a>
+<span class="lineNum">     505 </span>            : 
+<span class="lineNum">     506 </span><span class="lineNoCov">          0 : void cleanBuffer()</span>
+<span class="lineNum">     507 </span>            : {
+<span class="lineNum">     508 </span><span class="lineNoCov">          0 :     char c = 0;</span>
+<span class="lineNum">     509 </span><span class="lineNoCov">          0 :     while (c != '\n' &amp;&amp; c != EOF)</span>
+<span class="lineNum">     510 </span>            :     {
+<span class="lineNum">     511 </span><span class="lineNoCov">          0 :         c = getchar();</span>
+<span class="lineNum">     512 </span>            :     }
+<span class="lineNum">     513 </span>            :     
+<a name="514"><span class="lineNum">     514 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     515 </span>            : 
+<span class="lineNum">     516 </span><span class="lineCov">          9 : void historize(char *arg)</span>
+<span class="lineNum">     517 </span>            : {
+<span class="lineNum">     518 </span><span class="lineCov">          9 :     FILE *pFile = fopen(&quot;/tmp/hist.txt&quot;, &quot;a&quot;);</span>
+<span class="lineNum">     519 </span><span class="lineCov">          9 :     if (pFile == NULL)</span>
+<span class="lineNum">     520 </span>            :     {
+<span class="lineNum">     521 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     522 </span>            :     }
+<span class="lineNum">     523 </span><span class="lineCov">          9 :     fprintf(pFile, &quot;%s\n&quot;, arg);</span>
+<span class="lineNum">     524 </span><span class="lineCov">          9 :     fclose(pFile);</span>
+<span class="lineNum">     525 </span>            : }
 </pre>
       </td>
     </tr>

@@ -1,0 +1,14 @@
+ls
+ls | grep b
+ls | grep b && echo ok
+ls > cat.txt
+ls -al >> cat.txt
+wc <<
+ls | grep sdfsdfdfd && echo ok1 && echo ok2 || echo nok
+ls | grep sdfsdfdfd || echo nok
+
+// Manque avec simple <
+
+//Look si cleanBuffer utilisé
+
+exit

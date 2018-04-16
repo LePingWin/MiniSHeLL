@@ -43,30 +43,6 @@ char* root(Tree t)
 	return t->value;
 }
 
-void writeTree(Tree t, FILE* fp)
-{
-    if(isEmpty(left(t)) == false){
-		fprintf(fp,"%s -> %s\n",root(t),root(left(t)));
-		writeTree(left(t),fp);
-	}
-	if(isEmpty(right(t)) == false){
-		fprintf(fp,"%s -> %s\n",root(t),root(right(t)));	
-		writeTree(right(t),fp);
-    }
-}
-
-void save_dot(Tree t,char* filename){
-	FILE* fp;
-	fp = fopen(filename,"w+");
-	fprintf(fp,"digraph G\n{\n");
-	if(isEmpty(t) == false){
-        
-		writeTree(t,fp);
-	}
-	fprintf(fp,"}");
-	fclose(fp);
-}
-
 void display(Tree t){
     if(isEmpty(left(t)) == false){
 		printf("%s -> %s\n",root(t),root(left(t)));
