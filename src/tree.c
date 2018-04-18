@@ -62,7 +62,7 @@ int sizeTree(Tree t)
 
 bool isEmpty(Tree t)
 {
-    if (t == NULL)
+    if (t == NULL || strcmp(root(t),"") == true)
         return true;
     else
         return false;

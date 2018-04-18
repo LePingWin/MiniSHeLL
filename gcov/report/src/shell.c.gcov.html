@@ -31,13 +31,13 @@
             <td class="headerValue">report.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">222</td>
-            <td class="headerCovTableEntry">237</td>
-            <td class="headerCovTableEntryHi">93.7 %</td>
+            <td class="headerCovTableEntry">223</td>
+            <td class="headerCovTableEntry">239</td>
+            <td class="headerCovTableEntryHi">93.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2018-04-16 16:11:16</td>
+            <td class="headerValue">2018-04-18 16:37:34</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">12</td>
@@ -139,9 +139,9 @@
 <span class="lineNum">      77 </span><span class="lineCov">          8 :         char reading_buf[size]; // Buffer de lecture</span>
 <span class="lineNum">      78 </span>            : 
 <span class="lineNum">      79 </span>            :         // Lecture tant qu'il y a des donnees
-<span class="lineNum">      80 </span><span class="lineCov">       5229 :         while (read(pfd[0], reading_buf, size) &gt; 0)</span>
+<span class="lineNum">      80 </span><span class="lineCov">       5234 :         while (read(pfd[0], reading_buf, size) &gt; 0)</span>
 <span class="lineNum">      81 </span>            :         {
-<span class="lineNum">      82 </span><span class="lineCov">       5213 :           write(1, reading_buf, size); // Ecrit dans sdout ce qui est envoye par le fils</span>
+<span class="lineNum">      82 </span><span class="lineCov">       5218 :           write(1, reading_buf, size); // Ecrit dans sdout ce qui est envoye par le fils</span>
 <span class="lineNum">      83 </span>            :         }
 <span class="lineNum">      84 </span>            : 
 <span class="lineNum">      85 </span>            :         // Si tout s'est bien passe, return true
@@ -440,133 +440,141 @@
 <span class="lineNum">     378 </span><span class="lineCov">          5 :     if(strcmp(root(t),&quot;&amp;&amp;&quot;) == true || strcmp(root(t),&quot;||&quot;) == true)</span>
 <span class="lineNum">     379 </span>            :     {
 <span class="lineNum">     380 </span><span class="lineCov">          1 :         bool status = evaluateTree(left(t));</span>
-<span class="lineNum">     381 </span><span class="lineCov">          1 :         if(status == true &amp;&amp; strcmp(root(t),&quot;&amp;&amp;&quot;) == true)</span>
-<span class="lineNum">     382 </span>            :         {          
-<span class="lineNum">     383 </span><span class="lineNoCov">          0 :             return evaluateTree(right(t));</span>
-<span class="lineNum">     384 </span>            :         }
-<span class="lineNum">     385 </span><span class="lineCov">          1 :         else if(status == false &amp;&amp; strcmp(root(t),&quot;||&quot;) == true)</span>
-<span class="lineNum">     386 </span>            :         {
-<span class="lineNum">     387 </span><span class="lineNoCov">          0 :             return evaluateTree(right(t));</span>
-<span class="lineNum">     388 </span>            :         }
-<span class="lineNum">     389 </span>            :         //Case root(t) == &amp;&amp; et status == false donc Switch jusqu'au prochain operateur != &amp;&amp; s'il existe
-<span class="lineNum">     390 </span>            :         //Case root(t) == || et status == true donc Switch jusqu'au prochain operateur != || s'il existe
-<span class="lineNum">     391 </span>            :         else
-<span class="lineNum">     392 </span>            :         {
-<span class="lineNum">     393 </span><span class="lineCov">          1 :             bool flagOtherOperator = false;</span>
-<span class="lineNum">     394 </span><span class="lineCov">          1 :             Tree Ttmp = t;</span>
-<span class="lineNum">     395 </span><span class="lineCov">          4 :             while(flagOtherOperator == false &amp;&amp; sizeTree(right(Ttmp)) &gt; 1)</span>
-<span class="lineNum">     396 </span>            :             {
-<span class="lineNum">     397 </span><span class="lineCov">          2 :                 Ttmp = right(Ttmp);</span>
-<span class="lineNum">     398 </span><span class="lineCov">          2 :                 if((strcmp(root(Ttmp),&quot;&amp;&amp;&quot;) != true &amp;&amp; status == false) || (strcmp(root(Ttmp),&quot;||&quot;) != true &amp;&amp; status == true))</span>
+<span class="lineNum">     381 </span>            :         
+<span class="lineNum">     382 </span><span class="lineCov">          1 :         if(isEmpty(right(t)) == false)</span>
+<span class="lineNum">     383 </span>            :         {
+<span class="lineNum">     384 </span><span class="lineCov">          1 :             if(status == true &amp;&amp; strcmp(root(t),&quot;&amp;&amp;&quot;) == true)</span>
+<span class="lineNum">     385 </span>            :             {          
+<span class="lineNum">     386 </span><span class="lineNoCov">          0 :                 return evaluateTree(right(t));</span>
+<span class="lineNum">     387 </span>            :             }
+<span class="lineNum">     388 </span><span class="lineCov">          1 :             else if(status == false &amp;&amp; strcmp(root(t),&quot;||&quot;) == true)</span>
+<span class="lineNum">     389 </span>            :             {
+<span class="lineNum">     390 </span><span class="lineNoCov">          0 :                 return evaluateTree(right(t));</span>
+<span class="lineNum">     391 </span>            :             }
+<span class="lineNum">     392 </span>            :             //Case root(t) == &amp;&amp; et status == false donc Switch jusqu'au prochain operateur != &amp;&amp; s'il existe
+<span class="lineNum">     393 </span>            :             //Case root(t) == || et status == true donc Switch jusqu'au prochain operateur != || s'il existe
+<span class="lineNum">     394 </span>            :             else
+<span class="lineNum">     395 </span>            :             {
+<span class="lineNum">     396 </span><span class="lineCov">          1 :                 bool flagOtherOperator = false;</span>
+<span class="lineNum">     397 </span><span class="lineCov">          1 :                 Tree Ttmp = t;</span>
+<span class="lineNum">     398 </span><span class="lineCov">          4 :                 while(flagOtherOperator == false &amp;&amp; sizeTree(right(Ttmp)) &gt; 1)</span>
 <span class="lineNum">     399 </span>            :                 {
-<span class="lineNum">     400 </span><span class="lineCov">          1 :                     flagOtherOperator = true;</span>
-<span class="lineNum">     401 </span>            :                 } 
-<span class="lineNum">     402 </span>            :             }
-<span class="lineNum">     403 </span><span class="lineCov">          1 :             if(flagOtherOperator == true)</span>
-<span class="lineNum">     404 </span><span class="lineCov">          1 :                 return evaluateTree(right(Ttmp));</span>
-<span class="lineNum">     405 </span><span class="lineNoCov">          0 :             return true;</span>
-<span class="lineNum">     406 </span>            :         }
-<span class="lineNum">     407 </span>            :     }
-<span class="lineNum">     408 </span><span class="lineCov">          4 :     else if  (root(t)[0] == '&lt;')</span>
-<span class="lineNum">     409 </span>            :     {
-<span class="lineNum">     410 </span><span class="lineCov">          2 :         if (strcmp(root(t),&quot;&lt;&lt;&quot;) == true)</span>
-<span class="lineNum">     411 </span>            :         {
-<span class="lineNum">     412 </span>            :             char chaine[255];
-<span class="lineNum">     413 </span><span class="lineCov">          1 :             char* filename = &quot;/tmp/tmp-miniShell.txt&quot;;</span>
-<span class="lineNum">     414 </span>            :             FILE *p1;
-<span class="lineNum">     415 </span><span class="lineCov">          1 :             p1=fopen(filename,&quot;w+&quot;);</span>
-<span class="lineNum">     416 </span>            :             do{
-<span class="lineNum">     417 </span><span class="lineCov">          2 :                 printf(&quot;&gt; &quot;);</span>
-<span class="lineNum">     418 </span><span class="lineCov">          2 :                 readerL(chaine,255);</span>
-<span class="lineNum">     419 </span><span class="lineCov">          2 :                 fprintf(p1, &quot;%s\n&quot;, chaine);</span>
-<span class="lineNum">     420 </span><span class="lineCov">          2 :                 chaine[strcspn(chaine, &quot;\n&quot;) ] = '\0';</span>
-<span class="lineNum">     421 </span><span class="lineCov">          2 :             }while(strcmp(chaine,root(right(t))) != true);</span>
-<span class="lineNum">     422 </span>            :                 
-<span class="lineNum">     423 </span><span class="lineCov">          1 :             fclose(p1);</span>
-<span class="lineNum">     424 </span><span class="lineCov">          1 :             strcat(root(left(t)),&quot; &quot;);</span>
-<span class="lineNum">     425 </span><span class="lineCov">          1 :             strcat(root(left(t)),filename);</span>
-<span class="lineNum">     426 </span>            :                 
-<span class="lineNum">     427 </span><span class="lineCov">          1 :             status = evaluateTree(left(t));</span>
-<span class="lineNum">     428 </span>            : 
-<span class="lineNum">     429 </span><span class="lineCov">          1 :             remove(filename);</span>
-<span class="lineNum">     430 </span>            :         }
-<span class="lineNum">     431 </span>            :         else
-<span class="lineNum">     432 </span>            :         {
-<span class="lineNum">     433 </span><span class="lineCov">          1 :             int original_dup = dup(STDIN);</span>
-<span class="lineNum">     434 </span><span class="lineCov">          1 :             freopen(root(right(t)), &quot;r&quot;, stdin); </span>
-<span class="lineNum">     435 </span>            :             //Execute
-<span class="lineNum">     436 </span><span class="lineCov">          1 :             status = evaluateTree(left(t));</span>
-<span class="lineNum">     437 </span>            :             //Reset
-<span class="lineNum">     438 </span><span class="lineCov">          1 :             fflush(stdin);</span>
-<span class="lineNum">     439 </span><span class="lineCov">          1 :             dup2(original_dup,STDIN);</span>
-<span class="lineNum">     440 </span><span class="lineCov">          1 :             close(original_dup); </span>
-<span class="lineNum">     441 </span>            :         }
-<span class="lineNum">     442 </span><span class="lineCov">          2 :         return status;</span>
-<span class="lineNum">     443 </span>            : 
-<span class="lineNum">     444 </span>            :     }
-<span class="lineNum">     445 </span><span class="lineCov">          2 :     else if (root(t)[0] == '&gt;')</span>
-<span class="lineNum">     446 </span>            :     {
-<span class="lineNum">     447 </span><span class="lineCov">          2 :         int original_dup = dup(STDOUT);</span>
-<span class="lineNum">     448 </span><span class="lineCov">          2 :         if (strcmp(root(t),&quot;&gt;&gt;&quot;) == true)</span>
-<span class="lineNum">     449 </span>            :         {
-<span class="lineNum">     450 </span><span class="lineCov">          1 :             freopen(root(right(t)), &quot;a+&quot;, stdout); </span>
-<span class="lineNum">     451 </span>            :         }
-<span class="lineNum">     452 </span>            :         else
-<span class="lineNum">     453 </span>            :         {
-<span class="lineNum">     454 </span><span class="lineCov">          1 :             freopen(root(right(t)), &quot;w&quot;, stdout); </span>
-<span class="lineNum">     455 </span>            :         }
-<span class="lineNum">     456 </span>            :         //Execute
-<span class="lineNum">     457 </span><span class="lineCov">          2 :         status = evaluateTree(left(t));</span>
-<span class="lineNum">     458 </span>            :         //Reset
-<span class="lineNum">     459 </span><span class="lineCov">          2 :         fflush(stdout);</span>
-<span class="lineNum">     460 </span><span class="lineCov">          2 :         dup2(original_dup,STDOUT);</span>
-<span class="lineNum">     461 </span><span class="lineCov">          2 :         close(original_dup);</span>
-<span class="lineNum">     462 </span><span class="lineCov">          2 :         return status;</span>
-<span class="lineNum">     463 </span>            :     }
-<span class="lineNum">     464 </span>            :     /*else
-<span class="lineNum">     465 </span>            :     {
-<span class="lineNum">     466 </span>            :         return root(t);
-<span class="lineNum">     467 </span>            :     }*/
-<span class="lineNum">     468 </span><span class="lineNoCov">          0 :     return status;</span>
-<a name="469"><span class="lineNum">     469 </span>            : }</a>
-<span class="lineNum">     470 </span>            : 
-<span class="lineNum">     471 </span><span class="lineCov">          2 : void readInput(char *command, int size)</span>
-<span class="lineNum">     472 </span>            : {
-<span class="lineNum">     473 </span><span class="lineCov">          2 :     printWorkingDirColored();</span>
-<span class="lineNum">     474 </span><span class="lineCov">          2 :     readerL(command, size);</span>
-<span class="lineNum">     475 </span><span class="lineCov">          2 :     historize(command);</span>
-<a name="476"><span class="lineNum">     476 </span><span class="lineCov">          2 : }</span></a>
-<span class="lineNum">     477 </span>            : 
-<span class="lineNum">     478 </span><span class="lineCov">          4 : int readerL(char *chaine, int longueur)</span>
-<span class="lineNum">     479 </span>            : {
-<span class="lineNum">     480 </span><span class="lineCov">          4 :     char *positionEntree = NULL;</span>
-<span class="lineNum">     481 </span>            : 
-<span class="lineNum">     482 </span>            :     // On lit le texte saisi au clavier
-<span class="lineNum">     483 </span><span class="lineCov">          4 :     if (fgets(chaine, longueur, stdin) != NULL) // Pas d'erreur de saisie ?</span>
-<span class="lineNum">     484 </span>            :     {
-<span class="lineNum">     485 </span><span class="lineCov">          4 :         positionEntree = strchr(chaine, '\n'); // On recherche l'&quot;Entrée&quot;</span>
-<span class="lineNum">     486 </span><span class="lineCov">          4 :         if (positionEntree != NULL)            // Si on a trouvé le retour à la ligne</span>
-<span class="lineNum">     487 </span>            :         {
-<span class="lineNum">     488 </span><span class="lineCov">          4 :             *positionEntree = '\0'; // On remplace ce caractère par \0</span>
-<span class="lineNum">     489 </span>            :         }
-<span class="lineNum">     490 </span><span class="lineCov">          4 :         return 1; // On renvoie 1 si la fonction s'est déroulée sans erreur</span>
-<span class="lineNum">     491 </span>            :     }
-<span class="lineNum">     492 </span>            :     else
-<span class="lineNum">     493 </span>            :     {
-<span class="lineNum">     494 </span><span class="lineNoCov">          0 :         return 0; // On renvoie 0 s'il y a eu une erreur</span>
-<span class="lineNum">     495 </span>            :     }
-<a name="496"><span class="lineNum">     496 </span>            : }</a>
-<span class="lineNum">     497 </span>            : 
-<span class="lineNum">     498 </span><span class="lineCov">          2 : void historize(char *arg)</span>
-<span class="lineNum">     499 </span>            : {
-<span class="lineNum">     500 </span><span class="lineCov">          2 :     FILE *pFile = fopen(&quot;/tmp/hist.txt&quot;, &quot;a&quot;);</span>
-<span class="lineNum">     501 </span><span class="lineCov">          2 :     if (pFile == NULL)</span>
-<span class="lineNum">     502 </span>            :     {
-<span class="lineNum">     503 </span><span class="lineNoCov">          0 :         return;</span>
-<span class="lineNum">     504 </span>            :     }
-<span class="lineNum">     505 </span><span class="lineCov">          2 :     fprintf(pFile, &quot;%s\n&quot;, arg);</span>
-<span class="lineNum">     506 </span><span class="lineCov">          2 :     fclose(pFile);</span>
-<span class="lineNum">     507 </span>            : }
+<span class="lineNum">     400 </span><span class="lineCov">          2 :                     Ttmp = right(Ttmp);</span>
+<span class="lineNum">     401 </span><span class="lineCov">          2 :                     if((strcmp(root(Ttmp),&quot;&amp;&amp;&quot;) != true &amp;&amp; status == false) || (strcmp(root(Ttmp),&quot;||&quot;) != true &amp;&amp; status == true))</span>
+<span class="lineNum">     402 </span>            :                     {
+<span class="lineNum">     403 </span><span class="lineCov">          1 :                         flagOtherOperator = true;</span>
+<span class="lineNum">     404 </span>            :                     } 
+<span class="lineNum">     405 </span>            :                 }
+<span class="lineNum">     406 </span><span class="lineCov">          1 :                 if(flagOtherOperator == true)</span>
+<span class="lineNum">     407 </span><span class="lineCov">          1 :                     return evaluateTree(right(Ttmp));</span>
+<span class="lineNum">     408 </span><span class="lineNoCov">          0 :                 return true;</span>
+<span class="lineNum">     409 </span>            :             }
+<span class="lineNum">     410 </span>            :         }
+<span class="lineNum">     411 </span>            :         else
+<span class="lineNum">     412 </span>            :         {
+<span class="lineNum">     413 </span><span class="lineNoCov">          0 :             return status;</span>
+<span class="lineNum">     414 </span>            :         }
+<span class="lineNum">     415 </span>            :     }
+<span class="lineNum">     416 </span><span class="lineCov">          4 :     else if  (root(t)[0] == '&lt;')</span>
+<span class="lineNum">     417 </span>            :     {
+<span class="lineNum">     418 </span><span class="lineCov">          2 :         if (strcmp(root(t),&quot;&lt;&lt;&quot;) == true)</span>
+<span class="lineNum">     419 </span>            :         {
+<span class="lineNum">     420 </span>            :             char chaine[255];
+<span class="lineNum">     421 </span><span class="lineCov">          1 :             char* filename = &quot;/tmp/tmp-miniShell.txt&quot;;</span>
+<span class="lineNum">     422 </span>            :             FILE *p1;
+<span class="lineNum">     423 </span><span class="lineCov">          1 :             p1=fopen(filename,&quot;w+&quot;);</span>
+<span class="lineNum">     424 </span>            :             do{
+<span class="lineNum">     425 </span><span class="lineCov">          3 :                 printf(&quot;&gt; &quot;);</span>
+<span class="lineNum">     426 </span><span class="lineCov">          3 :                 readerL(chaine,255);</span>
+<span class="lineNum">     427 </span><span class="lineCov">          3 :                 fprintf(p1, &quot;%s\n&quot;, chaine);</span>
+<span class="lineNum">     428 </span><span class="lineCov">          3 :                 chaine[strcspn(chaine, &quot;\n&quot;) ] = '\0';</span>
+<span class="lineNum">     429 </span><span class="lineCov">          3 :             }while(strcmp(chaine,root(right(t))) != true);</span>
+<span class="lineNum">     430 </span>            :                 
+<span class="lineNum">     431 </span><span class="lineCov">          1 :             fclose(p1);</span>
+<span class="lineNum">     432 </span><span class="lineCov">          1 :             strcat(root(left(t)),&quot; &quot;);</span>
+<span class="lineNum">     433 </span><span class="lineCov">          1 :             strcat(root(left(t)),filename);</span>
+<span class="lineNum">     434 </span>            :                 
+<span class="lineNum">     435 </span><span class="lineCov">          1 :             status = evaluateTree(left(t));</span>
+<span class="lineNum">     436 </span>            : 
+<span class="lineNum">     437 </span><span class="lineCov">          1 :             remove(filename);</span>
+<span class="lineNum">     438 </span>            :         }
+<span class="lineNum">     439 </span>            :         else
+<span class="lineNum">     440 </span>            :         {
+<span class="lineNum">     441 </span><span class="lineCov">          1 :             int original_dup = dup(STDIN);</span>
+<span class="lineNum">     442 </span><span class="lineCov">          1 :             freopen(root(right(t)), &quot;r&quot;, stdin); </span>
+<span class="lineNum">     443 </span>            :             //Execute
+<span class="lineNum">     444 </span><span class="lineCov">          1 :             status = evaluateTree(left(t));</span>
+<span class="lineNum">     445 </span>            :             //Reset
+<span class="lineNum">     446 </span><span class="lineCov">          1 :             fflush(stdin);</span>
+<span class="lineNum">     447 </span><span class="lineCov">          1 :             dup2(original_dup,STDIN);</span>
+<span class="lineNum">     448 </span><span class="lineCov">          1 :             close(original_dup); </span>
+<span class="lineNum">     449 </span>            :         }
+<span class="lineNum">     450 </span><span class="lineCov">          2 :         return status;</span>
+<span class="lineNum">     451 </span>            : 
+<span class="lineNum">     452 </span>            :     }
+<span class="lineNum">     453 </span><span class="lineCov">          2 :     else if (root(t)[0] == '&gt;')</span>
+<span class="lineNum">     454 </span>            :     {
+<span class="lineNum">     455 </span><span class="lineCov">          2 :         int original_dup = dup(STDOUT);</span>
+<span class="lineNum">     456 </span><span class="lineCov">          2 :         if (strcmp(root(t),&quot;&gt;&gt;&quot;) == true)</span>
+<span class="lineNum">     457 </span>            :         {
+<span class="lineNum">     458 </span><span class="lineCov">          1 :             freopen(root(right(t)), &quot;a+&quot;, stdout); </span>
+<span class="lineNum">     459 </span>            :         }
+<span class="lineNum">     460 </span>            :         else
+<span class="lineNum">     461 </span>            :         {
+<span class="lineNum">     462 </span><span class="lineCov">          1 :             freopen(root(right(t)), &quot;w&quot;, stdout); </span>
+<span class="lineNum">     463 </span>            :         }
+<span class="lineNum">     464 </span>            :         //Execute
+<span class="lineNum">     465 </span><span class="lineCov">          2 :         status = evaluateTree(left(t));</span>
+<span class="lineNum">     466 </span>            :         //Reset
+<span class="lineNum">     467 </span><span class="lineCov">          2 :         fflush(stdout);</span>
+<span class="lineNum">     468 </span><span class="lineCov">          2 :         dup2(original_dup,STDOUT);</span>
+<span class="lineNum">     469 </span><span class="lineCov">          2 :         close(original_dup);</span>
+<span class="lineNum">     470 </span><span class="lineCov">          2 :         return status;</span>
+<span class="lineNum">     471 </span>            :     }
+<span class="lineNum">     472 </span>            :     /*else
+<span class="lineNum">     473 </span>            :     {
+<span class="lineNum">     474 </span>            :         return root(t);
+<span class="lineNum">     475 </span>            :     }*/
+<span class="lineNum">     476 </span><span class="lineNoCov">          0 :     return status;</span>
+<a name="477"><span class="lineNum">     477 </span>            : }</a>
+<span class="lineNum">     478 </span>            : 
+<span class="lineNum">     479 </span><span class="lineCov">          2 : void readInput(char *command, int size)</span>
+<span class="lineNum">     480 </span>            : {
+<span class="lineNum">     481 </span><span class="lineCov">          2 :     printWorkingDirColored();</span>
+<span class="lineNum">     482 </span><span class="lineCov">          2 :     readerL(command, size);</span>
+<span class="lineNum">     483 </span><span class="lineCov">          2 :     historize(command);</span>
+<a name="484"><span class="lineNum">     484 </span><span class="lineCov">          2 : }</span></a>
+<span class="lineNum">     485 </span>            : 
+<span class="lineNum">     486 </span><span class="lineCov">          5 : int readerL(char *chaine, int longueur)</span>
+<span class="lineNum">     487 </span>            : {
+<span class="lineNum">     488 </span><span class="lineCov">          5 :     char *positionEntree = NULL;</span>
+<span class="lineNum">     489 </span>            : 
+<span class="lineNum">     490 </span>            :     // On lit le texte saisi au clavier
+<span class="lineNum">     491 </span><span class="lineCov">          5 :     if (fgets(chaine, longueur, stdin) != NULL) // Pas d'erreur de saisie ?</span>
+<span class="lineNum">     492 </span>            :     {
+<span class="lineNum">     493 </span><span class="lineCov">          5 :         positionEntree = strchr(chaine, '\n'); // On recherche l'&quot;Entrée&quot;</span>
+<span class="lineNum">     494 </span><span class="lineCov">          5 :         if (positionEntree != NULL)            // Si on a trouvé le retour à la ligne</span>
+<span class="lineNum">     495 </span>            :         {
+<span class="lineNum">     496 </span><span class="lineCov">          5 :             *positionEntree = '\0'; // On remplace ce caractère par \0</span>
+<span class="lineNum">     497 </span>            :         }
+<span class="lineNum">     498 </span><span class="lineCov">          5 :         return 1; // On renvoie 1 si la fonction s'est déroulée sans erreur</span>
+<span class="lineNum">     499 </span>            :     }
+<span class="lineNum">     500 </span>            :     else
+<span class="lineNum">     501 </span>            :     {
+<span class="lineNum">     502 </span><span class="lineNoCov">          0 :         return 0; // On renvoie 0 s'il y a eu une erreur</span>
+<span class="lineNum">     503 </span>            :     }
+<a name="504"><span class="lineNum">     504 </span>            : }</a>
+<span class="lineNum">     505 </span>            : 
+<span class="lineNum">     506 </span><span class="lineCov">          2 : void historize(char *arg)</span>
+<span class="lineNum">     507 </span>            : {
+<span class="lineNum">     508 </span><span class="lineCov">          2 :     FILE *pFile = fopen(&quot;/tmp/hist.txt&quot;, &quot;a&quot;);</span>
+<span class="lineNum">     509 </span><span class="lineCov">          2 :     if (pFile == NULL)</span>
+<span class="lineNum">     510 </span>            :     {
+<span class="lineNum">     511 </span><span class="lineNoCov">          0 :         return;</span>
+<span class="lineNum">     512 </span>            :     }
+<span class="lineNum">     513 </span><span class="lineCov">          2 :     fprintf(pFile, &quot;%s\n&quot;, arg);</span>
+<span class="lineNum">     514 </span><span class="lineCov">          2 :     fclose(pFile);</span>
+<span class="lineNum">     515 </span>            : }
 </pre>
       </td>
     </tr>

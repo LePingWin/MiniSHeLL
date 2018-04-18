@@ -378,31 +378,39 @@ bool evaluateTree(Tree t) {
     if(strcmp(root(t),"&&") == true || strcmp(root(t),"||") == true)
     {
         bool status = evaluateTree(left(t));
-        if(status == true && strcmp(root(t),"&&") == true)
-        {          
-            return evaluateTree(right(t));
-        }
-        else if(status == false && strcmp(root(t),"||") == true)
+        
+        if(isEmpty(right(t)) == false)
         {
-            return evaluateTree(right(t));
+            if(status == true && strcmp(root(t),"&&") == true)
+            {          
+                return evaluateTree(right(t));
+            }
+            else if(status == false && strcmp(root(t),"||") == true)
+            {
+                return evaluateTree(right(t));
+            }
+            //Case root(t) == && et status == false donc Switch jusqu'au prochain operateur != && s'il existe
+            //Case root(t) == || et status == true donc Switch jusqu'au prochain operateur != || s'il existe
+            else
+            {
+                bool flagOtherOperator = false;
+                Tree Ttmp = t;
+                while(flagOtherOperator == false && sizeTree(right(Ttmp)) > 1)
+                {
+                    Ttmp = right(Ttmp);
+                    if((strcmp(root(Ttmp),"&&") != true && status == false) || (strcmp(root(Ttmp),"||") != true && status == true))
+                    {
+                        flagOtherOperator = true;
+                    } 
+                }
+                if(flagOtherOperator == true)
+                    return evaluateTree(right(Ttmp));
+                return true;
+            }
         }
-        //Case root(t) == && et status == false donc Switch jusqu'au prochain operateur != && s'il existe
-        //Case root(t) == || et status == true donc Switch jusqu'au prochain operateur != || s'il existe
         else
         {
-            bool flagOtherOperator = false;
-            Tree Ttmp = t;
-            while(flagOtherOperator == false && sizeTree(right(Ttmp)) > 1)
-            {
-                Ttmp = right(Ttmp);
-                if((strcmp(root(Ttmp),"&&") != true && status == false) || (strcmp(root(Ttmp),"||") != true && status == true))
-                {
-                    flagOtherOperator = true;
-                } 
-            }
-            if(flagOtherOperator == true)
-                return evaluateTree(right(Ttmp));
-            return true;
+            return status;
         }
     }
     else if  (root(t)[0] == '<')
